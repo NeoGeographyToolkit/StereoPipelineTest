@@ -44,7 +44,7 @@ sub mark_all_as_not_started{
   while(1){
 
     foreach my $runDir (@$runDirs){
-      set_status( $baseDir, $runDir, get_not_started_flag(), $exitStatus, $runTime );
+      set_status($baseDir, $runDir, get_not_started_flag(), $exitStatus, $runTime);
     }
 
     my $numDone = 1;

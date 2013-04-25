@@ -5,8 +5,8 @@ use Cwd;
 use List::Util qw[min];
 use File::Spec;
 
-# Run a set of tests in paralel on multiple machines and
-# create a report with status of each test and run-time.
+# Run a set of tests in paralel on multiple machines and create a
+# report with the status of each test and run-time.
 # README.txt has more details.
 MAIN:{
 
@@ -22,8 +22,7 @@ MAIN:{
   $baseDir    =~ s/\/*\s*$//g;
 
   my $jobFile = $ARGV[0];
-  my ($runDirs, $machines, $numCPUs)
-     = parse_job_file($jobFile);
+  my ($runDirs, $machines, $numCPUs) = parse_job_file($jobFile);
 
   # When launching runs, first start the ones which take longest.
   my $reportFile = "output.txt";

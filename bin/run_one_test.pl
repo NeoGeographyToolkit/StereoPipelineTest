@@ -44,7 +44,7 @@ MAIN:{
   # The script which will decide if the run passed or failed
   my $validate = $binPath . "/validate.sh";
   if ( (!-e $validate) || (!-x $validate) ){
-    print "ERROR: File $validate does not exist or is not executable.\n";
+    print "ERROR: Script $validate does not exist or is not executable.\n";
     set_status( $baseDir, $runDir, get_done_flag(), $exitStatus, $runTime );
     exit(1);
   }
