@@ -22,10 +22,10 @@ MAIN:{
   $baseDir    =~ s/\/*\s*$//g;
 
   my $jobFile = $ARGV[0];
-  my ($runDirs, $machines, $numCPUs) = parse_job_file($jobFile);
+  my ($runDirs, $machines, $numProc, $toolsDir) = parse_job_file($jobFile);
 
   # When launching runs, first start the ones which take longest.
-  my $reportFile = "output.txt";
+  my $reportFile = "report.txt";
   my $prevRunsTAT = read_report($reportFile);
 
   mark_all_as_not_started($baseDir, $runDirs, $machines);
@@ -57,27 +57,27 @@ MAIN:{
       }
     }
 
-    my @availableCPUs = get_available_CPUs($machines, $numCPUs, \%numRunning);
-    my $numAvailableCPUs = scalar (@availableCPUs);
+    my @unusedProc = get_unused_processes($machines, $numProc, \%numRunning);
+    my $numUnusedProc = scalar (@unusedProc);
 
     my $totalNumRunning = 0;
     foreach my $key (keys %numRunning){
       $totalNumRunning += $numRunning{$key};
     }
     print "Not started: $numNotStartedJobs. Running: $totalNumRunning. " .
-       "Num available CPUs: $numAvailableCPUs.\n";
+       "Num unused processes: $numUnusedProc.\n";
 
     if ( $numNotStartedJobs == 0 || # no more runs to start
-         $numAvailableCPUs  == 0 ){ # no available CPUs
+         $numUnusedProc  == 0 ){ # no unused processes
       sleep 5; # Wait for jobs to complete
       next;
     }
 
-    my $numToRun = min($numNotStartedJobs, $numAvailableCPUs);
+    my $numToRun = min($numNotStartedJobs, $numUnusedProc);
     my $c = 0;
     foreach my $job (sort { $notStartedHash{$a} <=> $notStartedHash{$b} }
                               keys %notStartedHash ){
-      dispatchRun($job, $baseDir, $availableCPUs[$c], $binPath);
+      dispatchRun($job, $baseDir, $unusedProc[$c], $binPath, $toolsDir);
       $dispatchedCount{$job}++; # Count how many times a job was started
       $c++;
       last if ($c >= $numToRun);

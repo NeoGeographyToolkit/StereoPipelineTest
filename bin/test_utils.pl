@@ -161,35 +161,34 @@ sub get_status_of_all {
   @$notStarted = shuffle(@$notStarted);
 }
 
-sub get_available_CPUs{
+sub get_unused_processes{
 
-  # Get the list of the available CPUs. If one machine can run two
+  # Get the list of the unused processes. If one machine can run two
   # jobs, and none are running now, repeat that machine's name twice
   # so that two jobs can be started on it.
-  my ($machines, $numCPUs, $numRunning) = @_;
+  my ($machines, $numProc, $numRunning) = @_;
 
-  my @availableCPUs = ();
+  my @unusedProc = ();
 
   for (my $count = 0; $count < scalar(@$machines); $count++){
 
     my $machine  = $machines->[$count];
-    my $nCPUs    = $numCPUs->[$count];
+    my $nProc    = $numProc->[$count];
     my $nRunning = $numRunning->{$machine};
 
-    if ($nRunning > $nCPUs){
+    if ($nRunning > $nProc){
       print "ERROR: There are $nRunning jobs on $machine. "
-         . "There should have been only $nCPUs..\n";
+         . "There should have been only $nProc..\n";
       #exit(1);
     }
 
-    while ($nRunning < $nCPUs){
-      push(@availableCPUs, $machine);
+    while ($nRunning < $nProc){
+      push(@unusedProc, $machine);
       $nRunning++;
-      #print "Max cpus and num running: '$machine' $nCPUs $nRunning\n";
     }
   }
 
-  return shuffle(@availableCPUs);
+  return shuffle(@unusedProc);
 }
 
 sub parse_job_file{
@@ -252,15 +251,19 @@ sub parse_job_file{
     $Settings{$name} = \@vals;
   }
 
-  my @runDirs       = @{ $Settings { "runDirs"    } };
-  my @machines      = @{ $Settings { "machines"   } };
-  my @numCPUs       = @{ $Settings { "numCPUs"    } };
+  my @runDirs  = @{ $Settings { "runDirs"  } };
+  my @machines = @{ $Settings { "machines" } };
+  my @numProc  = @{ $Settings { "numProc"  } };
+  my $toolsDir = $Settings    { "toolsDir" }->[0];
 
-  print "runDirs:  "  . join(" ", @runDirs)  . "\n";
-  print "machines: "  . join(" ", @machines) . "\n";
-  print "numCPUs:  "  . join(" ", @numCPUs)  . "\n";
+  $toolsDir =~ s/\$(\w+)/$ENV{$1}/g; # expand env variable
 
-  return (\@runDirs, \@machines, \@numCPUs);
+  print "runDirs:  " . join(" ", @runDirs)  . "\n";
+  print "machines: " . join(" ", @machines) . "\n";
+  print "numProc:  " . join(" ", @numProc)  . "\n";
+  print "toolsDir: " . join(" ", $toolsDir) . "\n";
+
+  return (\@runDirs, \@machines, \@numProc, $toolsDir);
 }
 
 sub dispatchRun{
@@ -269,13 +272,21 @@ sub dispatchRun{
   my $baseDir    = shift;
   my $machine    = shift;
   my $binPath    = shift;
+  my $toolsDir   = shift;
 
-  my $command = "ssh $machine "
-     . "-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
-        . "-T -q -f '$binPath/run_one_test.pl "
-           . "-baseDir $baseDir -runDir $runDir' 2>/dev/null &";
-  print "$command\n";
-  system($command);
+  my $cmd = "$binPath/run_one_test.pl -baseDir $baseDir -runDir $runDir -toolsDir $toolsDir";
+
+  # Use ssh if have to connect to a different machine
+  if ( $machine ne "localhost" && $machine ne get_curr_machine() ){
+    $cmd = "ssh $machine "
+       . "-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
+          . "-T -q -f '$cmd' 2>/dev/null &";
+  }else{
+    $cmd = "$cmd &";
+  }
+
+  print "$cmd\n";
+  system($cmd);
 
 }
 

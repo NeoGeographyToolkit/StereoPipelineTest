@@ -9,13 +9,14 @@ use File::Spec;
 
 MAIN:{
 
-  if (scalar(@ARGV) < 4){
-    print "Usage: $0 -baseDir <baseDir> -runDir <runDir>\n";
+  if (scalar(@ARGV) < 6){
+    print "Usage: $0 -baseDir <baseDir> -runDir <runDir> -toolsDir <toolsDir>\n";
     exit(1);
   }
 
-  my $baseDir = $ARGV[1]; # Here will save the status of each test and the summary
-  my $runDir  = $ARGV[3]; # Here will run the curent test
+  my $baseDir  = $ARGV[1]; # Here will save the status of each test and the summary
+  my $runDir   = $ARGV[3]; # Here will run the curent test
+  my $toolsDir = $ARGV[5]; # The path to ASP tools dir
 
   my $binPath = bin_path();
 
@@ -49,8 +50,9 @@ MAIN:{
     exit(1);
   }
 
-  my $prog = 'source ~/.bashenv; /usr/bin/time -f "elapsedTime=%E mem=%M" ./run.sh';
+  local $ENV{PATH} = "$toolsDir:$ENV{PATH}"; # path to ASP Tools dir
   my $outfile = "output.txt";
+  my $prog = '/usr/bin/time ./run.sh';
 
   # Do the run. Extract the exist status and the running time.
   qx(uname -a        >  $outfile 2>&1);
@@ -62,7 +64,9 @@ MAIN:{
     $exitStatus = get_failed_status();
   }else{
     open(OFILE, "<$outfile"); my $data = join("", <OFILE>); close(OFILE);
-    if ($data =~ /^.*elapsedTime=(.*?) mem=/s){
+    if ($data =~ /^.* ([^\s]*?)elapsed/s){
+      $runTime = $1;
+    }elsif ($data =~ /^.*\s([^\s]*?)\s+real/s){
       $runTime = $1;
     }
   }
