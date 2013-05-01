@@ -105,8 +105,8 @@ sub get_status{
       $runTime = $4;
       last;
     }else{
-      print "Failed to parse the string '$text' from the file $statusFile. " .
-         "Will try again soon.\n";
+      print "Warning: Could not read properly the file $statusFile. " .
+         "Perhaps another process is writing to it. Will try again soon.\n";
       sleep 5;
     }
 
@@ -177,9 +177,11 @@ sub get_unused_processes{
     my $nRunning = $numRunning->{$machine};
 
     if ($nRunning > $nProc){
-      print "ERROR: There are $nRunning jobs on $machine. "
-         . "There should have been only $nProc..\n";
-      #exit(1);
+      # This warning shows up quite rately. Most likely it is due to
+      # the fact that we track the number of running processes by
+      # writing to disk, which is not fool-proof.
+      #print "Warning: There are $nRunning jobs on $machine. "
+      #   . "There should have been only $nProc.\n";
     }
 
     while ($nRunning < $nProc){
