@@ -11,7 +11,7 @@ use File::Spec;
 MAIN:{
 
   if (scalar(@ARGV) < 1){
-    print "Usage: $0 tests.conf\n";
+    print "Usage: $0 <configFile>\n";
     exit(1);
   }
 
@@ -21,8 +21,8 @@ MAIN:{
   my $baseDir = getcwd;
   $baseDir    =~ s/\/*\s*$//g;
 
-  my $jobFile = $ARGV[0];
-  my ($runDirs, $machines, $numProc, $toolsDir) = parse_job_file($jobFile);
+  my $configFile = $ARGV[0];
+  my ($runDirs, $machines, $numProc) = parse_job_file($configFile);
 
   # When launching runs, first start the ones which take longest.
   my $reportFile = "report.txt";
@@ -77,7 +77,7 @@ MAIN:{
     my $c = 0;
     foreach my $job (sort { $notStartedHash{$a} <=> $notStartedHash{$b} }
                               keys %notStartedHash ){
-      dispatchRun($job, $baseDir, $unusedProc[$c], $binPath, $toolsDir);
+      dispatchRun($job, $baseDir, $unusedProc[$c], $binPath, $configFile);
       $dispatchedCount{$job}++; # Count how many times a job was started
       $c++;
       last if ($c >= $numToRun);
@@ -86,14 +86,12 @@ MAIN:{
 
   }
 
-  # Print the report
+  # Save the report
   write_report($reportFile, $baseDir, $runDirs);
 
-  # Send the report
-  my $user = qx(whoami);
-  $user =~ s/\s*$//g;
-  system("mailx $user -s 'Status of tests' < $reportFile");
-
+  # Send the report by email
+  my $user = qx(whoami); $user =~ s/\s*$//g;
+  system("mailx $user -s 'Status of tests' < $reportFile > /dev/null 2>&1");
 }
 
 sub bin_path{

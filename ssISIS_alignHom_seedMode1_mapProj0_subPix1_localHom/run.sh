@@ -1,6 +1,5 @@
 #!/bin/bash
 
-. ~oalexan1/bin/isis_setup.sh
 d=../data
 dir=run
 rm -rfv $dir

@@ -193,6 +193,9 @@ sub get_unused_processes{
 
 sub parse_job_file{
 
+  # Parse the jobs file. Extract values, and set environmental
+  # variables.
+
   my $file = shift;
   my $status = open(FILE, "<$file");
   if (!$status){
@@ -206,12 +209,26 @@ sub parse_job_file{
 
   foreach my $setting (@lines){
     $setting =~ s/\#.*?$//g; # Wipe comments
-    next unless ($setting =~ /^\s*(\w+)\s*=\s*(.*?)\s*$/);
+    next unless ($setting =~ /^\s*(.*?)\s*=\s*(.*?)\s*$/);
     my $name = $1;
     my $val  = $2;
     $val =~ s/[{},\t]/ /g;
     $val =~ s/^\s*//g;
     $val =~ s/\s*$//g;
+
+    # Expand environmental variables in $val
+    while ($val =~ /^(.*?)\$(\w+)\b(.*?)$/){
+      my ($a, $b, $c) = ($1, $2, $3);
+      if (exists $ENV{$b}){ $b = $ENV{$b}; }
+      else                { $b = "";       }
+      $val = "$a$b$c";
+    }
+
+    # Save current value as environmental variable
+    if ( $name =~ /export\s+(\w+)/ ){
+      $name = $1;
+      $ENV{$name} = $val;
+    }
 
     my @vals = split(/\s+/, $val);
 
@@ -221,20 +238,7 @@ sub parse_job_file{
       if ($vals[0] eq "all"){
         # Expand "all" into all subdirectories of given directory
         @dirs = <*>;
-      }
-      elsif ($vals[0] eq "cat"){
-
-        open FILE2, "$vals[1]";
-        my $lines = join("", <FILE2>);
-        @dirs = split(/\n/,$lines);
-
-        @vals = ();
-        foreach my $mylines (@dirs){
-          push(@vals, $mylines);
-        }
-
-      }
-      else{
+      } else{
         # Expand "dir1 dir2/*" into "dir1 dir2/subDir1 ... dir2/subDirN"
         foreach my $val (@vals){
           @dirs = (@dirs, glob($val));
@@ -254,16 +258,12 @@ sub parse_job_file{
   my @runDirs  = @{ $Settings { "runDirs"  } };
   my @machines = @{ $Settings { "machines" } };
   my @numProc  = @{ $Settings { "numProc"  } };
-  my $toolsDir = $Settings    { "toolsDir" }->[0];
-
-  $toolsDir =~ s/\$(\w+)/$ENV{$1}/g; # expand env variable
 
   print "runDirs:  " . join(" ", @runDirs)  . "\n";
   print "machines: " . join(" ", @machines) . "\n";
   print "numProc:  " . join(" ", @numProc)  . "\n";
-  print "toolsDir: " . join(" ", $toolsDir) . "\n";
 
-  return (\@runDirs, \@machines, \@numProc, $toolsDir);
+  return (\@runDirs, \@machines, \@numProc);
 }
 
 sub dispatchRun{
@@ -272,9 +272,9 @@ sub dispatchRun{
   my $baseDir    = shift;
   my $machine    = shift;
   my $binPath    = shift;
-  my $toolsDir   = shift;
+  my $configFile = shift;
 
-  my $cmd = "$binPath/run_one_test.pl -baseDir $baseDir -runDir $runDir -toolsDir $toolsDir";
+  my $cmd = "$binPath/run_one_test.pl -baseDir $baseDir -runDir $runDir -configFile $configFile";
 
   # Use ssh if have to connect to a different machine
   if ( $machine ne "localhost" && $machine ne get_curr_machine() ){

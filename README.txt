@@ -17,7 +17,7 @@ file has:
    via ssh and share disk storage).
 3. How many processes to use on each machine (each process in turn uses 
    multiple threads).
-4. The path to the ASP Tools directory.
+4. Environmental variables, such as the path to the ASP executables.
 
 Each test needs to be in its own directory. A test is executed by
 running the script 'run.sh' in that directory, which should create an

@@ -10,13 +10,13 @@ use File::Spec;
 MAIN:{
 
   if (scalar(@ARGV) < 6){
-    print "Usage: $0 -baseDir <baseDir> -runDir <runDir> -toolsDir <toolsDir>\n";
+    print "Usage: $0 -baseDir <baseDir> -runDir <runDir> -configFile <configFile>\n";
     exit(1);
   }
 
-  my $baseDir  = $ARGV[1]; # Here will save the status of each test and the summary
-  my $runDir   = $ARGV[3]; # Here will run the curent test
-  my $toolsDir = $ARGV[5]; # The path to ASP tools dir
+  my $baseDir    = $ARGV[1]; # Save here the status of each test and the summary
+  my $runDir     = $ARGV[3]; # Here will run the curent test
+  my $configFile = $ARGV[5]; # The configuration file
 
   my $binPath = bin_path();
 
@@ -30,6 +30,9 @@ MAIN:{
     set_status( $baseDir, $runDir, get_done_flag(), $exitStatus, $runTime );
     exit(1);
   }
+
+  # Parse the job file and set environmental variables
+  my ($runDirs, $machines, $numProc) = parse_job_file($configFile);
 
   # Job is running
   set_status( $baseDir, $runDir, get_running_flag(), $exitStatus, $runTime );
@@ -50,7 +53,6 @@ MAIN:{
     exit(1);
   }
 
-  local $ENV{PATH} = "$toolsDir:$ENV{PATH}"; # path to ASP Tools dir
   my $outfile = "output.txt";
   my $prog = '/usr/bin/time ./run.sh';
 
