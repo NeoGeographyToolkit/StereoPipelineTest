@@ -261,9 +261,9 @@ sub parse_job_file{
   my @machines = @{ $Settings { "machines" } };
   my @numProc  = @{ $Settings { "numProc"  } };
 
-  print "runDirs:  " . join(" ", @runDirs)  . "\n";
-  print "machines: " . join(" ", @machines) . "\n";
-  print "numProc:  " . join(" ", @numProc)  . "\n";
+  #print "runDirs:  " . join(" ", @runDirs)  . "\n";
+  #print "machines: " . join(" ", @machines) . "\n";
+  #print "numProc:  " . join(" ", @numProc)  . "\n";
 
   return (\@runDirs, \@machines, \@numProc);
 }
