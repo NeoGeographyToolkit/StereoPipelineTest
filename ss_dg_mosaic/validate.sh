@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for g in gold/run.r25.tif gold/run.r25.xml gold/run.small.png gold/run.tif gold/run.xml; do
+for g in gold/run.r25.tif gold/run.r25.xml gold/run.small.png; do
   
   if [ ! -e "$g" ]; then
       echo "ERROR: File $g does not exist."

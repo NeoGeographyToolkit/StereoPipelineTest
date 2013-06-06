@@ -58,6 +58,7 @@ MAIN:{
 
   # Do the run. Extract the exist status and the running time.
   qx(uname -a        >  $outfile 2>&1);
+  qx(env             >  $outfile 2>&1);
   qx(rm -rfv ./run   >> $outfile 2>&1);
   qx($prog           >> $outfile 2>&1);
   qx($validate       >> $outfile 2>&1);

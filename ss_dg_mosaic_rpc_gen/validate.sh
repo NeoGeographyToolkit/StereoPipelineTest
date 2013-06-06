@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for g in gold/run.r33.xml gold/run.vrt gold/run.xml; do 
+for g in gold/run.r33.xml; do 
   
   if [ ! -e "$g" ]; then
       echo "ERROR: File $g does not exist."
