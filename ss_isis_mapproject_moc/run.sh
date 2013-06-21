@@ -8,7 +8,7 @@ rm -rfv $dir
 cp -f $d/M0100115.cub input.cub
 spiceinit from=input.cub       
 
-orthoproject --mpp 40 $d/ref-ortho-moc-DEM.tif input.cub run/run-ortho.tif
+rpc_mapproject --mpp 40 $d/ref-ortho-moc-DEM.tif input.cub run/run-ortho.tif
 
 
 
