@@ -22,7 +22,8 @@ MAIN:{
   $baseDir    =~ s/\/*\s*$//g;
 
   my $configFile = $ARGV[0];
-  my ($runDirs, $machines, $numProc) = parse_job_file($configFile);
+  my ($runDirs, $machines, $numProc, $strictValidation)
+     = parse_job_file($configFile);
 
   # When launching runs, first start the ones which take longest.
   my $reportFile = "report.txt";

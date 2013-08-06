@@ -15,6 +15,10 @@ sub get_not_started_flag{
   return "not_started";
 }
 
+sub get_success_status{
+  return 0; # The succesful exit status is 0.
+}
+
 sub get_failed_status{
   return 1; # The succesful exit status is 0.
 }
@@ -257,15 +261,39 @@ sub parse_job_file{
     $Settings{$name} = \@vals;
   }
 
-  my @runDirs  = @{ $Settings { "runDirs"  } };
-  my @machines = @{ $Settings { "machines" } };
-  my @numProc  = @{ $Settings { "numProc"  } };
+  my @runDirs   = @{ $Settings { "runDirs"  } };
+  my @machines  = @{ $Settings { "machines" } };
+  my @numProc   = @{ $Settings { "numProc"  } };
 
+  # Remove from @runDirs the tests in @skipTests
+  my @skipTests;
+  if (exists $Settings{"skipTests"}){
+    @skipTests = @{ $Settings { "skipTests" } };
+  }
+  my @newTests;
+  foreach my $dir (@runDirs){
+    my $isGood = 1;
+    foreach my $skip (@skipTests){
+      if ($dir eq $skip){
+        $isGood = 0;
+      }
+    }
+    next if (!$isGood);
+    push(@newTests, $dir);
+  }
+  @runDirs = @newTests;
+
+  # If to declare a test failed even when the relative
+  # error in the results is small.
+  my $strictValidation = "1";
+  if (exists $Settings{"strictValidation"}){
+    $strictValidation = $Settings{"strictValidation"}->[0];
+  }
   #print "runDirs:  " . join(" ", @runDirs)  . "\n";
   #print "machines: " . join(" ", @machines) . "\n";
   #print "numProc:  " . join(" ", @numProc)  . "\n";
 
-  return (\@runDirs, \@machines, \@numProc);
+  return (\@runDirs, \@machines, \@numProc, $strictValidation);
 }
 
 sub dispatchRun{

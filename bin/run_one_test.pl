@@ -32,7 +32,7 @@ MAIN:{
   }
 
   # Parse the job file and set environmental variables
-  my ($runDirs, $machines, $numProc) = parse_job_file($configFile);
+  my ($runDirs, $machines, $numProc, $strictValidation) = parse_job_file($configFile);
 
   # Job is running
   set_status( $baseDir, $runDir, get_running_flag(), $exitStatus, $runTime );
@@ -58,7 +58,7 @@ MAIN:{
 
   # Do the run. Extract the exist status and the running time.
   qx(uname -a        >  $outfile 2>&1);
-  qx(env             >  $outfile 2>&1);
+  qx(env             >> $outfile 2>&1);
   qx(rm -rfv ./run   >> $outfile 2>&1);
   qx($prog           >> $outfile 2>&1);
   qx($validate       >> $outfile 2>&1);
@@ -71,6 +71,16 @@ MAIN:{
       $runTime = $1;
     }elsif ($data =~ /^.*\s([^\s]*?)\s+real/s){
       $runTime = $1;
+    }
+
+    # Allow small errors when comparing the current run to the reference
+    # if the user chooses so.
+    my $maxRelErr = 1e+100;
+    if ($data =~ /^.*max rel err is\s+(.*?)\s/s){
+      $maxRelErr = $1;
+    }
+    if ($strictValidation eq "0" && $maxRelErr < 1e-8){
+      $exitStatus = get_success_status();
     }
   }
 
