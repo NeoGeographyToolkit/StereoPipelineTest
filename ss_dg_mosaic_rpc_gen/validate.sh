@@ -1,4 +1,5 @@
 #!/bin/bash
+export PATH=../bin:$PATH
 
 for g in gold/run.r33.xml; do 
   

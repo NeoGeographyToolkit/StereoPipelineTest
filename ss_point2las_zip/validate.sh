@@ -1,4 +1,5 @@
 #!/bin/bash
+export PATH=../bin:$PATH
 
 file=run/run-LAS.laz
 gold=gold/run-LAS.laz
