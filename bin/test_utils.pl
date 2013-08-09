@@ -81,6 +81,11 @@ sub set_status{
     $exitStatus = "Pass";
   }
 
+  if ($runTime =~/^\s*$/){
+    # Something went terribly wrong
+    $runTime = "1000000";
+  }
+
   open(FILE, ">$statusFile");
   print FILE "$flag " . get_curr_machine() . " $exitStatus $runTime\n";
   close(FILE);
@@ -155,8 +160,10 @@ sub get_status_of_all {
       print "Not started:  $runDir\n";
       push(@$notStarted, $runDir);
     }else {
-      print "ERROR: Unknown flag: '$flag'\n";
-      exit(1);
+      # Perhaps we accessed the file system at the wrong time?
+      print "WARNING: Unknown flag: '$flag' in $runDir\n";
+      sleep 10;
+      #exit(1);
     }
 
   }
