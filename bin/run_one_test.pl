@@ -79,7 +79,7 @@ MAIN:{
     if ($data =~ /^.*max rel err is\s+(.*?)\s/s){
       $maxRelErr = $1;
     }
-    if ($strictValidation eq "0" && $maxRelErr < 1e-8){
+    if ($strictValidation eq "0" && $maxRelErr < 1e-7){
       $exitStatus = get_success_status();
     }
   }
