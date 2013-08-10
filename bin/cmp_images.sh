@@ -25,8 +25,8 @@ if [ $status -ne 0 ]; then
     opts=""
 fi
 
-gdalinfo -stats $opts $1 | grep -v Min= | grep -v .tif | perl -pi -e "s#=# = #g" >> $out1
-gdalinfo -stats $opts $2 | grep -v Min= | grep -v .tif | perl -pi -e "s#=# = #g" >> $out2
+gdalinfo -stats $opts $1 | grep STATISTICS_ | grep -v Min= | grep -v .tif | perl -pi -e "s#=# = #g" >> $out1
+gdalinfo -stats $opts $2 | grep STATISTICS_ | grep -v Min= | grep -v .tif | perl -pi -e "s#=# = #g" >> $out2
 
 if [ "$plainDiff" -eq 1 ]; then
     diff $out1 $out2
