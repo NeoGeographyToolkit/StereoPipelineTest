@@ -32,7 +32,8 @@ MAIN:{
   }
 
   # Parse the job file and set environmental variables
-  my ($runDirs, $machines, $numProc, $strictValidation) = parse_job_file($configFile);
+  my ($runDirs, $machines, $numProc, $strictValidation, $errors)
+     = parse_job_file($configFile);
 
   # Job is running
   set_status( $baseDir, $runDir, get_running_flag(), $exitStatus, $runTime );
@@ -56,6 +57,13 @@ MAIN:{
   my $outfile = "output.txt";
   my $prog = '/usr/bin/time ./run.sh';
 
+  # How much relative error to allow when doing validation,
+  # if strict validation is not enforced.
+  my $allowedRelErr = 1e-6;
+  if (exists $errors->{$runDir}){
+    $allowedRelErr = $errors->{$runDir};
+  }
+
   # Do the run. Extract the exist status and the running time.
   qx(uname -a        >  $outfile 2>&1);
   qx(env             >> $outfile 2>&1);
@@ -67,9 +75,9 @@ MAIN:{
     $exitStatus = get_failed_status();
   }else{
     open(OFILE, "<$outfile"); my $data = join("", <OFILE>); close(OFILE);
-    if ($data =~ /^.* ([^\s]*?)elapsed/s){
+    if ($data =~ /^.*\s([e\+\d\.\:]+?)elapsed/s){
       $runTime = $1;
-    }elsif ($data =~ /^.*\s([^\s]*?)\s+real/s){
+    }elsif ($data =~ /^.*\s([e\+\d\.\:]+?)\s+real/s){
       $runTime = $1;
     }
 
@@ -79,7 +87,7 @@ MAIN:{
     if ($data =~ /^.*max rel err is\s+(.*?)\s/s){
       $maxRelErr = $1;
     }
-    if ($strictValidation eq "0" && $maxRelErr < 1e-5){
+    if ($strictValidation eq "0" && $maxRelErr < $allowedRelErr){
       $exitStatus = get_success_status();
     }
   }

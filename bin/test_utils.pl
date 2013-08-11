@@ -222,9 +222,17 @@ sub parse_job_file{
 
   foreach my $setting (@lines){
     $setting =~ s/\#.*?$//g; # Wipe comments
-    next unless ($setting =~ /^\s*(.*?)\s*=\s*(.*?)\s*$/);
-    my $name = $1;
-    my $val  = $2;
+    my ($name, $val);
+    if ($setting =~ /^\s*(.*?)\s*=\s*(.*?)\s*$/){
+      $name = $1;
+      $val  = $2;
+    }elsif ($setting =~ /^\s*([^\s]+?)\s+(.*?)\s*$/){
+      $name = $1;
+      $val  = $2;
+    }else{
+      next;
+    }
+
     $val =~ s/[{},\t]/ /g;
     $val =~ s/^\s*//g;
     $val =~ s/\s*$//g;
@@ -300,7 +308,17 @@ sub parse_job_file{
   #print "machines: " . join(" ", @machines) . "\n";
   #print "numProc:  " . join(" ", @numProc)  . "\n";
 
-  return (\@runDirs, \@machines, \@numProc, $strictValidation);
+
+  # Parse the relative error allowed for each run on validation
+  my %errors;
+  foreach my $setting (keys %Settings){
+    my @arr = @{ $Settings {$setting} };
+    if (scalar(@arr) > 0){
+      $errors{$setting} = $arr[0];
+    }
+  }
+
+  return (\@runDirs, \@machines, \@numProc, $strictValidation, \%errors);
 }
 
 sub dispatchRun{
