@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PATH=../bin:$PATH
+
 file=run/run-ortho.tif
 gold=gold/run-ortho.tif
 
@@ -17,11 +19,11 @@ fi
 rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
-~/bin/cmp_images.sh x $file $gold
+cmp_stats.sh $file $gold
 gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -v -i .tif > run.txt
 gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -v -i .tif > gold.txt
 
-diff=$(diff run.txt gold.txt) 
+diff=$(diff run.txt gold.txt)
 cat run.txt
 
 rm -f run.txt gold.txt

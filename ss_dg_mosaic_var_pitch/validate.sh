@@ -41,7 +41,7 @@ fi
 rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
-cmp_images.sh x $file $gold
+cmp_stats.sh $file $gold
 gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
 gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
 
