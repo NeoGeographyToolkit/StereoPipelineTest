@@ -25,6 +25,19 @@ MAIN:{
   my ($runDirs, $machines, $numProc, $strictValidation, $errors)
      = parse_job_file($configFile);
 
+  # Don't run tests on inaccessible or overloaded machines.
+  for (my $i = 0; $i < scalar(@$machines); $i++){
+    my $beg = time;
+    my $machine = $machines->[$i];
+    my @ans = qx(ssh $machine ls /);
+    my $end = time;
+    if ((scalar(@ans) == 0 || $end - $beg > 2) && scalar(@$machines) > 1){
+      print "Removing $machine as it is inaccessible or too slow\n";
+      splice(@$machines, $i, 1);
+      splice(@$numProc, $i, 1);
+    }
+  }
+
   # When launching runs, first start the ones which take longest.
   my $reportFile = "report.txt";
   my $prevRunsTAT = read_report($reportFile);
