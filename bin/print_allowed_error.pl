@@ -43,6 +43,8 @@ MAIN:{
     my $maxRelErr = 1e+100;
     if ($text =~ /^.*max rel err is\s+(.*?)\s/s){
       $maxRelErr = $1;
+    }else{
+      next;
     }
     if ($maxRelErr == 0){
       $maxRelErr = 1e-10;
