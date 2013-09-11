@@ -1,9 +1,7 @@
 #!/bin/bash
 
 set -x verbose
-d=../data
-dir=run
-rm -rfv $dir
+rm -rfv run
 
-dem_geoid $d/mars.tif -o run/run --double
+dem_geoid ../data/mars.tif -o run/run --double
 

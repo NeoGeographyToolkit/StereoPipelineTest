@@ -23,10 +23,8 @@ if [ "$PBS_O_WORKDIR" != "" ]; then cd $PBS_O_WORKDIR; fi
 
 . isis_setup.sh
 
-d=../data
-dir=run
-rm -rfv $dir
+rm -rfv run
 
-parallel_stereo --nodes-list "$PBS_NODEFILE" --processes 2 --threads-multiprocess 8 --job-size-w 1024 --job-size-h 1024 $d/M0100115.cub $d/E0201461.cub $dir/$dir -s stereo.default --left-image-crop-win 0 1024 672 4864 --alignment-method affineepipolar --corr-seed-mode 1 --subpixel-mode 1 --entry-point 0 --stop-point 7 --debug > output_p2.txt 2>&1
+parallel_stereo --nodes-list "$PBS_NODEFILE" --processes 2 --threads-multiprocess 8 --job-size-w 1024 --job-size-h 1024 ../data/M0100115.cub ../data/E0201461.cub run/run -s stereo.default --left-image-crop-win 0 1024 672 4864 --alignment-method affineepipolar --corr-seed-mode 1 --subpixel-mode 1 --entry-point 0 --stop-point 7 --debug > output_p2.txt 2>&1
 
 

@@ -21,4 +21,4 @@ echo Job is $n
 
 if [ "$PBS_O_WORKDIR" != "" ]; then cd $PBS_O_WORKDIR; fi
 
-parallel_stereo --nodes-list "$PBS_NODEFILE" --processes 2 --threads-multiprocess 8 --job-size-w 1024 --job-size-h 1024 $d/M0100115.cub $d/E0201461.cub $dir/$dir -s stereo.default --left-image-crop-win 0 1024 672 4864 --alignment-method affineepipolar --corr-seed-mode 1 --subpixel-mode 1 --entry-point 2 --stop-point 6 --debug > output_p.txt 2>&1
+parallel_stereo --nodes-list "$PBS_NODEFILE" --processes 2 --threads-multiprocess 8 --job-size-w 1024 --job-size-h 1024 ../data/M0100115.cub ../data/E0201461.cub run/run -s stereo.default --left-image-crop-win 0 1024 672 4864 --alignment-method affineepipolar --corr-seed-mode 1 --subpixel-mode 1 --entry-point 2 --stop-point 6 --debug > output_p.txt 2>&1

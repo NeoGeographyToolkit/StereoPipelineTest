@@ -1,14 +1,12 @@
 #!/bin/bash
 
 set -x verbose
-d=../data
-dir=run
-rm -rfv $dir
+rm -rfv run
 
-cp -f $d/M0100115.cub input.cub
+cp -f ../data/M0100115.cub input.cub
 spiceinit from=input.cub       
 
-mapproject --mpp 40 $d/ref-ortho-moc-DEM.tif input.cub run/run-ortho.tif
+mapproject --mpp 40 ../data/ref-ortho-moc-DEM.tif input.cub run/run-ortho.tif
 
 
 

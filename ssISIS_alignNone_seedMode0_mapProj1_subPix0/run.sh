@@ -1,10 +1,8 @@
 #!/bin/bash
 
 set -x verbose
-d=../data
-dir=run
-rm -rfv $dir
+rm -rfv run
 
-stereo $d/M0100115.map.cub $d/E0201461.map.cub $dir/$dir -s stereo.default --corr-search -300 -300 -200 -200 --left-image-crop-win 0 1024 672 4864 --alignment-method none --corr-seed-mode 0 --subpixel-mode 0
-point2dem -r mars $dir/$dir-PC.tif --nodata-value -32767
+stereo ../data/M0100115.map.cub ../data/E0201461.map.cub run/run -s stereo.default --corr-search -300 -300 -200 -200 --left-image-crop-win 0 1024 672 4864 --alignment-method none --corr-seed-mode 0 --subpixel-mode 0
+point2dem -r mars run/run-PC.tif --nodata-value -32767
 
