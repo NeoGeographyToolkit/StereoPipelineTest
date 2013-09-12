@@ -16,7 +16,7 @@ MAIN:{
   # reference.
 
   if ( scalar(@ARGV) < 1 ){
-    print "Usage: $0 name report.txt\n";
+    print "Usage: $0 report.txt\n";
     exit(1);
   }
 
