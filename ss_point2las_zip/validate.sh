@@ -14,6 +14,11 @@ if [ ! -e "$gold" ]; then
     exit 1;
 fi
 
+# Oddly enough, this is necessary
+if [ "$(uname -s)" = "Darwin" ]; then 
+   export DYLD_LIBRARY_PATH=$(dirname $(which lasinfo))/../lib
+fi
+
 lasinfo $file | grep -v Creation > run.txt
 status=$?
 if [ $status -ne 0 ]; then
