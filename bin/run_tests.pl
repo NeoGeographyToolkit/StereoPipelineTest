@@ -29,7 +29,6 @@ MAIN:{
     $runDirs = \@ARGV;
     print "Will run the tests: " . join(" ", @$runDirs) . "\n";
   }
-  exit(1);
   
   # Don't run tests on inaccessible or overloaded machines.
   for (my $i = 0; $i < scalar(@$machines); $i++){
