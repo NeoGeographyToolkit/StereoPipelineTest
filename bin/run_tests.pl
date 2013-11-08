@@ -11,7 +11,7 @@ use File::Spec;
 MAIN:{
 
   if (scalar(@ARGV) < 1){
-    print "Usage: $0 <configFile>\n";
+    print "Usage: $0 <configFile> <testList>\n";
     exit(1);
   }
 
@@ -21,10 +21,16 @@ MAIN:{
   my $baseDir = getcwd;
   $baseDir    =~ s/\/*\s*$//g;
 
-  my $configFile = $ARGV[0];
+  my $configFile = shift @ARGV;
   my ($runDirs, $machines, $numProc, $strictValidation, $errors)
      = parse_job_file($configFile);
 
+  if (scalar(@ARGV) > 0){
+    $runDirs = \@ARGV;
+    print "Will run the tests: " . join(" ", @$runDirs) . "\n";
+  }
+  exit(1);
+  
   # Don't run tests on inaccessible or overloaded machines.
   for (my $i = 0; $i < scalar(@$machines); $i++){
     my $beg = time;
