@@ -25,6 +25,8 @@ MAIN:{
   my ($runDirs, $machines, $numProc, $strictValidation, $errors)
      = parse_job_file($configFile);
 
+  # If a list of tests is passed from the command line, over-ride the list
+  # read from the config file.
   if (scalar(@ARGV) > 0){
     $runDirs = \@ARGV;
     print "Will run the tests: " . join(" ", @$runDirs) . "\n";
