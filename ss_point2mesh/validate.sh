@@ -14,13 +14,22 @@ if [ ! -e "$gold" ]; then
     exit 1;
 fi
 
-diff=$(cmp $file $gold 2>&1)
+#diff=$(cmp $file $gold 2>&1)
 
-echo diff is $diff
-if [ "$diff" != "" ]; then
-    echo Validation failed
-    exit 1
+#echo diff is $diff
+#if [ "$diff" != "" ]; then
+#    echo Validation failed
+#    exit 1
+#fi
+
+osgviewer run/run.ive
+status=$?
+
+if [ "$status" != "0" ]; then 
+  echo Validation failed
+  exit 1
 fi
 
 echo Validation succeded
 exit 0
+
