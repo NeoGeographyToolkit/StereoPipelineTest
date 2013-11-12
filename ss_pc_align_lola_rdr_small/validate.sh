@@ -46,7 +46,7 @@ if [ ! -e "$gold" ]; then
     exit 1;
 fi
 
-diff=$(diff $file $gold)
+diff=$(diff $file $gold | head -n 5000)
 echo "diff is $diff"
 if [ "$diff" != "" ]; then
     echo Validation failed
