@@ -280,6 +280,13 @@ sub parse_job_file{
   my @machines  = @{ $Settings { "machines" } };
   my @numProc   = @{ $Settings { "numProc"  } };
 
+  # Handle the case when the machine is specified as "localhost"
+  foreach my $machine (@machines){
+    if ($machine eq "localhost"){
+      $machine = get_curr_machine();
+    }
+  }
+  
   # Remove from @runDirs the tests in @skipTests
   my @skipTests;
   if (exists $Settings{"skipTests"}){
