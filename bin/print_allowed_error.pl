@@ -31,9 +31,19 @@ MAIN:{
       print "Warning: no $out\n";
       next;
     }
+
+    # Read first several thousand lines from the file
+    my $num = 10000;
     open(FILE, "<$out");
-    my $text = join("", <FILE>);
+    my $text = "";
+    my $count = 0;
+    while( my $line = <FILE>)  {
+      $text .= $line;
+      $count++;
+      last if ($count > $num);
+    }
     close(FILE);
+    
     my $runTime = 10000;
     if ($text =~ /^.*\s([e\+\d\.\:]+?)elapsed/s){
       $runTime = $1;
