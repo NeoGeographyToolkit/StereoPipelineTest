@@ -1,8 +1,8 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-file=run/run.ive
-gold=gold/run.ive
+file=run/run.osg
+gold=gold/run.osg
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."
@@ -22,7 +22,7 @@ fi
 #    exit 1
 #fi
 
-osgviewer run/run.ive
+osgviewer run/run.osg
 status=$?
 
 if [ "$status" != "0" ]; then 
