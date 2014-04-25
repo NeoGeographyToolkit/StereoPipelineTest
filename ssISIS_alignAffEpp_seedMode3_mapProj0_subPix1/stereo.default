@@ -37,6 +37,9 @@ prefilter-kernel-width 1.4
 # 2 - normalized cross correlation (recommended)
 cost-mode 1
 
+# Initialization for seed mode
+corr-seed-mode 3
+
 # Initialization step: correlation kernel size
 corr-kernel 25 25
 
@@ -75,3 +78,5 @@ rm-cleanup-passes 1
 # Setting both values to zero turns this post-processing step off.
 near-universe-radius 0.0
 far-universe-radius 0.0
+
+
