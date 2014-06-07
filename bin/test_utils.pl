@@ -104,6 +104,12 @@ sub get_status{
   # then try again.
   for (my $attempt = 0 ; $attempt < 10 ; $attempt++){
 
+    if ( ! -f "$statusFile"){
+      print "File $statusFile does not exist.\n";
+      sleep 5;
+      next;
+    }
+    
     open(FILE, "<$statusFile") || die "File $statusFile does not exist\n";
     my $text = join("", <FILE>);
     close(FILE);
