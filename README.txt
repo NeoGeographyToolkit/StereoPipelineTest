@@ -9,6 +9,9 @@ Usage: bin/run_tests.pl settings.conf
 After the tests finish, a report is written to 'report.txt', and the
 report is also emailed to the user.
 
+If the processes is terminated before all tests finish, the last result
+for each test can be seen by running bin/check_status.py.
+
 A sample settings file is provided, named 'pfe.conf'. The settings
 file has:
 

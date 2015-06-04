@@ -7,7 +7,8 @@ import os, sys
 
 # Get a list of all the contents of the test folder
 THIS_FOLDER    = os.path.dirname(os.path.abspath(__file__))
-folderContents = os.listdir(THIS_FOLDER)
+TEST_FOLDER    = os.path.join(THIS_FOLDER, '..')
+folderContents = os.listdir(TEST_FOLDER)
 
 for f in folderContents:
 
@@ -18,7 +19,7 @@ for f in folderContents:
       continue
 
     # Get paths
-    testFolder = os.path.join(THIS_FOLDER, f)
+    testFolder = os.path.join(TEST_FOLDER, f)
     statusPath = os.path.join(testFolder,  'status.txt')
 
     # Parse the status file
