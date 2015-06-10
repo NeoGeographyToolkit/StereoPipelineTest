@@ -3,10 +3,5 @@
 set -x verbose
 rm -rfv run
 
-cp -f ../data/M0100115.cub input.cub
-spiceinit from=input.cub       
-
-mapproject --mpp 40 ../data/ref-ortho-moc-DEM.tif input.cub run/run-ortho.tif
-
-
+mapproject --mpp 40 ../data/ref-ortho-moc-DEM.tif ../data/M0100115.cub run/run-ortho.tif  --bundle-adjust-prefix ../data/run_ba/run
 
