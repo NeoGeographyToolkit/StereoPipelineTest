@@ -6,7 +6,7 @@ rm -rfv run
 echo ../data/dem1_10pct.tif > list.txt
 echo ../data/dem2_10pct.tif >> list.txt
 
-for f in "" first last min max mean median count; do 
+for f in "" first last min max mean stddev median count; do 
 	 
   opt=""
   if [ "$f" != "" ]; then 

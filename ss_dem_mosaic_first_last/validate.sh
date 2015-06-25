@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 rm -f run/*xml gold/*xml
 
-for f in "" first- last- min- max- mean- median- count-; do 
+for f in "" first- last- min- max- mean- stddev- median- count-; do 
 
   file=run/run-tile-"$f"0.tif
   gold=gold/run-tile-"$f"0.tif
