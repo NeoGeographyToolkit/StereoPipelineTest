@@ -33,6 +33,10 @@ sub get_curr_machine{
 sub get_status_file{
   my $baseDir = shift;
   my $runDir  = shift;
+  if (! -d "$baseDir/$runDir"){
+    print "Error: Missing directory: $baseDir/$runDir\n";
+    exit(1);
+  }
   return "$baseDir/$runDir/status.txt";
 }
 
@@ -109,7 +113,7 @@ sub get_status{
       sleep 5;
       next;
     }
-    
+
     open(FILE, "<$statusFile") || die "File $statusFile does not exist\n";
     my $text = join("", <FILE>);
     close(FILE);
@@ -292,7 +296,7 @@ sub parse_job_file{
       $machine = get_curr_machine();
     }
   }
-  
+
   # Remove from @runDirs the tests in @skipTests
   my @skipTests;
   if (exists $Settings{"skipTests"}){
