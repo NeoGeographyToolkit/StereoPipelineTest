@@ -15,6 +15,8 @@ def pytest_generate_tests(metafunc):
     # TODO: There must be a better way.
     os.environ["CONFIG"] = metafunc.config.option.config_file
 
+    os.environ["BASE_DIR"] = os.getcwd()
+
     # Read in all the tests. They start with "ss".
     # TODO: Find a better convention.
     count = 0
@@ -22,13 +24,12 @@ def pytest_generate_tests(metafunc):
     for val in os.listdir(os.getcwd()):
         if not re.match('ss', val): continue
         if not os.path.isdir(val): continue
-        if count >= 1: break
+        if count >= 3: break # temporary debug code
         count = count + 1
         tests.append(val)
 
     if 'testName' in metafunc.fixturenames:
         metafunc.parametrize("testName", tests)
-
 
 # Anywhere in string one finds $SOMETHING, replace it with os.environ[SOMETHING]
 def replaceEnv(line):

@@ -9,6 +9,9 @@ def test_run(testName, setup):
         print("Will skip test: ", testName)
         return 1
 
+    # Switch to the base directory
+    os.chdir(os.environ["BASE_DIR"])
+
     if not os.path.isdir(testName):
         print("No such directory: ", testName)
         assert 0
