@@ -24,7 +24,7 @@ def pytest_generate_tests(metafunc):
     for val in os.listdir(os.getcwd()):
         if not re.match('ss', val): continue
         if not os.path.isdir(val): continue
-        if count >= 3: break # temporary debug code
+        #if count >= 3: break # temporary debug code
         count = count + 1
         tests.append(val)
 
