@@ -1,30 +1,38 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-AS15-M-1134.lev1.adjust run/run-AS15-M-1135.lev1.adjust; do 
+file=run/run-IntersectionErr.tif
+gold=gold/run-IntersectionErr.tif
 
-  gold=${file/run\/run/gold\/run}
+if [ ! -e "$file" ]; then
+    echo "ERROR: File $file does not exist."
+    exit 1;
+fi
 
-  if [ ! -e "$file" ]; then
-      echo "ERROR: File $file does not exist."
-      exit 1;
-  fi
+if [ ! -e "$gold" ]; then
+    echo "ERROR: File $gold does not exist."
+    exit 1;
+fi
 
-  if [ ! -e "$gold" ]; then
-      echo "ERROR: File $gold does not exist."
-      exit 1;
-  fi
+# Remove cached xmls
+rm -fv "$file.aux.xml"
+rm -fv "$gold.aux.xml"
 
-  echo diff $file $gold
-  diff=$(diff $file $gold)
+cmp_stats.sh $file $gold
+gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
+gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
 
-  echo diff is $diff
-  if [ "$diff" != "" ]; then
-      echo Validation failed
-      exit 1
-  fi
+diff=$(diff run.txt gold.txt)
+cat run.txt
 
-done
+rm -f run.txt gold.txt
+
+echo diff is $diff
+if [ "$diff" != "" ]; then
+    echo Validation failed
+    exit 1
+fi
 
 echo Validation succeded
 exit 0
+
