@@ -28,10 +28,11 @@ def pytest_generate_tests(metafunc):
         count = count + 1
         tests.append(val)
 
+    # Create a test instance for every test name
     if 'testName' in metafunc.fixturenames:
         metafunc.parametrize("testName", tests)
 
-# Anywhere in string one finds $SOMETHING, replace it with os.environ[SOMETHING]
+# If anywhere in string one finds $SOMETHING, replace it with os.environ[SOMETHING]
 def replaceEnv(line):
     while 1:
         a = re.match('^(.*?)\$(\w+)(.*?)$', line)
@@ -40,13 +41,13 @@ def replaceEnv(line):
             line = a.group(1) + os.environ[a.group(2)] + a.group(3)
         else:
             print("No such environmental variable: ", a.group(2))
+            line = a.group(1) + a.group(3)
     return line
 
 # Parse the config file and save the variables we need to pass to the
 # test
 class TestSetup:
     def __init__(self):
-        self.env={}
         self.skipTests={}
 
         configFile = os.environ["CONFIG"]

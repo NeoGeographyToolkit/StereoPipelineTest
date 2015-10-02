@@ -19,18 +19,18 @@ def test_run(testName, setup):
     # Switch to the directory where the test will take place
     os.chdir(testName)
 
-    #The output file
-    outFile = "./output.txt"
+    #The log file
+    logFile = "output.txt"
 
     # Open the log file and wipe it
-    log = open(outFile, 'w')
+    log = open(logFile, 'w')
     log.write('Starting test\n')
     log.close()
 
     # Re-open the file and append to it
-    log = open(outFile, 'a')
+    log = open(logFile, 'a')
 
-    # Save the enf
+    # Save the env for the test
     a = subprocess.Popen(["env"], stdout=log, stderr=log, shell=True)
     exitcode = a.wait()
 
