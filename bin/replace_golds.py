@@ -1,53 +1,62 @@
 #!/usr/bin/env python
 
 
-# Tool for pulling down gold folders from another folder
+# Tool for replacing a bunch of gold folders at once
+# - Use this to update all your failing gold folders to the latest version.
 
-import os, sys
-
-
-# Change this to copy from somewhere else!
-REMOTE_FOLDER = '/home/oalexan1/projects/StereoPipelineTest/'
-
-# Enter all the folders to update here
-TEST_LIST = """ssDG_alignNone_seedMode3_mapProj1_subPix1_badDisp1
-ss_bundle_adjust_aerial_ceres
-ssPinHole_alignHom_seedMode1_mapProj0_subPix1_parallel1
-ss_point2dem_csv_proj4
-ssISIS_alignHom_seedMode1_mapProj0_subPix1_optThresh
-ssRPC_alignHom_seedMode1_mapProj0_subPix1_BasaltHills
-ssDG_alignHom_seedMode1_mapProj0_subPix1
-ssNadirPinHole_alignHom_seedMode1_mapProj0_subPix1
-ssPinHole_alignHom_seedMode1_mapProj0_subPix1
-ss_isis_mapproject_moc
-ssISIS_alignHom_seedMode1_mapProj0_subPix1_crop_left_right
-ssISIS_alignHom_seedMode1_mapProj0_subPix1_parallel"""
-TEST_LIST = TEST_LIST.split()
-
-
+import os, sys, subprocess, re
 
 # Get a list of all the contents of the test folder
 THIS_FOLDER    = os.path.dirname(os.path.abspath(__file__))
 TEST_FOLDER    = os.path.join(THIS_FOLDER, '..')
 
+OLEG_FOLDER = '/home/oalexan1/projects/StereoPipelineTest/'
 
-for f in TEST_LIST:
+# Call check_stats to find all the failed tests
+checkPath = os.path.join(THIS_FOLDER, 'check_status.py')
+cmd = ['python', checkPath]
+p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+textOutput, err = p.communicate()
+
+# Extract the names of all the processes that failed
+casesToReplace = []
+for line in textOutput.split('\n'):
+    #if 'FAIL' not in line:
+    #    continue
+    # Extract the name portion
+    startPos = 0#line.rfind('=')+1
+    name = line[startPos:]
+    # Strip out weird color characters
+    name = re.sub('[^_A-Za-z0-9.]+', '',name)
+    name = re.sub('0m+', '',name) # Clean a '0m' that shows up at the end of the line
+    name = re.sub('91m', '',name) # Clean a '91m' that shows up at the start of the line
+
+    if len(name) > 4:
+        casesToReplace.append(name.strip())
+
+#print casesToReplace
+#raise Exception('DEBUG')
+
+for f in casesToReplace:
+
+    # Skip items that are not test case folders
+    if len(f) < 4:
+        continue;
+    if f[:2] != "ss":
+      continue
 
     # Get paths
-    testFolder  = os.path.join(TEST_FOLDER, f)
-    goldFolder  = os.path.join(testFolder, 'gold')
-    testFolderR = os.path.join(REMOTE_FOLDER, f)
-    goldFolderR = os.path.join(testFolderR, 'gold')
+    testFolder     = os.path.join(TEST_FOLDER, f)
+    goldFolder     = os.path.join(testFolder,  'gold')
+    olegFolder     = os.path.join(OLEG_FOLDER, f)
+    olegGoldFolder = os.path.join(olegFolder,  'gold')
 
-    # Copy the folder
-    cmd = 'cp -r ' + goldFolderR +' '+ goldFolder
+
+    cmd = 'rm -rf ' + goldFolder
     print cmd
     os.system(cmd)
-
     
-
-
-
-
-
+    cmd = 'cp -r ' + olegGoldFolder +' '+ goldFolder
+    print cmd
+    os.system(cmd)
 

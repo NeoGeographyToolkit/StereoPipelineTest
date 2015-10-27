@@ -10,6 +10,8 @@ THIS_FOLDER    = os.path.dirname(os.path.abspath(__file__))
 TEST_FOLDER    = os.path.join(THIS_FOLDER, '..')
 folderContents = os.listdir(TEST_FOLDER)
 
+skipSuccess = True
+
 for f in folderContents:
 
     # Skip items that are not test case folders
@@ -42,5 +44,12 @@ for f in folderContents:
 
     # Print the result in the selected color
     END_COLOR_CODE = '\033[0m'
-    print colorCode + status + ' <=== ' + f + END_COLOR_CODE
+    if not skipSuccess:
+        print colorCode + status + ' <=== ' + f + END_COLOR_CODE
+    else:
+       if (status != 'PASS'):
+        print colorCode + f + END_COLOR_CODE
+
+
+
 
