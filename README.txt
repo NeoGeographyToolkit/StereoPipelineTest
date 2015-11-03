@@ -5,7 +5,7 @@ the test suite should be updated regularly as more functionality is
 added to ASP.
 
 StereoPipelineTest uses the Python py.test framework to run the tests.
-This framework needs Python >= 2.6, which can be installed as follows:
+This framework needs Python >= 2.6. It can be installed as follows:
 
 pip install --user pytest
 pip install --user pytest-xdist
