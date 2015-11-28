@@ -29,11 +29,11 @@ for file in run/run-DEM.tif run/run-DRG.tif; do
   gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
 
   #diff=$(diff run.txt gold.txt)
-  diff=$(cmp_stats.sh $file $gold | grep -i "Max abs err" | awk '{print $5}')
+  diff=$(cmp_stats.sh $file $gold | grep -i "Max rel err" | awk '{print $8}')
 
   # Allow some discrepancy, for some reason, the result is not always the same
   echo Discrepancy is $diff  
-  fcomp $diff 1e+1
+  fcomp $diff 3e-1
   ans=$?
    
   if [ "$ans" != "0" ]; then 
