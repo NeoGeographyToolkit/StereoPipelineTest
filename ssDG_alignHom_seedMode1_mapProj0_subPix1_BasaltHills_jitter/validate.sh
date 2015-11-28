@@ -33,7 +33,7 @@ for file in run/run-DEM.tif run/run-DRG.tif; do
 
   # Allow some discrepancy, for some reason, the result is not always the same
   echo Discrepancy is $diff  
-  fcomp $diff 1e-1
+  fcomp $diff 1e+1
   ans=$?
    
   if [ "$ans" != "0" ]; then 
