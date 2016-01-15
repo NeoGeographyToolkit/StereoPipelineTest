@@ -1,6 +1,6 @@
 # Configuration for all tests.
 
-import pytest, os, sys, re
+import pytest, os, sys, fnmatch, re
 
 # Option parser
 def pytest_addoption(parser):
@@ -16,6 +16,7 @@ def pytest_generate_tests(metafunc):
     os.environ["CONFIG"] = metafunc.config.option.config_file
 
     os.environ["BASE_DIR"] = os.getcwd()
+    setup = TestSetup()
 
     # Read in all the tests. They start with "ss".
     # TODO: Find a better convention.
@@ -26,7 +27,8 @@ def pytest_generate_tests(metafunc):
         if not os.path.isdir(val): continue
         #if count >= 3: break # temporary debug code
         count = count + 1
-        tests.append(val)
+        if setup.checkIfRunTest(val): # Make sure this is on the runDirs list
+            tests.append(val)
 
     # Create a test instance for every test name
     if 'testName' in metafunc.fixturenames:
@@ -44,17 +46,22 @@ def replaceEnv(line):
             line = a.group(1) + a.group(3)
     return line
 
-# Parse the config file and save the variables we need to pass to the
-# test
+# Parse the config file and save the variables we need to pass to the test
 class TestSetup:
     def __init__(self):
         self.skipTests={}
+        self.runTests ={}
 
         configFile = os.environ["CONFIG"]
         with open(configFile) as f:
             lines = f.readlines()
             for line in lines:
                 line = line.rstrip() # wipe the newline
+
+                # Read the skipped tests
+                if re.match("runDirs", line):
+                    for skip in line.split(" "):
+                        self.runTests[skip] = 1
 
                 # Read the skipped tests
                 if re.match("skipTests", line):
@@ -66,6 +73,12 @@ class TestSetup:
                 if a:
                     os.environ[a.group(1)] = replaceEnv(a.group(2))
 
+    def checkIfRunTest(self, testName):
+        '''Returns true if this test is indicated by the runDirs line in the config file.'''
+        for pattern in self.runTests:
+            if fnmatch.fnmatch(testName, pattern):
+                return True
+        return False
 
 @pytest.fixture(scope="session", autouse=True)
 def setup():

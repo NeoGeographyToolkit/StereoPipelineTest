@@ -1,8 +1,8 @@
-# Run a test
-
 import os, time, subprocess, pytest
 
 def test_run(testName, setup):
+    '''Function called for each test that is run.
+       "setup" is populated by a TestSetup object from conftest.py'''
 
     # Skip tests per the config file
     if testName in setup.skipTests:
