@@ -24,7 +24,7 @@ for g in gold/run.r25.xml; do
 
 done
 
-for file in run/run.r25.tif run/run.small.png; do 
+for file in run/run.r25.tif; do 
 	gold=${file/run\/run/gold\/run}
 	
 	echo Comparing $file $gold
