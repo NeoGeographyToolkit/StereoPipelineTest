@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for g in gold/run.r25.tif gold/run.r25.xml gold/run.small.png; do
+for g in gold/run.r25.tif gold/run.r25.xml; do
   
   if [ ! -e "$g" ]; then
       echo "ERROR: File $g does not exist."
