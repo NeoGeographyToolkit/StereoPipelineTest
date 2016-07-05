@@ -3,53 +3,62 @@
 
 # Tool for printing the last test result of each test case
 
-import os, sys
+import os, sys, optparse, common
 
-# Get a list of all the contents of the test folder
-THIS_FOLDER    = os.path.dirname(os.path.abspath(__file__))
-TEST_FOLDER    = os.path.join(THIS_FOLDER, '..')
-folderContents = os.listdir(TEST_FOLDER)
 
-skipSuccess = True
 
-for f in folderContents:
+def printTest(test, status, skipSuccess):
+    '''Pretty print the result of one test'''
 
-    # Skip items that are not test case folders
-    if len(f) < 4:
-        continue;
-    if f[:2] != "ss":
-      continue
-
-    # Get paths
-    testFolder = os.path.join(TEST_FOLDER, f)
-    statusPath = os.path.join(testFolder,  'status.txt')
-
-    # Parse the status file
-    # - It should look something like this: done lunokhod1 Fail 6:31.75
-    if not os.path.exists(statusPath):
-        status    = 'INCOMPLETE'
+    if status == common.STATUS_INCOMPLETE:
+        text      = 'INCOMPLETE'
         colorCode = '\033[93m'
-    else:
-        with open(statusPath, 'r') as handle:
-            statusLine = handle.readline()
-        if 'Fail' in statusLine:
-            status    = 'FAIL'
-            colorCode = '\033[91m'
-        elif 'Pass' in statusLine:
-            status    = 'PASS'
-            colorCode = '\033[92m'
-        else:
-            status    = 'UNKNOWN'
-            colorCode = '\033[93m'
+    if status == common.STATUS_FAIL:
+        text      = 'FAIL'
+        colorCode = '\033[91m'
+    if status == common.STATUS_SUCCESS:
+        text      = 'PASS'
+        colorCode = '\033[92m'
 
     # Print the result in the selected color
     END_COLOR_CODE = '\033[0m'
     if not skipSuccess:
-        print colorCode + status + ' <=== ' + f + END_COLOR_CODE
+        print colorCode + text + ' <=== ' + test + END_COLOR_CODE
     else:
-       if (status != 'PASS'):
-        print colorCode + f + END_COLOR_CODE
+       if (status != common.STATUS_SUCCESS):
+           print colorCode + test + END_COLOR_CODE
 
+
+def main(argsIn):
+
+    try:
+        usage = "usage: registration_processor.py [--help]\n  "
+        parser = optparse.OptionParser(usage=usage)
+
+        parser.add_option("--skip-successful", dest="skipSuccess", action="store_true", default=False,
+                          help="Do not display successful tests.")
+        parser.add_option("--conf-file", dest="confFile", default=None,
+                          help="Specify configuration file to load skipped tests from.")
+
+        (options, args) = parser.parse_args(argsIn)
+
+    except optparse.OptionError, msg:
+        raise Usage(msg)
+
+
+    # Check the status on all of the tests
+    allTests   = common.getAllTests(options.confFile)
+    testStatus = [common.checkStatus(f) for f in allTests]
+
+    # Pretty print the results
+    for test, status in zip(allTests, testStatus):
+        printTest(test, status, options.skipSuccess)
+
+
+
+# Run main function if file used from shell
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
 
 
 
