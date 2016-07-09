@@ -6,12 +6,8 @@
 
 import os, sys, subprocess, re, common
 
-# Get a list of all the contents of the test folder
-THIS_FOLDER    = os.path.dirname(os.path.abspath(__file__))
-TEST_FOLDER    = os.path.join(THIS_FOLDER, '..')
 
 OLEG_FOLDER = '/home/oalexan1/projects/StereoPipelineTest/'
-
 
 def replaceGold(f):
     '''Replace the gold folder with one from Oleg's directory'''

@@ -37,7 +37,7 @@ def checkStatus(testName):
     return status
 
 
-def getAllTests(confFile):
+def getAllTests(confFile=None):
     '''Return a list of all test names'''
     
     skipTests = []
@@ -60,7 +60,7 @@ def getAllTests(confFile):
         
     return output  
 
-def getFailedTests(confFile):
+def getFailedTests(confFile=None):
     '''Return a list of the names of all failed tests'''
 
     # Check the status on all of the tests
