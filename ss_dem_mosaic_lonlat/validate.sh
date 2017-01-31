@@ -1,8 +1,9 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-file=run/run-tile-0.tif
-gold=gold/run-tile-0.tif
+for i in 08 13; do 
+  file=run/run-tile-${i}.tif
+  gold=gold/run-tile-${i}.tif
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."
@@ -32,6 +33,8 @@ if [ "$diff" != "" ]; then
     echo Validation failed
     exit 1
 fi
+
+done
 
 echo Validation succeded
 exit 0
