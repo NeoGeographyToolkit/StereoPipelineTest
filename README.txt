@@ -56,3 +56,15 @@ needs to be updated by copying the output from the 'run' directory.
 If the processes is terminated before all tests finish, the last result
 for each test can be seen by running bin/check_status.py.
 
+--== Troubleshooting ==--
+
+If py.test is not found, try running 
+source [BINARY_BUILDER_DIR]/auto_build/utils.sh
+
+
+On OSX machines, debugging tools cannot be run without admin access.
+SG can help set this up but you may periodically need to re-run this command
+(at least on andey) to get it to work again:
+ codesign -s gdb-cert /opt/local/bin/ggdb
+
+
