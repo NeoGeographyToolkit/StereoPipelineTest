@@ -1,31 +1,30 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for g in gold/run.r25.xml; do
+for ot in Byte UInt16 Int16 UInt32 Int32 Float32; do
+	f=run/run_${ot}.r25.xml
+	g=gold/run_${ot}.r25.xml
   
-  if [ ! -e "$g" ]; then
-      echo "ERROR: File $g does not exist."
-      exit 1
-  fi
+	if [ ! -e "$g" ]; then
+     	echo "ERROR: File $g does not exist."
+    	exit 1
+	fi
 
-  f=${g/gold/run}
-  if [ ! -e "$f" ]; then
-      echo "ERROR: File $f does not exist."
-      exit 1
-  fi
+	if [ ! -e "$f" ]; then
+    	echo "ERROR: File $f does not exist."
+    	exit 1
+	fi
 
-  diff=$(diff $f $g)
-  echo diff is $diff
+	diff=$(diff $f $g)
+	echo diff is $diff
  
-  if [ "$diff" != "" ]; then
-    echo Validation failed
-    exit 1
-  fi
+	if [ "$diff" != "" ]; then
+    	echo Validation failed
+    	exit 1
+	fi
 
-done
-
-for file in run/run.r25.tif; do 
-	gold=${file/run\/run/gold\/run}
+    file=run/run_${ot}.r25.tif
+	gold=gold/run_${ot}.r25.tif
 	
 	echo Comparing $file $gold
 
@@ -59,3 +58,7 @@ for file in run/run.r25.tif; do
 	fi
 
 done
+
+exit 0
+
+
