@@ -1,7 +1,9 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-DEM.tif; do 
+for val in "" -min -max -mean -median -stddev -count -nmad -50-pct -50.1-pct; do 
+
+  file=run/run$val-DEM.tif
 
   echo $file $gold
   gold=${file/run\/run/gold\/run}
