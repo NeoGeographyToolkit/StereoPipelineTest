@@ -9,6 +9,7 @@ THIS_FOLDER    = os.path.dirname(os.path.abspath(__file__))
 TEST_FOLDER    = os.path.join(THIS_FOLDER, '..')
 
 
+STATUS_NO_GOLD    = -2
 STATUS_INCOMPLETE = -1
 STATUS_FAIL       =  0
 STATUS_SUCCESS    =  1
@@ -18,9 +19,13 @@ def checkStatus(testName):
     
     # Get paths
     testFolder = os.path.join(TEST_FOLDER, testName)
-    statusPath = os.path.join(testFolder,  'output.txt')
+    goldFolder = os.path.join(testFolder, 'gold')
+    statusPath = os.path.join(testFolder, 'output.txt')
 
     status = STATUS_INCOMPLETE
+
+    if not os.path.exists(goldFolder):
+        status = STATUS_NO_GOLD
 
     # Parse the output file
     if not os.path.exists(statusPath):

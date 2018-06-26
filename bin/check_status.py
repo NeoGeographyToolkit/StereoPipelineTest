@@ -19,6 +19,9 @@ def printTest(test, status, skipSuccess):
     if status == common.STATUS_SUCCESS:
         text      = 'PASS'
         colorCode = '\033[92m'
+    if status == common.STATUS_NO_GOLD:
+        text      = 'NO GOLD'
+        colorCode = '\033[94m'
 
     # Print the result in the selected color
     END_COLOR_CODE = '\033[0m'

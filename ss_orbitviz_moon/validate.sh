@@ -24,5 +24,6 @@ for g in gold/run.kml gold/run.csv; do
 
 done
 
+echo Validation succeded
 exit 0
 

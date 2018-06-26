@@ -36,3 +36,4 @@ for file in run/run-trans_reference.tif run/run-trans_source.tif; do
 	fi
 
 done
+echo Validation succeded
