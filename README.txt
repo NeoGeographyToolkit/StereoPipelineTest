@@ -61,10 +61,22 @@ for each test can be seen by running bin/check_status.py.
 If py.test is not found, try running 
 source [BINARY_BUILDER_DIR]/auto_build/utils.sh
 
+--== Tools ==--
 
-On OSX machines, debugging tools cannot be run without admin access.
-SG can help set this up but you may periodically need to re-run this command
-(at least on andey) to get it to work again:
- codesign -s gdb-cert /opt/local/bin/ggdb
+There are a number of utilties in the main and bin/ folders which can
+be useful for working with tests.  These include:
+
+runs_to_golds.py = Convert all run folders to gold folders or pass in a
+single test name to just convert the folders for that test.
+
+check_status.py = Tries to print the last run status of each test.  Use
+the "--conf-file" argument to limit the list to non-disabled tests.
+
+
+
+
+
+
+
 
 
