@@ -152,14 +152,18 @@ point2dem --t_srs '+proj=longlat +datum=WGS84 +no_defs ' --tr 0.001111265432099 
 di ../data/zone10-CA_SanLuisResevoir-9m_25pct.tif $out-trans_source-DEM.tif
 
 # 25pct
-pc_align ../data/zone10-CA_SanLuisResevoir-9m_25pct.tif run_scale/run-trans_source-DEM.tif --max-displacement 100 -o run_p2p_25pct/run --alignment-method point-to-plane --save-transformed-source-points --num-iterations 100 --initial-transform-from-hillshading
+pc_align ../data/zone10-CA_SanLuisResevoir-9m_25pct.tif ../data/filled_dem_scaled.tif --max-displacement 100 -o run_p2p_25pct/run --alignment-method point-to-plane --save-transformed-source-points --num-iterations 100 --initial-transform-from-hillshading
 out=run_p2p_25pct/run
 point2dem --t_srs '+proj=longlat +datum=WGS84 +no_defs ' --tr 0.001111265432099 $out-trans_source.tif
 di ../data/zone10-CA_SanLuisResevoir-9m_25pct.tif $out-trans_source-DEM.tif
 
 # 50pct
-pc_align ../data/zone10-CA_SanLuisResevoir-9m_50pct.tif run_scale/run-trans_source-DEM.tif --max-displacement 100 -o run_p2p_50pct/run --alignment-method point-to-plane --save-transformed-source-points --num-iterations 100 --initial-transform-from-hillshading
+pc_align ../data/zone10-CA_SanLuisResevoir-9m_50pct.tif ../data/filled_dem_scaled.tif --max-displacement 100 -o run_p2p_50pct/run --alignment-method point-to-plane --save-transformed-source-points --num-iterations 100 --initial-transform-from-hillshading
 out=run_p2p_50pct/run
 point2dem --t_srs '+proj=longlat +datum=WGS84 +no_defs ' --tr 0.000555632716049 $out-trans_source.tif
 di ../data/zone10-CA_SanLuisResevoir-9m_50pct.tif $out-trans_source-DEM.tif
 
+# nightly run
+pc_align ../data/zone10-CA_SanLuisResevoir-9m_25pct.tif ../data/filled_dem_scaled.tif --max-displacement 300 -o run/run --alignment-method point-to-plane --save-transformed-source-points --num-iterations 100 --initial-transform-from-hillshading
+point2dem --t_srs '+proj=longlat +datum=WGS84 +no_defs ' --tr 0.001111265432099 run/run-trans_source.tif
+di ../data/zone10-CA_SanLuisResevoir-9m_50pct.tif run/run-trans_source-DEM.tif
