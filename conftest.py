@@ -8,7 +8,7 @@ def pytest_addoption(parser):
                       help="Choose the output resolution in meters per pixel on the ground (note that a coarse resolution may result in aliasing).")
 
 # Parse options and store the config file
-@pytest.fixture(scope="session")
+#@pytest.fixture(scope="session")
 def pytest_generate_tests(metafunc):
 
     # Parse the config file name and store it in an env variable.
