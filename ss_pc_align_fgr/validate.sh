@@ -19,7 +19,7 @@ goldLog=$(ls -atrd gold/*log* | tail -n 1)
 goldErr=$(grep "Output: mean of smallest errors" $goldLog | awk '{print $17}' | perl -pi -e 's#(0.\d+).*?$#int($1*100+0.5)/100#eg')
 
 if [ "$runErr" = "$goldErr" ]; then
-	echo Validation succeded, the errors are both $runErr and $goldErr
+	echo Validation succeded, the errors are both $runErr
 	exit 0
 else
 	echo Validation failed, the errors are different: $runErr and $goldErr
