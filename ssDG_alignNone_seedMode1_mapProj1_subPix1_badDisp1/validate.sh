@@ -34,7 +34,10 @@ if [ "$diff" != "" ]; then
 fi
 
 # Check that the outputs have georeference
-for f in $(ls run/*tif |grep -v PC); do 
+for f in $(ls run/*tif |grep -v PC); do
+        if [[ $f =~ .*stats.tif ]]; then
+                continue
+        fi
 	ans=$(gdalinfo $f |grep -i datum)
 	echo Datum in $f is $ans
 	if [ "$ans" = "" ]; then 
