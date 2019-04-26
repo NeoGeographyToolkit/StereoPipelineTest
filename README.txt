@@ -10,6 +10,7 @@ This framework needs Python >= 2.6. It can be installed as follows:
 pip install --user pytest
 pip install --user pytest-xdist
 pip install --user pytest-timeout
+
 or 
 
 easy_install --prefix ~/.local -U pytest
