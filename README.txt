@@ -9,11 +9,12 @@ This framework needs Python >= 2.6. It can be installed as follows:
 
 pip install --user pytest
 pip install --user pytest-xdist
-
+pip install --user pytest-timeout
 or 
 
 easy_install --prefix ~/.local -U pytest
 easy_install --prefix ~/.local -U pytest-xdist
+easy_install --prefix ~/.local -U pytest-timeout
 
 The py.test script ends up being installed either in /usr/bin, or in
 ~/.local/bin (on Linux) or in ~/Library/Python/2.x/bin (on OSX). In
@@ -56,21 +57,27 @@ needs to be updated by copying the output from the 'run' directory.
 If the processes is terminated before all tests finish, the last result
 for each test can be seen by running bin/check_status.py.
 
---== Troubleshooting ==--
+== Troubleshooting ==
 
 If py.test is not found, try running 
-source [BINARY_BUILDER_DIR]/auto_build/utils.sh
 
---== Tools ==--
+  source [BINARY_BUILDER_DIR]/auto_build/utils.sh
+
+If the --timeout or -n options are missing, that means pytest-xdist or
+pytest-timeout were not installed or cannot be found.
+
+== Tools ==
 
 There are a number of utilties in the main and bin/ folders which can
 be useful for working with tests.  These include:
 
-runs_to_golds.py = Convert all run folders to gold folders or pass in a
-single test name to just convert the folders for that test.
+runs_to_golds.py:
+   Convert all run folders to gold folders or pass in a
+  single test name to just convert the folders for that test.
 
-check_status.py = Tries to print the last run status of each test.  Use
-the "--conf-file" argument to limit the list to non-disabled tests.
+check_status.py:
+  Tries to print the last run status of each test.  Use
+  the "--conf-file" argument to limit the list to non-disabled tests.
 
 
 
