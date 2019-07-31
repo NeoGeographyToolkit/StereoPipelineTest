@@ -80,11 +80,3 @@ check_status.py:
   Tries to print the last run status of each test.  Use
   the "--conf-file" argument to limit the list to non-disabled tests.
 
-
-
-
-
-
-
-
-
