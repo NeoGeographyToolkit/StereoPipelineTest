@@ -23,7 +23,7 @@ for ot in Byte UInt16 Int16 UInt32 Int32 Float32; do
     	exit 1
 	fi
 
-    file=run/run_${ot}.r25.tif
+        file=run/run_${ot}.r25.tif
 	gold=gold/run_${ot}.r25.tif
 	
 	echo Comparing $file $gold
@@ -43,8 +43,8 @@ for ot in Byte UInt16 Int16 UInt32 Int32 Float32; do
 	rm -fv "$gold.aux.xml"
 
 	cmp_stats.sh $file $gold
-	gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v xml > run.txt
-	gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold.txt
+	gdalinfo -stats $file | grep -v Files | grep -v -i -E "tif|xml|imd" > run.txt
+	gdalinfo -stats $gold | grep -v Files | grep -v -i -E "tif|xml|imd" > gold.txt
 
 	diff=$(diff run.txt gold.txt)
 	cat run.txt
