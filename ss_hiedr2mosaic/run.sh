@@ -2,9 +2,9 @@
 
 set -x verbose
 rm -rfv run
-rm -rfv *cub 
+rm -rfv *cub
 
-hiedr2mosaic.py ../data/ESP_029421_2300_RED*IMG 
+hiedr2mosaic.py ../data/ESP_029421_2300_RED*IMG
 
 # TODO: Modify hiedr2mosaic.py to make its outputs go to any directory
 mkdir -p run

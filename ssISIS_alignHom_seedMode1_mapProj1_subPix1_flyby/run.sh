@@ -2,7 +2,7 @@
 
 set -x verbose
 rm -rfv run
-#cam2map4stereo.py N1717567658_1.cal.cub N1717571087_1.cal.cub --lon -180:180     
+#cam2map4stereo.py N1717567658_1.cal.cub N1717571087_1.cal.cub --lon -180:180
 stereo ../data/N1717567658_1.cal.map.cub ../data/N1717571087_1.cal.map.cub run/run --left-image-crop-win 1955 216 300 300 --corr-timeout 15000  --ip-detect-method 1
 
 # Test point2dem with two clouds

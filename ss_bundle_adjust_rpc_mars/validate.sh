@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-left_mars_rpc.adjust run/run-right_mars_rpc.adjust; do 
+for file in run/run-left_mars_rpc.adjust run/run-right_mars_rpc.adjust; do
 
   gold=${file/run\/run/gold\/run}
 

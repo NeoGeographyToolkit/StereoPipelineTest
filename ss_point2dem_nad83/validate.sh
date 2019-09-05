@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for val in "" -min -max -mean -median -stddev -count -nmad -50-pct -50.1-pct; do 
+for val in "" -min -max -mean -median -stddev -count -nmad -50-pct -50.1-pct; do
 
   file=run/run$val-DEM.tif
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-DEM-iter2.tif; do 
+for file in run/run-DEM-iter2.tif; do
 
   echo $file $gold
   gold=${file/run\/run/gold\/run}
@@ -24,13 +24,11 @@ for file in run/run-DEM-iter2.tif; do
   gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v xml > run.txt
   gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold.txt
 
-  diff=$(diff run.txt gold.txt)
-  cat run.txt
+  diff run.txt gold.txt
 
-  rm -f run.txt gold.txt
-
-  echo diff is $diff
-  if [ "$diff" != "" ]; then
+  max_err.pl run.txt gold.txt # print the error
+  ans=$(max_err.pl run.txt gold.txt 1e-9) # compare the error
+  if [ "$ans" -eq 0 ]; then
       echo Validation failed
       exit 1
   fi

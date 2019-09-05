@@ -8,8 +8,10 @@ undef $/;          # read one whole file in one scalar
 
 MAIN:{
 
-  # Look at the maximum discrepancy between corresp. numbers in file1 and file2
-
+  # Look at the maximum discrepancy between corresponding numbers in
+  # file1 and file2.  If a third argument is given, return the
+  # comparision of whether the maximum relative error between the two
+  # files is less than the third argument.
   if (scalar(@ARGV) < 2){
     print "Usage: $0 file1 file2\n";
     exit(0);
@@ -17,6 +19,12 @@ MAIN:{
 
   my $file1 = shift @ARGV;
   my $file2 = shift @ARGV;
+
+  my $thresh = -1;
+  if (scalar(@ARGV)){
+    $thresh = shift @ARGV;
+  }
+  
   open(FILE, "<$file1");  my @val1 = split("\n", <FILE>);  close(FILE);
   open(FILE, "<$file2");  my @val2 = split("\n", <FILE>);  close(FILE);
   if ( scalar(@val1) != scalar(@val2) ){
@@ -83,8 +91,18 @@ MAIN:{
 
   }
 
+  if ($thresh > 0){
+    # Print if the value is below threshold
+    my $ans = 0;
+    if ($max_rel_err < $thresh ){
+      $ans = 1;
+    }
+    print "$ans\n";
+    exit(0);
+  }
+  
   print "Max abs err is $max_abs_err at line " . $max_row
-     .                  " and column " . $max_col . " (count starts from 0)\n";
+     . " and column " . $max_col . " (count starts from 0)\n";
   print "At that location, max rel err is $max_rel_err\n";
 
   print "The corresponding lines with maximum error:\n";

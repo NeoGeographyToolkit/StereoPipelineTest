@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-trans_reference.tif run/run-trans_source.tif; do 
+for file in run/run-trans_reference.tif run/run-trans_source.tif; do
 	gold=${file/run\//gold\/}
 	echo $run $gold
 

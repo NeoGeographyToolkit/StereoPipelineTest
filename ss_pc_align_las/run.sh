@@ -4,7 +4,7 @@ set -x verbose
 rm -rfv run
 
 machine=$(uname -n | grep centos-32-5)
-if [ "$machine" !=  "" ]; then 
+if [ "$machine" !=  "" ]; then
  opt="--max-num-reference-points 1000000" # to avoid running out of memory
 fi
 

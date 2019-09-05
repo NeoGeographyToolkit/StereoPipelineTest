@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 for file in run/run-WV01_11JAN131652275-P1BS-10200100104A0300.r12.adjust \
-        	run/run-WV01_11JAN131653225-P1BS-1020010011862E00.r12.adjust; do 
+        	run/run-WV01_11JAN131653225-P1BS-1020010011862E00.r12.adjust; do
 
   gold=${file/run\/run/gold\/run}
 

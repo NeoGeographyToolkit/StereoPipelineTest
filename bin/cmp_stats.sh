@@ -19,8 +19,8 @@ rm -fv "$img2.aux.xml"
 echo $img1 > $out1
 echo $img2 > $out2
 
-gdalinfo -stats $img1 | grep -E "Origin|STATISTICS_" | grep -v Min= | grep -v .tif | perl -pi -e 's#([=,\(\)])# $1 #g' >> $out1
-gdalinfo -stats $img2 | grep -E "Origin|STATISTICS_" | grep -v Min= | grep -v .tif | perl -pi -e 's#([=,\(\)])# $1 #g' >> $out2
+gdalinfo -stats $img1 | grep -E "Origin|STATISTICS_" | grep -v Min= | grep -v .tif | perl -p -e 's#([=,\(\)])# $1 #g' >> $out1
+gdalinfo -stats $img2 | grep -E "Origin|STATISTICS_" | grep -v Min= | grep -v .tif | perl -p -e 's#([=,\(\)])# $1 #g' >> $out2
 
 diff $out1 $out2
 max_err.pl $out1 $out2

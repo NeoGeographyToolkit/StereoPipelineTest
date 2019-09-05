@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for i in 08 13; do 
+for i in 08 13; do
   file=run/run-tile-${i}.tif
   gold=gold/run-tile-${i}.tif
 

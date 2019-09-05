@@ -23,18 +23,18 @@ fi
 #fi
 
 # To dislodge stuck osgviewer
-(sleep 5; killall osgviewer > /dev/null 2>&1; exit 0) & 
+(sleep 5; killall osgviewer > /dev/null 2>&1; exit 0) &
 
 osgviewer run/run.osgb
 status=$?
 
 if [ "$status" = "143" ]; then
-   # Declare the test passed if osgviewer started well, but 
+   # Declare the test passed if osgviewer started well, but
    # failed to quit and had to be killed
    status=0
 fi
 
-if [ "$status" != "0" ]; then 
+if [ "$status" != "0" ]; then
   echo Validation failed
   exit 1
 fi

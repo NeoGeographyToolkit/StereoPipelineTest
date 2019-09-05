@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/ocv_cam_params.yml run/solve_cam_params.txt run/vw_cam_params.tsai; do 
+for file in run/ocv_cam_params.yml run/solve_cam_params.txt run/vw_cam_params.tsai; do
 
   echo $file $gold
   gold=${file/run\/run/gold\/run}

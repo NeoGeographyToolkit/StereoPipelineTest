@@ -19,11 +19,23 @@ for file in run/run.tif run/run.xml; do
   diff=$(cmp $file $gold)
 
   echo diff is $diff
-  if [ "$diff" != "" ]; then
-      echo Validation failed
-      exit 1
+  if [ "$file" = "run/run.tif" ]; then
+      # The gold tif file must be same as the current one
+      if [ "$diff" != "" ]; then
+          echo Validation failed
+          exit 1
+      fi
+  else
+      # For the xml file, compare the values with a relative error threshold
+      if [ "$file" = "run/run.xml" ]; then
+          max_err.pl $file $gold # print the error
+          ans=$(max_err.pl $file $gold 1e-8) # compare the error
+          if [ "$ans" -eq 0 ]; then
+          echo Validation failed
+          exit 1
+          fi
+      fi
   fi
-
 done
 
 echo Validation succeded

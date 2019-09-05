@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-merge-DEM.tif run/run-merge-DRG.tif; do 
+for file in run/run-merge-DEM.tif run/run-merge-DRG.tif; do
 
   echo $file $gold
   gold=${file/run\/run/gold\/run}

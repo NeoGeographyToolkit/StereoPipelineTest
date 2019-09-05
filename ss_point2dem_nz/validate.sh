@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-DEM.tif; do 
+for file in run/run-DEM.tif; do
 
   echo $file $gold
   gold=${file/run\/run/gold\/run}

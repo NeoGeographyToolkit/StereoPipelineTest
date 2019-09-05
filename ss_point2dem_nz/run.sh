@@ -5,7 +5,7 @@ rm -rfv run
 
 # Test point2dem with an unusual projection, specified via a WKT string
 
-WKT='PROJCS["NZGD2000 / New Zealand Transverse Mercator 2000",                            
+WKT='PROJCS["NZGD2000 / New Zealand Transverse Mercator 2000",
      GEOGCS["NZGD2000",
         DATUM["New_Zealand_Geodetic_Datum_2000",
             SPHEROID["GRS 1980",6378137,298.257222101,

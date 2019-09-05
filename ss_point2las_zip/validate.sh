@@ -18,7 +18,7 @@ fi
 export PATH=$(dirname $(which point2las))/../libexec:$PATH
 
 # Oddly enough, this is necessary
-if [ "$(uname -s)" = "Darwin" ]; then 
+if [ "$(uname -s)" = "Darwin" ]; then
    export DYLD_LIBRARY_PATH=$(dirname $(which lasinfo))/../lib
 fi
 

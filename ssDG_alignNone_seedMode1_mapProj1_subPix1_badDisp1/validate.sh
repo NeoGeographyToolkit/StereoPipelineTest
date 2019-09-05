@@ -40,11 +40,11 @@ for f in $(ls run/*tif |grep -v PC); do
         fi
 	ans=$(gdalinfo $f |grep -i datum)
 	echo Datum in $f is $ans
-	if [ "$ans" = "" ]; then 
+	if [ "$ans" = "" ]; then
 		echo No georeference in $f
 		exit 1
 	fi
-done 
+done
 
 echo Validation succeded
 exit 0
