@@ -19,7 +19,7 @@ for file in run/run-AS15-M-1134.lev1.adjust run/run-AS15-M-1135.lev1.adjust; do
   diff $file $gold
 
   max_err.pl $file $gold # print the error
-  ans=$(max_err.pl $file $gold 0.003) # compare the error
+  ans=$(max_err.pl $file $gold 0.03) # compare the error
   echo answer is $ans
   if [ "$ans" -eq 0 ]; then
       echo Validation failed
