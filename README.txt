@@ -4,7 +4,7 @@ to cover most, if not all, of the ways in which ASP can be used, and
 the test suite should be updated regularly as more functionality is
 added to ASP.
 
-StereoPipelineTest uses the Python py.test framework to run the tests.
+StereoPipelineTest uses the Python pytest framework to run the tests.
 This framework needs Python >= 2.6. It can be installed as follows:
 
 pip install --user pytest
@@ -17,26 +17,24 @@ easy_install --prefix ~/.local -U pytest
 easy_install --prefix ~/.local -U pytest-xdist
 easy_install --prefix ~/.local -U pytest-timeout
 
-The py.test script ends up being installed either in /usr/bin, or in
+The pytest script ends up being installed either in /usr/bin, or in
 ~/.local/bin (on Linux) or in ~/Library/Python/2.x/bin (on OSX). In
 either case, the install directory needs to be added to the path.
 
-Usage: py.test -n <num cpu> -q -s -r a --tb=no --config <settings file> > report.txt
+Usage: pytest -n <num cpu> -q -s -r a --tb=no --config <settings file> > report.txt
 
 Here, <num cpu> is how many processes to use. 
 
-The files conftest.py and test_run.py control the behavior of py.test.
+The files conftest.py and test_run.py control the behavior of pytest.
 
-A sample <settings file> is provided, named 'pfe.conf'. This file has:
+A sample settings file is provided, named 'pfe.conf'. This file has:
 
 1. The tests to run (wildcard expressions are accepted).
 2. The machines to distribute the runs across (they must be accessible
    via ssh and share disk storage).
 3. How many processes to use on each machine (each process in turn uses 
    multiple threads).
-4. If to do strict validation (that is, not allow, vs. allow, a small
-   discrepancy between current and reference runs, more below).
-5. Environmental variables, such as the path to the ASP executables.
+4. Environmental variables, such as the path to the ASP executables.
 
 Each test needs to be in its own directory. A test is executed by
 running the script 'run.sh' in that directory, which should create an
@@ -60,7 +58,7 @@ for each test can be seen by running bin/check_status.py.
 
 == Troubleshooting ==
 
-If py.test is not found, try running 
+If pytest is not found, try running 
 
   source [BINARY_BUILDER_DIR]/auto_build/utils.sh
 
