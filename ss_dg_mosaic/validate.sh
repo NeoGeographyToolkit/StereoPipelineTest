@@ -6,23 +6,24 @@ for ot in Byte UInt16 Int16 UInt32 Int32 Float32; do
 	g=gold/run_${ot}.r25.xml
 
 	if [ ! -e "$g" ]; then
-     	echo "ERROR: File $g does not exist."
-    	exit 1
+            echo "ERROR: File $g does not exist."
+            exit 1
 	fi
-
+        
 	if [ ! -e "$f" ]; then
-    	echo "ERROR: File $f does not exist."
-    	exit 1
+            echo "ERROR: File $f does not exist."
+            exit 1
 	fi
 
-	diff=$(diff $f $g)
-	echo diff is $diff
-
-	if [ "$diff" != "" ]; then
-    	echo Validation failed
-    	exit 1
-	fi
-
+        diff $f $g
+        
+        max_err.pl $f $g # print the error
+        ans=$(max_err.pl $f $g 1e-12) # compare the error
+        if [ "$ans" -eq 0 ]; then
+            echo Validation failed
+            exit 1
+        fi
+        
         file=run/run_${ot}.r25.tif
 	gold=gold/run_${ot}.r25.tif
 
@@ -44,8 +45,19 @@ for ot in Byte UInt16 Int16 UInt32 Int32 Float32; do
 
 	cmp_stats.sh $file $gold
 	gdalinfo -stats $file | grep -v Files | grep -v -i -E "tif|xml|imd" > run.txt
-	gdalinfo -stats $gold | grep -v Files | grep -v -i -E "tif|xml|imd" > gold.txt
-
+        ans=$?
+        if [ "$ans" -ne 0 ]; then
+            echo Validation failed
+            exit 1
+        fi
+        
+        gdalinfo -stats $gold | grep -v Files | grep -v -i -E "tif|xml|imd" > gold.txt
+        ans=$?
+        if [ "$ans" -ne 0 ]; then
+            echo Validation failed
+            exit 1
+        fi
+        
 	diff=$(diff run.txt gold.txt)
 	cat run.txt
 

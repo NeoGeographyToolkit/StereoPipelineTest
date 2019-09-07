@@ -1,28 +1,27 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for g in gold/run.r33.xml; do
+# Compare xml files
 
-  if [ ! -e "$g" ]; then
-      echo "ERROR: File $g does not exist."
-      exit 1
-  fi
+g=gold/run.r33.xml
+  
+if [ ! -e "$g" ]; then
+    echo "ERROR: File $g does not exist."
+    exit 1
+fi
 
-  f=${g/gold/run}
-  if [ ! -e "$f" ]; then
-      echo "ERROR: File $f does not exist."
-      exit 1
-  fi
-
-  diff=$(cmp $f $g)
-  echo diff is $diff
-
-  if [ "$diff" != "" ]; then
+f=${g/gold/run}
+if [ ! -e "$f" ]; then
+    echo "ERROR: File $f does not exist."
+    exit 1
+fi
+  
+max_err.pl $f $g # print the error
+ans=$(max_err.pl $f $g 1e-8) # compare the error
+if [ "$ans" -eq 0 ]; then
     echo Validation failed
     exit 1
-  fi
-
-done
+fi
 
 echo Validation succeded
 exit 0

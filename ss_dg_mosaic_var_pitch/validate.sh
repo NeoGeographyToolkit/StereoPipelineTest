@@ -1,60 +1,57 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for g in gold/run.r50.xml; do
+# Compare the tif files
+g=gold/run.r50.tif
 
-  if [ ! -e "$g" ]; then
-      echo "ERROR: File $g does not exist."
-      exit 1
-  fi
+if [ ! -e "$g" ]; then
+    echo "ERROR: File $g does not exist."
+    exit 1
+fi
 
-  f=${g/gold/run}
-  if [ ! -e "$f" ]; then
-      echo "ERROR: File $f does not exist."
-      exit 1
-  fi
+f=${g/gold/run}
+if [ ! -e "$f" ]; then
+    echo "ERROR: File $f does not exist."
+    exit 1
+fi
 
-  diff=$(cmp $f $g)
-  echo diff is $diff
-
-  if [ "$diff" != "" ]; then
+gdalinfo -stats $f | grep -i -E -v "imd|xml|tif" > $f.txt
+gdalinfo -stats $g | grep -i -E -v "imd|xml|tif" > $g.txt
+ans=$?
+if [ "$ans" -ne 0 ]; then
     echo Validation failed
     exit 1
-  fi
-
-done
-
-file=run/run.r50.tif
-gold=gold/run.r50.tif
-
-if [ ! -e "$file" ]; then
-    echo "ERROR: File $file does not exist."
-    exit 1;
 fi
 
-if [ ! -e "$gold" ]; then
-    echo "ERROR: File $gold does not exist."
-    exit 1;
+max_err.pl $f.txt $g.txt # print the error
+ans=$(max_err.pl $f.txt $g.txt 1e-8) # compare the error
+if [ "$ans" -eq 0 ]; then
+    echo Validation failed
+    exit 1
 fi
 
-# Remove cached xmls
-rm -fv "$file.aux.xml"
-rm -fv "$gold.aux.xml"
+# Compare xml files
 
-cmp_stats.sh $file $gold
-gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v run > run.txt
-gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v run > gold.txt
+g=gold/run.r50.xml
+  
+if [ ! -e "$g" ]; then
+    echo "ERROR: File $g does not exist."
+    exit 1
+fi
 
-diff=$(diff run.txt gold.txt)
-cat run.txt
-
-rm -f run.txt gold.txt
-
-echo diff is $diff
-if [ "$diff" != "" ]; then
+f=${g/gold/run}
+if [ ! -e "$f" ]; then
+    echo "ERROR: File $f does not exist."
+    exit 1
+fi
+  
+max_err.pl $f $g # print the error
+ans=$(max_err.pl $f $g 1e-8) # compare the error
+if [ "$ans" -eq 0 ]; then
     echo Validation failed
     exit 1
 fi
 
 echo Validation succeded
 exit 0
+

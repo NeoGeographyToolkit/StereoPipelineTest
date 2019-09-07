@@ -14,12 +14,13 @@ for g in  gold/run.r100.xml; do
       exit 1
   fi
 
-  diff=$(cmp $f $g)
-  echo diff is $diff
-
-  if [ "$diff" != "" ]; then
-    echo Validation failed
-    exit 1
+  diff $f $g
+  
+  max_err.pl $f $g # print the error
+  ans=$(max_err.pl $f $g 1e-14) # compare the error
+  if [ "$ans" -eq 0 ]; then
+      echo Validation failed
+      exit 1
   fi
 
 done
