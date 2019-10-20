@@ -1,41 +1,43 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-DEM.tif run/run-IntersectionErr.tif; do
+file=run/run-DEM.tif
+gold=gold/run-DEM.tif
 
-  echo $file $gold
-  gold=${file/run\/run/gold\/run}
+if [ ! -e "$file" ]; then
+    echo "ERROR: File $file does not exist."
+    exit 1;
+fi
 
-  if [ ! -e "$file" ]; then
-      echo "ERROR: File $file does not exist."
-      exit 1;
-  fi
+if [ ! -e "$gold" ]; then
+    echo "ERROR: File $gold does not exist."
+    exit 1;
+fi
 
-  if [ ! -e "$gold" ]; then
-      echo "ERROR: File $gold does not exist."
-      exit 1;
-  fi
+# Remove cached xmls
+rm -fv "$file.aux.xml"
+rm -fv "$gold.aux.xml"
 
-  # Remove cached xmls
-  rm -fv "$file.aux.xml"
-  rm -fv "$gold.aux.xml"
+cmp_stats.sh $file $gold
+gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right > run.txt
+gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right > gold.txt
 
-  cmp_stats.sh $file $gold
-  gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
-  gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
+diff run.txt gold.txt
 
-  diff=$(diff run.txt gold.txt)
-  cat run.txt
+max_err.pl run.txt gold.txt # print the error
+ans=$(max_err.pl run.txt gold.txt 1e-5) # compare the error
+if [ "$ans" -eq 0 ]; then
+    echo Validation failed
+    exit 1
+fi
 
-  rm -f run.txt gold.txt
+rm -f run.txt gold.txt
 
-  echo diff is $diff
-  if [ "$diff" != "" ]; then
-      echo Validation failed
-      exit 1
-  fi
-
-done
+echo diff is $diff
+if [ "$diff" != "" ]; then
+    echo Validation failed
+    exit 1
+fi
 
 echo Validation succeded
 exit 0
