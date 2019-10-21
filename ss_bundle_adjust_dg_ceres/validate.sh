@@ -20,7 +20,12 @@ for file in run/run-WV01_11JAN131652275-P1BS-10200100104A0300.r12.adjust \
   diff=$(diff $file $gold)
 
   echo diff is $diff
-  if [ "$diff" != "" ]; then
+  ../bin/max_err.pl $file $gold
+
+  tol=0.1
+  echo Comparing absolute error with $tol
+  ans=$(../bin/max_err.pl $file $gold | grep abs | awk '{print ($5 < '$tol')}')
+  if [ "$ans" -ne 1 ]; then
       echo Validation failed
       exit 1
   fi
