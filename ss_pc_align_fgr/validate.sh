@@ -24,7 +24,7 @@ echo $goldErr > gold.txt
 diff run.txt gold.txt
 
 max_err.pl run.txt gold.txt # print the error
-ans=$(max_err.pl run.txt gold.txt 0.5) # compare the error
+ans=$(max_err.pl run.txt gold.txt 0.75) # compare the error
 if [ "$ans" -eq 0 ]; then
     echo Validation failed
     exit 1
