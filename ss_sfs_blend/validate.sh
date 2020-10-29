@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in  run/run-blend.tif run/run-mask.tif; do 
+for file in  run/run-blend.tif run/run-weight.tif; do 
 
   echo $file $gold
   gold=${file/run\/run/gold\/run}
