@@ -27,9 +27,31 @@ cat run.txt
 
 rm -f run.txt gold.txt
 
-echo diff is $diff
+echo stereo diff is $diff
 if [ "$diff" != "" ]; then
-    echo Validation failed
+    echo Stereo validation failed
+    exit 1
+fi
+
+# Bathy threshold validatoin
+file=run/run-threshold.txt
+gold=gold/run-threshold.txt
+
+if [ ! -e "$file" ]; then
+    echo "ERROR: File $file does not exist."
+    exit 1;
+fi
+
+if [ ! -e "$gold" ]; then
+    echo "ERROR: File $gold does not exist."
+    exit 1;
+fi
+
+diff=$(diff $file $gold)
+
+echo bathy threshold diff is $diff
+if [ "$diff" != "" ]; then
+    echo Bathy threshold validation failed
     exit 1
 fi
 

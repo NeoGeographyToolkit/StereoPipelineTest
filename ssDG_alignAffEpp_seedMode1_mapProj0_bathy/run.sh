@@ -38,3 +38,7 @@ stereo ../data/left_bathy_b3.tif ../data/right_bathy_b3.tif \
 
 point2dem run/run-PC.tif
 
+# Also run bathy threshold estimation. Need extra Python modules for that.
+~oalexan1/miniconda3/envs/bathy/bin/python $(which bathy_threshold_calc.py) \
+    --image ../data/left_bathy_b7.tif --num-samples 100000                  \
+    --no-plot | grep -v -i elapsed > run/run-threshold.txt
