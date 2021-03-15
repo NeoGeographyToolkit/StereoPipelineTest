@@ -15,23 +15,25 @@ image_calc -c "max($rthresh, var_0)" --output-nodata-value $rthresh ../data/righ
 # First run with no bathymetry
 stereo ../data/left_bathy_b3.tif ../data/right_bathy_b3.tif \
     ../data/left_bathy.xml ../data/right_bathy.xml          \
-    --left-image-crop-win 158 3549 368 256                  \
-    --right-image-crop-win 123 4279 459 344                 \
     run/run-nobathy
 point2dem run/run-nobathy-PC.tif --orthoimage run/run-nobathy-L.tif 
+
+#    --left-image-crop-win -415 3295 1724 1844               \
+#    --right-image-crop-win -189 3895 1413 1258              \
 
 # Find the plane of the DEM
 bathy_plane_calc --shapefile ../data/bathy_shoreline.shp    \
     --dem run/run-nobathy-DEM.tif --outlier-threshold 0.2   \
     --bathy-plane run/bathy-plane.txt
 
+#    --left-image-crop-win -415 3295 1724 1844               \
+#    --right-image-crop-win -189 3895 1413 1258              \
+
 # Run with bathy
 stereo ../data/left_bathy_b3.tif ../data/right_bathy_b3.tif \
     ../data/left_bathy.xml ../data/right_bathy.xml          \
     --left-bathy-mask run/left_bathy_b7_mask.tif            \
     --right-bathy-mask run/right_bathy_b7_mask.tif          \
-    --left-image-crop-win 158 3549 368 256                  \
-    --right-image-crop-win 123 4279 459 344                 \
     --refraction-index $waterRefractionIndex                \
     --bathy-plane run/bathy-plane.txt                       \
     run/run
