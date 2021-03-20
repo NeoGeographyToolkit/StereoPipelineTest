@@ -1,8 +1,8 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-file=run/DMS_20171029_183704_02500_RPC.tsai
-gold=gold/DMS_20171029_183704_02500_RPC.tsai
+file=run/run-rpc.tsai
+gold=gold/run-rpc.tsai
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."
