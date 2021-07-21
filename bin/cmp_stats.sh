@@ -25,3 +25,6 @@ gdalinfo -stats $img2 | grep -E "Origin|STATISTICS_" | grep -v Min= | grep -v .t
 diff $out1 $out2
 max_err.pl $out1 $out2
 rm -f $out1 $out2
+
+rm -fv "$img1.aux.xml"
+rm -fv "$img2.aux.xml"
