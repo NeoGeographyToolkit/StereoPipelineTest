@@ -4,8 +4,8 @@ set -x verbose
 rm -rfv run
 
 # do nobathy
-stereo --alignment-method epipolar --xcorr-threshold -1 --corr-kernel 5 5 \
-    --corr-tile-size 6400 --cost-mode 4  --stereo-algorithm 2 --threads 8 \
+parallel_stereo --alignment-method epipolar --xcorr-threshold -1 --corr-kernel 5 5 \
+    --corr-tile-size 6400 --cost-mode 4  --stereo-algorithm 2 --threads-single 8 \
     --corr-seed-mode 1 --session-type nadirpinhole                        \
     ../data/img_icebridge2.tif ../data/img_icebridge3.tif                 \
     ../data/img_icebridge2.tsai ../data/img_icebridge3.tsai               \
@@ -25,8 +25,8 @@ bathy_plane_calc --shapefile ../data/bathy_pinhole_shoreline.shp --dem \
     run/run-DEM.tif --outlier-threshold 0.2                            \
     --bathy-plane run/bathy-plane-nadirpinhole.txt
 
-stereo --alignment-method epipolar --xcorr-threshold -1 --corr-kernel 5 5 \
-    --corr-tile-size 6400 --cost-mode 4  --stereo-algorithm 2 --threads 8 \
+parallel_stereo --alignment-method epipolar --xcorr-threshold -1 --corr-kernel 5 5 \
+    --corr-tile-size 6400 --cost-mode 4  --stereo-algorithm 2 --threads-single 8 \
     --corr-seed-mode 1 --session-type nadirpinhole                        \
     ../data/img_icebridge2.tif ../data/img_icebridge3.tif                 \
     ../data/img_icebridge2.tsai ../data/img_icebridge3.tsai               \
