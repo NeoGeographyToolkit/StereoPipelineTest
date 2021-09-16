@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in  run/run-left_sub16.adjusted_state.json run/run-right_sub16.adjusted_state.json; do
+for file in run/run-LSZ_02330_1CD_XKU_00S120_S1.8bit.state.adjusted_state.json; do 
 
   gold=${file/run\/run/gold\/run}
 

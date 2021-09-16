@@ -12,5 +12,5 @@ echo "-0.004472124774634615 0.99999 0   20" >> transform.txt
 echo "0        0       1   40             " >> transform.txt
 echo "0        0       0   1              " >> transform.txt
 
-bundle_adjust ../data/left_sub16.tif ../data/right_sub16.tif ../data/left_sub16.json ../data/right_sub16.json --apply-initial-transform-only --initial-transform transform.txt -o run/run
+bundle_adjust --apply-initial-transform-only --initial-transform transform.txt ../data/LSZ_01636_1CD_XKU_09N120_S1.8bit.cub ../data/LSZ_02330_1CD_XKU_00S120_S1.8bit.cub ../data/LSZ_01636_1CD_XKU_09N120_S1.8bit.state.json ../data/LSZ_02330_1CD_XKU_00S120_S1.8bit.state.json -o run/run
 
