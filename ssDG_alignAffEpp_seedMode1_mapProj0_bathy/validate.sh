@@ -39,12 +39,12 @@ gold=gold/run-threshold.txt
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."
-    exit 1;
+    exit 1
 fi
 
 if [ ! -e "$gold" ]; then
     echo "ERROR: File $gold does not exist."
-    exit 1;
+    exit 1
 fi
 
 diff=$(diff $file $gold)
@@ -54,6 +54,19 @@ if [ "$diff" != "" ]; then
     echo Bathy threshold validation failed
     exit 1
 fi
+
+for f in run/inliers.shp run/run-mask-inliers.shp; do 
+	g=${f/run\//gold\/};
+	if [ ! -f "$f" ] || [ ! -f "$g" ]; then 
+		echo Cannot find inlier files $f or $g. Validation failed.
+		exit 1
+	fi
+	ans=$(cmp $f $g)
+	if [ "$ans" != "" ]; then 
+		echo Files $f and $g differ. Validation failed.
+	    exit 1
+	fi
+done 
 
 echo Validation succeded
 exit 0
