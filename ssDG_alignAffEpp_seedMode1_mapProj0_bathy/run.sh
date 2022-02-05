@@ -23,13 +23,13 @@ point2dem run/run-nobathy-PC.tif --orthoimage run/run-nobathy-L.tif
 #    --left-image-crop-win -415 3295 1724 1844               \
 #    --right-image-crop-win -189 3895 1413 1258              \
 
-# Find the plane of the DEM
+# Find the bathy plane using a DEM and a shapefile
 bathy_plane_calc --shapefile ../data/bathy_shoreline.shp    \
     --dem run/run-nobathy-DEM.tif --outlier-threshold 0.2   \
     --bathy-plane run/bathy-plane.txt                       \
 	--output-inlier-shapefile run/inliers.shp  
 
-# Find the bathy plane using the mask
+# Find the bathy plane using a DEM, a mask, and a camera
 bathy_plane_calc --dem run/run-nobathy-DEM.tif       \
   --mask run/left_bathy_b7_mask.tif                  \
   --camera ../data/left_bathy.xml                    \
