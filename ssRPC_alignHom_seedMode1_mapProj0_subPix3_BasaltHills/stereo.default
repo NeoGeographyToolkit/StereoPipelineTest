@@ -60,7 +60,7 @@ corr-sub-seed-percent 0.0
 # 0 - disable subpixel correlation (fastest)
 # 1 - parabola fitting (draft mode - not as accurate)
 # 2 - affine adaptive window, bayes EM weighting (slower, but much more accurate)
-subpixel-mode 1
+subpixel-mode 3
 
 # Subpixel step: correlation kernel size
 subpixel-kernel 25 25
