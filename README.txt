@@ -43,6 +43,14 @@ Run:
 
     pytest --timeout=14400 -n 4 -q -s -r a --tb=no --config release_lunokhod1.conf -k ssCSM_SAR
 
+To run several tests, whose direcory names are test1, test2, test3, use:
+
+  -k 'test1 or test2 or test3'
+
+Wildcards are accepted as well. Hence, to run all tests starting with 'ss', use:
+
+  -k 'ss*'
+
 == More details == 
 
 A sample settings file is provided, named 'release_lunokhod1.conf'. This file has:
