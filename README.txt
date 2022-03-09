@@ -4,6 +4,8 @@ to cover most, if not all, of the ways in which ASP can be used, and
 the test suite should be updated regularly as more functionality is
 added to ASP.
 
+== Installation ==
+
 StereoPipelineTest uses the Python pytest framework to run the tests.
 This framework needs Python >= 2.6. It can be installed as follows:
 
@@ -21,13 +23,29 @@ The pytest script ends up being installed either in /usr/bin, or in
 ~/.local/bin (on Linux) or in ~/Library/Python/2.x/bin (on OSX). In
 either case, the install directory needs to be added to the path.
 
+== Usage and example ==
+
 Usage: pytest -n <num cpu> -q -s -r a --tb=no --config <settings file> > report.txt
 
 Here, <num cpu> is how many processes to use. 
 
 The files conftest.py and test_run.py control the behavior of pytest.
 
-A sample settings file is provided, named 'pfe.conf'. This file has:
+Example for how to run a single test:
+
+Change to the directory StereoPipelineTest. Run:
+
+   source ~/projects/BinaryBuilder/auto_build/utils.sh
+
+(Use above your path to BinaryBuilder.) This will set the path to pytest.
+
+Run:
+
+    pytest --timeout=14400 -n 4 -q -s -r a --tb=no --config release_lunokhod1.conf -k ssCSM_SAR
+
+== More details == 
+
+A sample settings file is provided, named 'release_lunokhod1.conf'. This file has:
 
 1. The tests to run (wildcard expressions are accepted).
 2. The machines to distribute the runs across (they must be accessible
@@ -67,7 +85,7 @@ pytest-timeout were not installed or cannot be found.
 
 == Tools ==
 
-There are a number of utilties in the main and bin/ folders which can
+There are a number of utilities in the main and bin/ folders which can
 be useful for working with tests.  These include:
 
 runs_to_golds.py:
