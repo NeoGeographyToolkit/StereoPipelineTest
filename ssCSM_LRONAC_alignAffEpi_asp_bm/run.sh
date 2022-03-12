@@ -7,5 +7,6 @@ parallel_stereo --left-image-crop-win 3583 3922 1767 1691 --right-image-crop-win
 
 point2dem run/run-PC.tif
 
-corr_eval run/run-L.tif run/run-R.tif run/run-F.tif run/run-F-ncc.tif
+corr_eval --metric ncc    run/run-L.tif run/run-R.tif run/run-F.tif run/run
+corr_eval --metric stddev run/run-L.tif run/run-R.tif run/run-F.tif run/run
 
