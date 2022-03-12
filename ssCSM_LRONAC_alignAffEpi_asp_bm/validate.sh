@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-DEM.tif run/run-L-R-disp-diff.tif; do 
+for file in run/run-DEM.tif run/run-L-R-disp-diff.tif run_asp_bm_subpix3/run-F-ncc.tif; do 
     
     gold=${file/run\//gold\/}
 
