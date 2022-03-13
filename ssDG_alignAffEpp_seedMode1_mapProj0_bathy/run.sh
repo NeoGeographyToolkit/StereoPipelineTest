@@ -46,11 +46,23 @@ stereo run/left_bathy_b3_corr.tif run/right_bathy_b3_corr.tif \
     ../data/left_bathy.xml ../data/right_bathy.xml            \
     --left-bathy-mask run/left_bathy_b7_mask.tif              \
     --right-bathy-mask run/right_bathy_b7_mask.tif            \
-    --refraction-index $waterRefractionIndex                  \
+    --refraction-index 1.333                                  \
     --bathy-plane run/bathy-plane.txt                         \
     run/run
 
 point2dem run/run-PC.tif
+
+# Test --prev-run-prefix
+parallel_stereo run/left_bathy_b3_corr.tif         \
+    run/right_bathy_b3_corr.tif                    \
+    ../data/left_bathy.xml ../data/right_bathy.xml \
+    --left-bathy-mask run/left_bathy_b7_mask.tif   \
+    --right-bathy-mask run/right_bathy_b7_mask.tif \
+    --refraction-index 1.333                       \
+    --bathy-plane run/bathy-plane.txt              \
+    --prev-run-prefix run/run run/clone-run
+
+point2dem run/clone-run-PC.tif
 
 # Also run bathy threshold estimation. Need extra Python modules for that.
 ~oalexan1/miniconda3/envs/bathy/bin/python $(which bathy_threshold_calc.py) \
