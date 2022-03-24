@@ -7,3 +7,6 @@ stereo -t nadirpinhole --alignment-method homography ../data/DZB1212-500082L0020
 
 point2dem -r Earth run/run-PC.tif --nodata-value -32767
 
+# Test for --correlator-mode. This does not produce a PC file.
+stereo --correlator-mode run/run-L.tif run/run-R.tif run/run-corr
+
