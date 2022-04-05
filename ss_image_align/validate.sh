@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-align.tif run/run-transform.txt; do
+for file in run/run-align.tif run/run-transform.txt run/run-corr-align.tif; do
     
     gold=${file/run\/run/gold\/run}
 
