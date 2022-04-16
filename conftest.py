@@ -5,7 +5,7 @@ import pytest, os, sys, fnmatch, re
 # Option parser
 def pytest_addoption(parser):
     parser.addoption("--config", dest="config_file", default="",
-                      help="Choose the output resolution in meters per pixel on the ground (note that a coarse resolution may result in aliasing).")
+                      help="Config file.")
 
 # Parse options and store the config file
 #@pytest.fixture(scope="session")
@@ -23,6 +23,7 @@ def pytest_generate_tests(metafunc):
     count = 0
     tests = []
     for val in os.listdir(os.getcwd()):
+        # Tests are in directories starting with 'ss'
         if not re.match('ss', val): continue
         if not os.path.isdir(val): continue
         #if count >= 3: break # temporary debug code
