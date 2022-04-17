@@ -39,9 +39,9 @@ MAIN:{
     my $row1 = $val1[$row_num];
     my $row2 = $val2[$row_num];
 
-    # wipe all kinds of parentheses
-    $row1 =~ s/[\<\>\(\)\[\]]/ /g;
-    $row2 =~ s/[\<\>\(\)\[\]]/ /g;
+    # wipe all kinds of parentheses and other separators
+    $row1 =~ s/[\<\>\(\)\[\]=]/ /g;
+    $row2 =~ s/[\<\>\(\)\[\]=]/ /g;
 
     $row1 =~ s/^[,|\s]+//g; $row1 =~ s/[,|\s]+$//g;
     $row2 =~ s/^[,|\s]+//g; $row2 =~ s/[,|\s]+$//g;
@@ -49,8 +49,10 @@ MAIN:{
     my @l1 = split(/[,|\s]+/, $row1);
     my @l2 = split(/[,|\s]+/, $row2);
 
-    #foreach my $a (@l1){ print "1--$a++\n"; }
-    #foreach my $a (@l2){ print "2--$a++\n"; }
+    # Useful for debugging
+    # print "\nRow is " . ($row_num + 1) . "\n";
+    # foreach my $a (@l1){ print "file1++$a++\n"; }
+    # foreach my $a (@l2){ print "file2++$a++\n"; }
 
     my $len1 = scalar(@l1);
     my $len2 = scalar(@l2);
