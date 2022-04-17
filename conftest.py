@@ -1,4 +1,4 @@
-# Configuration for all tests.
+# Configuration for all tests. Each test is launched via test_run.py.
 
 import pytest, os, sys, fnmatch, re
 
@@ -15,7 +15,9 @@ def pytest_generate_tests(metafunc):
     # TODO: There must be a better way.
     os.environ["CONFIG"] = metafunc.config.option.config_file
 
+    # Set the directory where all the test directories are located
     os.environ["BASE_DIR"] = os.getcwd()
+    
     setup = TestSetup()
 
     # Read in all the tests. They start with "ss".
@@ -38,7 +40,7 @@ def pytest_generate_tests(metafunc):
 # If anywhere in string one finds $SOMETHING, replace it with os.environ[SOMETHING]
 def replaceEnv(line):
     while 1:
-        a = re.match('^(.*?)\$(\w+)(.*?)$', line)
+        a = re.match(r'^(.*?)\$(\w+)(.*?)$', line)
         if not a: break
         if a.group(2) in os.environ:
             line = a.group(1) + os.environ[a.group(2)] + a.group(3)
@@ -50,8 +52,8 @@ def replaceEnv(line):
 # Parse the config file and save the variables we need to pass to the test
 class TestSetup:
     def __init__(self):
-        self.skipTests={}
-        self.runTests ={}
+        self.skipTests = {}
+        self.runTests  = {}
 
         configFile = os.environ["CONFIG"]
         with open(configFile) as f:
@@ -59,18 +61,18 @@ class TestSetup:
             for line in lines:
                 line = line.rstrip() # wipe the newline
 
-                # Read the skipped tests
+                # The tests to run
                 if re.match("runDirs", line):
-                    for skip in line.split(" "):
-                        self.runTests[skip] = 1
+                    for testName in line.split(" "):
+                        self.runTests[testName] = 1
 
-                # Read the skipped tests
+                # The tests to skip
                 if re.match("skipTests", line):
-                    for skip in line.split(" "):
-                        self.skipTests[skip] = 1
+                    for testName in line.split(" "):
+                        self.skipTests[testName] = 1
 
                 # Expand and store the environmental variables
-                a = re.match('export (\w+)=(.*?)$', line)
+                a = re.match(r'export (\w+)=(.*?)$', line)
                 if a:
                     os.environ[a.group(1)] = replaceEnv(a.group(2))
 

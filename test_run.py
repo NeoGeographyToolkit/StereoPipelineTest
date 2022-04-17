@@ -1,4 +1,6 @@
-import os, time, subprocess, pytest
+# Run a single test. The setup is done in conftest.py.
+
+import os, sys, time, subprocess, pytest
 
 def test_run(testName, setup):
     '''Function called for each test that is run.
@@ -19,28 +21,37 @@ def test_run(testName, setup):
     # Switch to the directory where the test will take place
     os.chdir(testName)
 
-    #The log file
+    # The log file where all the text output printed below will go to
     logFile = "output.txt"
 
-    # Open the log file and wipe it
-    log = open(logFile, 'w')
-    log.write('Starting test\n')
-    log.close()
+    # Open the log file in write mode and wipe it
+    logHandle = open(logFile, 'w')
+    logHandle.write('Starting test\n')
+    logHandle.close()
 
     # Re-open the file and append to it
-    log = open(logFile, 'a')
+    logHandle = open(logFile, 'a')
 
     # Save the env for the test
-    a = subprocess.Popen(["env"], stdout=log, stderr=log, shell=True)
+    a = subprocess.Popen(['env'], stdout = logHandle, stderr = logHandle, shell = False)
     exitcode = a.wait()
 
-    # Run the test
-    a = subprocess.Popen(["./run.sh"], stdout=log, stderr=log, shell=True)
+    # The script having the test to run
+    cmd= ['./run.sh']
+
+    # On Linux check memory usage and run time
+    if 'linux' in sys.platform:
+        fmt_str = cmd[0] + ': elapsed=%E ([hours:]minutes:sec.subsec), memory=%M (kb)'
+        cmd = ['/usr/bin/time', '-f', fmt_str] + cmd
+        
+    # Run the test. Do not start a shell, as then the command must be a string
+    # and not an array of strings.
+    a = subprocess.Popen(cmd, stdout = logHandle, stderr = logHandle, shell = False)
     exitcode = a.wait()
 
     # Validate the test
-    a = subprocess.Popen(["./validate.sh"], stdout=log, stderr=log, shell=True)
+    a = subprocess.Popen(['./validate.sh'], stdout = logHandle, stderr = logHandle, shell = False)
     exitcode = a.wait()
 
     # Must return 0 on success
-    assert ( exitcode == 0 )
+    assert (exitcode == 0)

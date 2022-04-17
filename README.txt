@@ -43,7 +43,7 @@ Run:
 
     pytest --timeout=14400 -n 4 -q -s -r a --tb=no --config release_lunokhod1.conf -k ssCSM_SAR
 
-To run several tests, whose direcory names are test1, test2, test3, use:
+To run several tests, whose directory names are test1, test2, test3, use:
 
   -k 'test1 or test2 or test3'
 
@@ -55,12 +55,16 @@ Wildcards are accepted as well. Hence, to run all tests starting with 'ss', use:
 
 A sample settings file is provided, named 'release_lunokhod1.conf'. This file has:
 
-1. The tests to run (wildcard expressions are accepted).
+1. The tests to run (wildcard expressions are accepted). It usually
+   looks like: runDirs = ss*
 2. The machines to distribute the runs across (they must be accessible
    via ssh and share disk storage).
 3. How many processes to use on each machine (each process in turn uses 
    multiple threads).
 4. Environmental variables, such as the path to the ASP executables.
+5. A list of tests and maximum error per test for each to pass. If a
+   test is not listed here, it will still be run, but it will fail if the
+   maximum error is > 0.
 
 Each test needs to be in its own directory. A test is executed by
 running the script 'run.sh' in that directory, which should create an
@@ -74,6 +78,12 @@ in the settings file or match the wildcard pattern already present
 there. Each test must have a 'run.sh' file, and a validation script,
 named 'validate.sh'. The 'validate.sh' script must return exit status
 0 on successful validation, and non-zero otherwise.
+
+The output of 'run.sh', its elapsed time, and maximum memory usage of
+the programs launched by it, as well as the output of 'validate.sh',
+are all written to a file called 'output.txt' in run's
+directory. Also, most ASP tools write log files, which would be found
+in both the current 'run' directory and reference ('gold') directory.
 
 When tests fail, which is inevitable when something changes, and the
 new results are deemed acceptable, the 'gold' reference directory
