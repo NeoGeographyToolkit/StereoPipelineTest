@@ -33,5 +33,27 @@ if [ "$diff" != "" ]; then
     exit 1
 fi
 
+# Validate bundle_adjust results
+for f in run/ba/run-lsz_03821_1cd_xku_16n196_v1.adjusted_state.json \
+         run/ba/run-lsz_03822_1cd_xku_23n196_v1.adjusted_state.json \
+         run/ba_state/run-run-lsz_03821_1cd_xku_16n196_v1.adjusted_state.json \
+         run/ba_state/run-run-lsz_03822_1cd_xku_23n196_v1.adjusted_state.json; do
+
+    g=${f/run\//gold\//}
+    echo $f $g;
+    if [ ! -f "$f" ] || [ ! -f "$g"  ]; then
+        echo "ERROR: Missing $f or $g"
+        exit 1
+    fi
+
+    diff=$(diff $f $g)
+    echo Diff for $f is $diff
+    if [ "$diff" != "" ]; then
+      echo Validation failed
+      exit 1
+    fi
+done
+
 echo Validation succeded
 exit 0
+
