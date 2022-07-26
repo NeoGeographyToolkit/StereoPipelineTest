@@ -16,4 +16,3 @@ dem_mosaic --erode 1 run/run-tile-08.tif -o run/run-eroded.tif
 # Test hole-filling 
 dem_mosaic --hole-fill-len 200 run/run-eroded.tif -o run/run-filled.tif
 
-
