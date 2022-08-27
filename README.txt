@@ -39,17 +39,13 @@ Change to the directory StereoPipelineTest. Run:
 
 (Use above your path to BinaryBuilder.) This will set the path to pytest.
 
-Run:
+To run all tests whose directory names have the string 'CSM', do:
 
-    pytest --timeout=14400 -n 4 -q -s -r a --tb=no --config release_lunokhod1.conf -k ssCSM_SAR
+    pytest --timeout=14400 -n 4 -q -s -r a --tb=no --config release_lunokhod1.conf -k CSM
 
 To run several tests, whose directory names are test1, test2, test3, use:
 
   -k 'test1 or test2 or test3'
-
-Wildcards are accepted as well. Hence, to run all tests starting with 'ss', use:
-
-  -k 'ss*'
 
 == More details == 
 
