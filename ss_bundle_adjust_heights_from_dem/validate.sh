@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/*tsai; do
+for file in run/*tsai run/run-mapproj_match_offsets.txt; do
 
   gold=${file/run\/run/gold\/run}
 

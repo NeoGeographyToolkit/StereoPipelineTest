@@ -14,4 +14,3 @@ bundle_adjust --solve-intrinsics ../data/left_sub16.tif ../data/right_sub16.tif 
 # Then just apply a transform
 bundle_adjust ../data/left_sub16.tif ../data/right_sub16.tif  run/ba1/run-left_sub16.v2.tsai run/ba1/run-right_sub16.v2.tsai --inline-adjustments -t pinhole --datum WGS84 -o run/run --initial-transform transform.txt --apply-initial-transform-only --threads 1
 
-
