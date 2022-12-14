@@ -39,11 +39,13 @@ rig_calibrator                                       \
     --save_transformed_depth_clouds                  \
     --out_dir run
 
+rm -rfv run/rig_theia/matches # takes too much space
+
 # Create a mesh using the images, depth clouds,
 # and obtained optimized cameras
 voxblox_mesh --index run/voxblox/haz_cam/index.txt \
     --output_mesh run/fused_mesh.ply               \
-    --min_ray_length 0.1 --max_ray_length 2.0      \
+    --min_ray_length 0.1 --max_ray_length 4.0      \
     --voxel_size 0.01
 
 # Create textured meshes for given sensors
