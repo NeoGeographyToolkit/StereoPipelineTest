@@ -83,6 +83,8 @@ mesh_gen_opts="
   --max_ray_length $maxDistanceFromCamera
   --voxel_size 0.01"
 
+# Skip image 1 as being too similar to image 2.
+# That will cause stereo to fail.
 multi_stereo --rig_config run/rig_config.txt \
     --camera_poses run/cameras.txt           \
     --undistorted_crop_win '1100 700'        \
@@ -92,6 +94,6 @@ multi_stereo --rig_config run/rig_config.txt \
     --stereo_options "$stereo_opts"          \
     --pc_filter_options "$pc_filter_opts"    \
     --mesh_gen_options "$mesh_gen_opts"      \
-    --first-image-index 1                    \
-    --last-image-index 3                     \
+    --first-image-index 2                    \
+    --last-image-index 4                     \
   --out_dir run/stereo
