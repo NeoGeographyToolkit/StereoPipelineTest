@@ -7,49 +7,39 @@ added to ASP.
 == Installation ==
 
 StereoPipelineTest uses the Python pytest framework to run the tests.
-This framework needs Python >= 2.6. It can be installed as follows:
+It can be installed as follows:
 
-pip install --user pytest
-pip install --user pytest-xdist
-pip install --user pytest-timeout
+    conda create -n pytest pytest pytest-xdist pytest-timeout
 
-or 
+== Usage ==
 
-easy_install --prefix ~/.local -U pytest
-easy_install --prefix ~/.local -U pytest-xdist
-easy_install --prefix ~/.local -U pytest-timeout
+Sample invocation: 
 
-The pytest script ends up being installed either in /usr/bin, or in
-~/.local/bin (on Linux) or in ~/Library/Python/2.x/bin (on OSX). In
-either case, the install directory needs to be added to the path.
-
-== Usage and example ==
-
-Usage: pytest -n <num cpu> -q -s -r a --tb=no --config <settings file> > report.txt
+  $HOME/miniconda3/envs/pytest/bin/python   \
+    $HOME/miniconda3/envs/pytest/bin/pytest \
+    -n <num cpu> -q -s -r a --tb=no         \
+    --config <settings file>                \
+    > report.txt
 
 Here, <num cpu> is how many processes to use. 
 
 The files conftest.py and test_run.py control the behavior of pytest.
 
-Example for how to run a single test:
+This tool allows one to run just a subset of the tests. For example,
+to run all tests whose directory names have the string 'CSM', append
+to the above command: 
+  
+  -k CSM
 
-Change to the directory StereoPipelineTest. Run:
-
-   source ~/projects/BinaryBuilder/auto_build/utils.sh
-
-(Use above your path to BinaryBuilder.) This will set the path to pytest.
-
-To run all tests whose directory names have the string 'CSM', do:
-
-    pytest --timeout=14400 -n 4 -q -s -r a --tb=no --config release_lunokhod1.conf -k CSM
-
-To run several tests, whose directory names are test1, test2, test3, use:
+To run several tests whose directory names are test1, test2, test3,
+use:
 
   -k 'test1 or test2 or test3'
 
 == More details == 
 
-A sample settings file is provided, named 'release_lunokhod1.conf'. This file has:
+A sample settings file is provided, named
+'release_lunokhod1.conf'. This file has:
 
 1. The tests to run (wildcard expressions are accepted). It usually
    looks like: runDirs = ss*
