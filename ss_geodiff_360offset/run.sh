@@ -7,4 +7,3 @@ rm -rfv run
 # There were bugfixes in both of these cases.
 geodiff ../data/dem_clip7.tif ../data/dem_clip8.tif -o run/run
 
-
