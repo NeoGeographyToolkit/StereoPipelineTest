@@ -10,5 +10,6 @@ point2dem --covariances --stereographic --proj-lon 0 --proj-lat 90 --errorimage 
 # Run with mapprojected images too
 mapproject run/run-DEM.tif ../data/IMG_PHR1B_P_202204132246314_SEN_6304928201-1_R1C1_crop.TIF ../data/DIM_PHR1B_P_202204132246314_SEN_6304928201-1.XML run/left_proj.tif
 mapproject run/run-DEM.tif ../data/IMG_PHR1B_P_202204132247161_SEN_6304929201-1_R1C1_crop.tif ../data/DIM_PHR1B_P_202204132247161_SEN_6304929201-1.XML --tr 0.534364640712738 run/right_proj.tif
-parallel_stereo run/left_proj.tif run/right_proj.tif ../data/DIM_PHR1B_P_202204132246314_SEN_6304928201-1.XML ../data/DIM_PHR1B_P_202204132247161_SEN_6304929201-1.XML run/run-proj run/run-DEM.tif
-point2dem --stereographic --proj-lon 0 --proj-lat 90 --errorimage run/run-proj-PC.tif
+parallel_stereo run/left_proj.tif run/right_proj.tif ../data/DIM_PHR1B_P_202204132246314_SEN_6304928201-1.XML ../data/DIM_PHR1B_P_202204132247161_SEN_6304929201-1.XML run/run-proj run/run-DEM.tif --compute-point-cloud-covariances 
+point2dem --stereographic --proj-lon 0 --proj-lat 90 --errorimage --covariances run/run-proj-PC.tif
+
