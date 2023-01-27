@@ -39,7 +39,7 @@ for f in run/ba/run-M119923055ME.adjusted_state.json      \
     run/ba_state/run-run-M119923055ME.adjusted_state.json \
     run/ba_state/run-run-M119929852ME.adjusted_state.json; do
 
-	g=${f/run\//gold\//}
+	g=${f/run\//gold\/}
 	echo $f $g;
 	if [ ! -f "$f" ] || [ ! -f "$g"  ]; then
 		echo "ERROR: Missing $f or $g"
