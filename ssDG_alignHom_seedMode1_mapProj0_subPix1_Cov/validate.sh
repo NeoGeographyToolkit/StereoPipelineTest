@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-DEM.tif run/run-HorizontalCovariance.tif run/run-VerticalCovariance.tif; do
+for file in run/run-DEM.tif run/run-HorizontalStdDev.tif run/run-VerticalStdDev.tif; do
 
     gold=${file/run\//gold\/};
     echo $file $gold
