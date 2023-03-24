@@ -8,9 +8,7 @@ for file in run/rig_config.txt           \
     run/convergence_angles.txt           \
     run/fused_mesh.ply                   \
     run/texrecon_out/nav_cam/texture.obj \
-    run/texrecon_out/sci_cam/texture.obj \
-    run/stereo/nav_cam/fused_mesh.ply;   \
-    do 
+    run/texrecon_out/sci_cam/texture.obj; do 
   
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."
