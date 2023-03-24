@@ -16,13 +16,19 @@ theia_sfm --rig_config                            \
 # Run the rig calibrator. It will register the cameras,
 # optimize the intrinsics, camera poses and rig transforms.
 cams="nav_cam sci_cam haz_cam"
-float="focal_length,optical_center,distortion"
-float_all="nav_cam:${float} haz_cam:${float} sci_cam:${float}" 
+
+# Floating intrinsics
+# intr="focal_length,optical_center,distortion"
+# float_intr="nav_cam:${intr} haz_cam:${intr} sci_cam:${intr}"
+
+# Not floating intrinsics
+float_intr=""
+
 rig_calibrator                                       \
     --rig_config ${dataDir}/rig_input/rig_config.txt \
     --nvm run/rig_theia/cameras.nvm                  \
     --camera_poses_to_float "$cams"                  \
-    --intrinsics_to_float "$float_all"               \
+    --intrinsics_to_float "$float_intr"              \
     --depth_to_image_transforms_to_float "$cams"     \
     --affine_depth_to_image                          \
     --bracket_len 2.0                                \
