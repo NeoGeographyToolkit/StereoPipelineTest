@@ -1,9 +1,6 @@
-*~
-*#
 gold/
 data/
 run/
 ss*/*.txt
 ss*/print.prt
-ss*/*.cub
-ss*/tmp*
+
