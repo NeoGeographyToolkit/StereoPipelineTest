@@ -6,7 +6,7 @@ export PATH=../bin:$PATH
 for file in run/submap1.nvm run/submap2.nvm run/merged.nvm; do 
 
   echo $file $gold
-  gold=${file/run\/run/gold\/run}
+  gold=${file/run\//gold\/}
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."
