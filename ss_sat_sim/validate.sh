@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in gold/run10000.map.tif gold/run10001.map.tif; do
+for file in gold/run-10000.map.tif run/run-10001.map.tif; do
     
     gold=${file/run\//gold\/}
 

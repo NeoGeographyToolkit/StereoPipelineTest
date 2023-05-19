@@ -7,6 +7,7 @@ sat_sim --dem ../data/sat_sim_DEM.tif --ortho ../data/sat_sim_ortho.tif -o run/r
 
 # Create orthoimages for inspection
 for i in 10000 10001; do
-  mapproject ../data/sat_sim_DEM.tif run/run${i}.tif run/run${i}.tsai run/run${i}.map.tif
+  mapproject ../data/sat_sim_DEM.tif run/run-${i}.tif run/run-${i}.tsai run/run-${i}.map.tif
 done
+
 
