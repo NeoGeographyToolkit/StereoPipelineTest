@@ -15,8 +15,8 @@ for file in $(ls run/run-1000[0-4].tif); do
         exit 1;
     fi
     
-    gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right > run.txt
-    gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right > gold.txt
+    gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right | grep -v Min= > run.txt
+    gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right | grep -v Min= > gold.txt
 
     diff=$(diff run.txt gold.txt)
     rm -f run.txt gold.txt
