@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run.map.tif; do
+for file in run/run.tif run/run-run.tif run/run.map.tif; do
     
     gold=${file/run\//gold\/}
 
