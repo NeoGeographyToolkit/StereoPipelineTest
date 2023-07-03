@@ -13,4 +13,3 @@ bundle_adjust run/f.tif run/n.tif run/f.json run/n.json -o run/run --threads 1 -
 # Solve for jitter with these cameras with the yaw constraint
 jitter_solve run/f.tif run/n.tif run/f.json run/n.json -o run/run --match-files-prefix run/run --heights-from-dem ../data/sat_sim_DEM.tif --heights-from-dem-weight 0.1 --heights-from-dem-robust-threshold 0.1 --yaw-weight 10000 --threads 1 --num-iterations 10
 
-
