@@ -13,5 +13,5 @@ sat_sim --dem ../data/sat_sim_DEM.tif --ortho ../data/sat_sim_ortho.tif -o run/r
 bundle_adjust --threads 1 --max-pairwise-matches 5000 run/run_ls.tif run/run_pin-1000[0-4].tif run/run_ls.json run/run_pin-1000[0-4].json -o run/run
 
 # Solve for jitter
-jitter_solve --num-iterations 10 --rotation-weight 0.1 --translation-weight 0.1 --threads 1 run/run_ls.tif run/run_pin-images.txt run/run_ls.json run/run_pin-cameras.txt --clean-match-files-prefix run/run -o run/jitter/run
+jitter_solve --num-iterations 10 --rotation-weight 0.1 --translation-weight 0.1 --threads 1 run/run_ls.tif run/run_pin-images.txt run/run_ls.json run/run_pin-cameras.txt --clean-match-files-prefix run/run -o run/jitter/run --roll-weight 0.1 --yaw-weight 0.1 --heights-from-dem ../data/sat_sim_DEM.tif --heights-from-dem-weight 0.1 --heights-from-dem-robust-threshold 0.1
 
