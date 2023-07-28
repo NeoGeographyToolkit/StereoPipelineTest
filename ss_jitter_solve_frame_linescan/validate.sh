@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-run_ls.adjusted_state.json run/run-run_pin-10000.adjusted_state.json run/run-run_pin-10001.adjusted_state.json run/run-run_pin-10002.adjusted_state.json run/run-run_pin-10003.adjusted_state.json run/run-run_pin-10004.adjusted_state.json; do 
+for file in run/run-run-l.adjusted_state.json run/run-run-p-10000.adjusted_state.json run/run-run-p-10001.adjusted_state.json run/run-run-p-10002.adjusted_state.json run/run-run-p-10003.adjusted_state.json run/run-run-p-10004.adjusted_state.json; do 
 
     gold=${file/run\//gold\/}
 
