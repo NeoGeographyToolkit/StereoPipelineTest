@@ -8,9 +8,22 @@ echo "0    1.2  0    3000" >> transform.txt
 echo "0    0    1.2  4000" >> transform.txt
 echo "0    0    0       1" >> transform.txt
 
-# First do bundle adjustment
-bundle_adjust --solve-intrinsics ../data/left_sub16.tif ../data/right_sub16.tif ../data/left_sub16.v2.tsai ../data/right_sub16.v2.tsai ../data/gcp_sub16.gcp --inline-adjustments -t pinhole --datum WGS84 -o run/ba1/run --intrinsics-to-float "other_intrinsics" --threads 1
+# First do bundle adjustment (per sensor)
+mkdir -p run
+ls ../data/left_sub16.tif > run/sensor1_images.txt
+ls ../data/right_sub16.tif > run/sensor2_images.txt
+ls ../data/left_sub16.v2.tsai > run/sensor1_cameras.txt
+ls ../data/right_sub16.v2.tsai > run/sensor2_cameras.txt
+bundle_adjust --solve-intrinsics                                  \
+    --inline-adjustments                                          \
+    --intrinsics-to-float "other_intrinsics"                      \
+    -t pinhole                                                    \
+    --threads 1                                                   \
+    --image-list run/sensor1_images.txt,run/sensor2_images.txt    \
+    --camera-list run/sensor1_cameras.txt,run/sensor2_cameras.txt \
+    ../data/gcp_sub16.gcp                                         \
+    --datum WGS84                                                 \
+    -o run/ba1/run
 
 # Then just apply a transform
 bundle_adjust ../data/left_sub16.tif ../data/right_sub16.tif  run/ba1/run-left_sub16.v2.tsai run/ba1/run-right_sub16.v2.tsai --inline-adjustments -t pinhole --datum WGS84 -o run/run --initial-transform transform.txt --apply-initial-transform-only --threads 1
-
