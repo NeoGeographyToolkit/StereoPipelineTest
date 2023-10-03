@@ -39,3 +39,4 @@ done
 
 echo Validation succeded
 exit 0
+

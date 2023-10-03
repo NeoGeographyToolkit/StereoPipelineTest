@@ -7,4 +7,3 @@ parallel_stereo ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.tif .
 
 point2dem -r Earth run/run-PC.tif --nodata-value -32767 --orthoimage run/run-L.tif --orthoimage-hole-fill-len 30 --dem-hole-fill-len 30 --tr .000174961596144
 
-
