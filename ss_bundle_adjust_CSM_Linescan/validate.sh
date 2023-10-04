@@ -3,12 +3,12 @@ export PATH=../bin:$PATH
 
 for file in run/run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json \
             run/run-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json \
-			run/run-weight-run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json \
-			run/run-weight-run-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json \
+            run/run-weight-run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json \
+            run/run-weight-run-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json \
             run/run-run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json \
             run/run-run-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json \
-			run/jitter-run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json \
-			run/jitter-run-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json; do 
+            run/jitter-run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json \
+            run/jitter-run-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json; do 
 
   gold=${file/run\/run/gold\/run}
 
