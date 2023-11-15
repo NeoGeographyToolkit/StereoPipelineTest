@@ -19,17 +19,17 @@ export PATH=$(dirname $(which point2las))/../libexec:$PATH
 
 # Oddly enough, this is necessary
 if [ "$(uname -s)" = "Darwin" ]; then
-   export DYLD_LIBRARY_PATH=$(dirname $(which lasinfo))/../lib
+   export DYLD_LIBRARY_PATH=$(dirname $(which pdal))/../lib
 fi
 
-lasinfo $file | grep -v Creation > run.txt
+pdal info --all $file | grep -v filename | grep -v now | grep -v creation > run.txt
 status=$?
 if [ $status -ne 0 ]; then
     echo Validation failed
     exit 1
 fi
 
-lasinfo $gold |grep -v Creation > gold.txt
+pdal info --all $gold | grep -v filename | grep -v now | grep -v creation > gold.txt
 status=$?
 if [ $status -ne 0 ]; then
     echo Validation failed
