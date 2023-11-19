@@ -14,9 +14,6 @@ if [ ! -e "$gold" ]; then
     exit 1;
 fi
 
-# Include libexec in the path
-export PATH=$(dirname $(which pdal))/../libexec:$PATH
-
 # Oddly enough, this is necessary
 if [ "$(uname -s)" = "Darwin" ]; then
    export DYLD_LIBRARY_PATH=$(dirname $(which pdal))/../lib
