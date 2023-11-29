@@ -16,7 +16,7 @@ for file in run/*tsai run/run-mapproj_match_offsets.txt; do
   fi
 
   echo diff $file $gold
-  diff=$(diff $file $gold)
+  diff=$(diff $file $gold | head -n 50)
 
   echo diff is $diff
   if [ "$diff" != "" ]; then
