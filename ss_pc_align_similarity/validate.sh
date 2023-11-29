@@ -14,7 +14,7 @@ for file in run/run-trans_reference.csv run/run-trans_source.csv; do
 	    exit 1;
 	fi
 
-	diff=$(diff $file $gold)
+	diff=$(diff $file $gold | head -n 50)
 	echo "diff is $diff"
 	if [ "$diff" != "" ]; then
 	    echo Validation failed

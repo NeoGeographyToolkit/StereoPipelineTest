@@ -22,7 +22,7 @@ cmp_stats.sh $file $gold
 gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
 gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
 
-diff=$(diff run.txt gold.txt)
+diff=$(diff run.txt gold.txt | head -n 50)
 cat run.txt
 
 rm -f run.txt gold.txt
@@ -46,7 +46,7 @@ if [ ! -e "$gold" ]; then
     exit 1;
 fi
 
-diff=$(diff $file $gold | head -n 1000)
+diff=$(diff $file $gold | head -n 50)
 echo "diff is $diff"
 if [ "$diff" != "" ]; then
     echo Validation failed

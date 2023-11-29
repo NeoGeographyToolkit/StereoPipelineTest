@@ -33,7 +33,7 @@ if [ $status -ne 0 ]; then
     exit 1
 fi
 
-diff=$(diff run.txt gold.txt)
+diff=$(diff run.txt gold.txt | head -n 50)
 cat run.txt
 
 rm -f run.txt gold.txt

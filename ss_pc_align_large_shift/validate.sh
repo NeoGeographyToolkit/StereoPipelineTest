@@ -24,7 +24,7 @@ for file in run/run-trans_source.tif; do
     gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
     gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
 
-    diff=$(diff run.txt gold.txt)
+    diff=$(diff run.txt gold.txt | head -n 50)
     cat run.txt
 
     rm -f run.txt gold.txt

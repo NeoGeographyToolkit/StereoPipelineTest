@@ -14,7 +14,7 @@ for file in run/run-trans_reference.tif run/run-trans_source.tif; do
 	    exit 1;
 	fi
 
-	diff=$(cmp $file $gold)
+	diff=$(cmp $file $gold | head -n 50)
 	ans=$?
 	echo "diff is $diff"
 	echo "return flag is $ans"
