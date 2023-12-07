@@ -54,6 +54,15 @@ if [ "$diff" != "" ]; then
 fi
 
 # Add validation for pdal
+for f in run/run-trans_reference.las gold/run-trans_reference.las; do 
+  pdal info run/run-trans_reference.las >/dev/null 2>&1
+  ans=$?
+  if [ "$ans" -ne 0 ]; then 
+    echo pdal info failed
+	exit 1
+  fi
+done
+    
 pdal info run/run-trans_reference.las  | grep -v filename | grep -v now > run/pdal_run.txt
 pdal info gold/run-trans_reference.las | grep -v filename |grep -v now > gold/pdal_gold.txt
 
