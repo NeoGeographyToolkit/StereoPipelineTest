@@ -23,7 +23,7 @@ for file in run/run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json \
   fi
 
   echo diff $file $gold
-  diff=$(diff $file $gold)
+  diff=$(diff $file $gold | head -n 50)
 
   echo diff is $diff
   if [ "$diff" != "" ]; then
