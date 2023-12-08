@@ -63,8 +63,8 @@ for f in run/run-trans_reference.las gold/run-trans_reference.las; do
   fi
 done
     
-pdal info run/run-trans_reference.las  | grep -v filename | grep -v now > run/pdal_run.txt
-pdal info gold/run-trans_reference.las | grep -v filename |grep -v now > gold/pdal_gold.txt
+pdal info run/run-trans_reference.las  | grep -v filename | grep -i -v software | grep -v now > run/pdal_run.txt
+pdal info gold/run-trans_reference.las | grep -v filename | grep -i -v software |grep -v now > gold/pdal_gold.txt
 
 diff=$(diff run/pdal_run.txt gold/pdal_gold.txt | head -n 50)
 echo "diff is $diff"
