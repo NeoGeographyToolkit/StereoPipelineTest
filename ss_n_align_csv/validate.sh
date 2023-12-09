@@ -21,4 +21,5 @@ for ((i = 0; i < 3; i++)); do
 	fi
 done
 
+echo Validation succeded
 exit 0
