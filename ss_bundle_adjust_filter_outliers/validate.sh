@@ -15,7 +15,7 @@ for file in run/run-DMS_20171029_183704_02500.adjust run/run-DMS_20171029_183706
   fi
 
   echo diff $file $gold
-  diff=$(diff $file $gold)
+  diff=$(diff $file $gold | head -n 50)
 
   echo diff is $diff
   if [ "$diff" != "" ]; then

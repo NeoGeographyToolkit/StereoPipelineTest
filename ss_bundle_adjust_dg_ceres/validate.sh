@@ -17,7 +17,7 @@ for file in run/run-WV01_11JAN131652275-P1BS-10200100104A0300.r12.adjust \
   fi
 
   echo diff $file $gold
-  diff=$(diff $file $gold)
+  diff=$(diff $file $gold | head -n 50)
 
   echo diff is $diff
   ../bin/max_err.pl $file $gold

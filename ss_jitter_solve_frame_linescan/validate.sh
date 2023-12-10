@@ -15,7 +15,7 @@ for file in run/run-run-l.adjusted_state.json run/run-run-p-10000.adjusted_state
         exit 1;
     fi
     
-    diff=$(diff $file $gold)
+    diff=$(diff $file $gold | head -n 50)
     
     echo diff is $diff
     if [ "$diff" != "" ]; then

@@ -16,7 +16,7 @@ for file in run/run-left_mars_rpc.adjust run/run-right_mars_rpc.adjust; do
   fi
 
   echo diff $file $gold
-  diff=$(diff $file $gold)
+  diff=$(diff $file $gold | head -n 50)
 
   echo diff is $diff
   if [ "$diff" != "" ]; then

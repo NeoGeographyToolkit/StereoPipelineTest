@@ -19,7 +19,7 @@ for file in run/run-TC1W2B0_01_02934N034E0959.adjusted_state.json \
   fi
 
   echo diff $file $gold
-  diff=$(diff $file $gold)
+  diff=$(diff $file $gold | head -n 50)
 
   echo diff is $diff
   if [ "$diff" != "" ]; then

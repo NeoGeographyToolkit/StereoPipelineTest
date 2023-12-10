@@ -19,7 +19,7 @@ for file in run/run-09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.adjust \
   fi
 
   echo diff $file $gold
-  diff=$(diff $file $gold)
+  diff=$(diff $file $gold | head -n 50)
 
   echo diff is $diff
   if [ "$diff" != "" ]; then

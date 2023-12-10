@@ -17,7 +17,7 @@ for file in run/ocv_cam_params.yml run/solve_cam_params.txt run/vw_cam_params.ts
   fi
 
 
-  diff=$(diff $file $gold)
+  diff=$(diff $file $gold | head -n 50)
 
   echo diff is $diff
   if [ "$diff" != "" ]; then

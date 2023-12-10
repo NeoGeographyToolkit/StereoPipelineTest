@@ -16,7 +16,7 @@ for file in run/run-DS1105-2248DA079.tsai run/run-DS1105-2248DA079_crop.tsai; do
   fi
 
   echo diff $file $gold
-  diff=$(diff $file $gold)
+  diff=$(diff $file $gold | head -n 50)
 
   echo diff is $diff
   if [ "$diff" != "" ]; then

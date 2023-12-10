@@ -15,7 +15,7 @@ for file in $(ls run/run-1000[0-4].tsai); do
         exit 1;
     fi
     
-    diff=$(diff $file $gold)
+    diff=$(diff $file $gold | head -n 50)
     
     echo diff is $diff
     if [ "$diff" != "" ]; then
