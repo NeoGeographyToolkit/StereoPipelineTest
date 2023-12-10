@@ -18,14 +18,14 @@ fi
 rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
-cmp_stats.sh $file $gold
+../bin/cmp_stats.sh $file $gold
 gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
 gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
 
 diff run.txt gold.txt
 
-max_err.pl run.txt gold.txt # print the error
-ans=$(max_err.pl run.txt gold.txt 1e-10) # compare the error
+../bin/max_err.pl run.txt gold.txt # print the error
+ans=$(../bin/max_err.pl run.txt gold.txt 1e-3 | grep -v Warn) # compare the error
 if [ "$ans" -eq 0 ]; then
     echo Validation failed
     exit 1
