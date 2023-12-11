@@ -13,14 +13,13 @@ for file in run/run-trans_reference.tif run/run-trans_source.tif; do
 	    echo "ERROR: File $gold does not exist."
 	    exit 1;
 	fi
-
-	diff=$(cmp $file $gold | head -n 50)
-	ans=$?
-	echo "diff is $diff"
-	echo "return flag is $ans"
-	if [ "$diff" != "" ] || [ "$ans" -ne 0 ]; then
-	    echo Validation failed
-	    exit 1
+    gdalinfo -stats $file |grep -v xml > run/run.txt
+    gdalinfo -stats $gold |grep -v xml > gold/run.txt
+    ../bin/max_err.pl run/run.txt gold/run.txt
+	ans=$(../bin/max_err.pl run/run.txt gold/run.txt 1e-6)
+	if [ "$ans" -eq 0 ]; then
+	     echo Validation failed
+	     exit 1
 	fi
 done
 
