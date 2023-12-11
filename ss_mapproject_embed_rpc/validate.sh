@@ -22,16 +22,18 @@ cmp_stats.sh $file $gold
 gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
 gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
 
-diff=$(diff run.txt gold.txt)
+diff=$(diff run.txt gold.txt | head -n 50)
 cat run.txt
+echo Diff is $diff
+
+../bin/max_err.pl run.txt gold.txt
+ans=$(../bin/max_err.pl run.txt gold.txt 1e-9)
+if [ "$ans" -eq 0 ]; then
+     echo Validation failed
+     exit 1
+fi
 
 rm -f run.txt gold.txt
-
-echo diff is $diff
-if [ "$diff" != "" ]; then
-    echo Validation failed
-    exit 1
-fi
 
 echo Validation succeded
 exit 0

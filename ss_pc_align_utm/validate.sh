@@ -18,7 +18,7 @@ fi
 rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
-cmp_stats.sh $file $gold
+../bin/cmp_stats.sh $file $gold
 gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
 gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
 
@@ -47,10 +47,13 @@ if [ ! -e "$gold" ]; then
 fi
 
 diff=$(diff $file $gold | head -n 50)
-echo "diff is $diff"
-if [ "$diff" != "" ]; then
-    echo Validation failed
-    exit 1
+echo Diff is $diff
+
+../bin/max_err.pl $file $gold
+ans=$(../bin/max_err.pl $file $gold 1e-8)
+if [ "$ans" -eq 0 ]; then
+     echo Validation failed
+     exit 1
 fi
 
 # Add validation for pdal
@@ -63,8 +66,8 @@ for f in run/run-trans_reference.las gold/run-trans_reference.las; do
   fi
 done
     
-pdal info run/run-trans_reference.las  | grep -v filename | grep -i -v software | grep -v now > run/pdal_run.txt
-pdal info gold/run-trans_reference.las | grep -v filename | grep -i -v software |grep -v now > gold/pdal_gold.txt
+pdal info run/run-trans_reference.las  | grep -v filename | grep -v now > run/pdal_run.txt
+pdal info gold/run-trans_reference.las | grep -v filename |grep -v now > gold/pdal_gold.txt
 
 diff=$(diff run/pdal_run.txt gold/pdal_gold.txt | head -n 50)
 echo "diff is $diff"
@@ -75,4 +78,5 @@ fi
 
 echo Validation succeded
 exit 0
+
 

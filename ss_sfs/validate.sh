@@ -26,8 +26,8 @@ for file in run/run-DEM-iter2.tif; do
 
   diff run.txt gold.txt
 
-  max_err.pl run.txt gold.txt # print the error
-  ans=$(max_err.pl run.txt gold.txt 1e-9) # compare the error
+  ../bin/max_err.pl run.txt gold.txt # print the error
+  ans=$(../bin/max_err.pl run.txt gold.txt 1e-9) # compare the error
   if [ "$ans" -eq 0 ]; then
       echo Validation failed
       exit 1
