@@ -1,7 +1,10 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/*adjust; do
+for file in run/*adjust \
+	run/run-final_residuals_pointmap.csv \
+	run/run-cnet-final_residuals_pointmap.csv \
+	run/run-cnet2-final_residuals_pointmap.csv; do
 
   gold=${file/run\/run/gold\/run}
 
