@@ -13,6 +13,11 @@ export PATH=../bin:$PATH
 # should be converted to python.
 
 runLog=$(ls -atrd run/*log* | tail -n 1)
+if [ ! -f "$runLog" ]; then
+	echo Missing file $runLog
+	exit 1
+fi
+
 runErr=$(grep "Output: mean of smallest errors" $runLog | awk '{print $17}' | perl -pi -e 's#(0.\d+).*?$#int($1*100+0.5)/100#eg')
 
 goldLog=$(ls -atrd gold/*log* | tail -n 1)

@@ -1,8 +1,12 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in $(ls run/run-1000[0-4].tsai); do
-    
+for file in run/run-10000.map.tsai \
+            run/run-10001.map.tsai \
+            run/run-10002.map.tsai \
+            run/run-10003.map.tsai \
+            run/run-10004.map.tsai; do 
+            
     gold=${file/run\//gold\/}
 
     if [ ! -e "$file" ]; then
