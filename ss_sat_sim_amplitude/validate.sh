@@ -1,11 +1,11 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-10000.map.tsai \
-            run/run-10001.map.tsai \
-            run/run-10002.map.tsai \
-            run/run-10003.map.tsai \
-            run/run-10004.map.tsai; do 
+for file in run/run-10000.tsai \
+            run/run-10001.tsai \
+            run/run-10002.tsai \
+            run/run-10003.tsai \
+            run/run-10004.tsai; do 
             
     gold=${file/run\//gold\/}
 
