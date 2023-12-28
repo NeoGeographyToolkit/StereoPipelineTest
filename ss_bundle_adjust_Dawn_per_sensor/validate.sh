@@ -2,8 +2,10 @@
 export PATH=../bin:$PATH
 
 # Check the state files
-for f in run/run-FC21B0004011_11224024300F1E.adjusted_state.json \
-         run/run-FC21B0004012_11224030401F1E.adjusted_state.json; do 
+for f in run/run1-FC21B0004011_11224024300F1E.adjusted_state.json \
+         run/run1-FC21B0004012_11224030401F1E.adjusted_state.json \
+         run/run2-FC21B0004011_11224024300F1E.adjusted_state.json \
+         run/run2-FC21B0004012_11224030401F1E.adjusted_state.json; do
 
         g=${f/run\//gold\/}
         echo $f $g;
