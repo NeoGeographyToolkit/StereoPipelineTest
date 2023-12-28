@@ -13,7 +13,7 @@ bundle_adjust --threads 1 ../data/M0100115_small.cub ../data/E0201461_small.cub 
 
 # Test running jigsaw
 ls ../data/M0100115_small.cub ../data/E0201461_small.cub > run/list.txt
-jigsaw fromlist=run/list.txt update=no twist=no radius=yes cnet=run/run-cnet.net onet=run/run-jigsaw.net
+jigsaw fromlist=run/list.txt update=no twist=no radius=yes cnet=run/run-cnet.net onet=run/run-jigsaw.net file_prefix=run/run
 
 # Test reading an ISIS cnet
 bundle_adjust --threads 1 ../data/M0100115_small.cub ../data/E0201461_small.cub -o run/run-cnet2 --num-iterations 5 --ip-per-tile 1000 --isis-cnet run/run-jigsaw.net
