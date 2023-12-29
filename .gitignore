@@ -1,6 +1,9 @@
 gold/
 data/
 run/
-ss*/*.txt
+ss*/output.txt
+ss*/status.txt
 ss*/print.prt
+ss*/*txt
+__pycache__
 
