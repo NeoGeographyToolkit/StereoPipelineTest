@@ -20,6 +20,7 @@ for file in run/run-run-l.adjusted_state.json         \
     
     diff=$(diff $file $gold | head -n 50)
     
+	echo diff $file $gold
     echo diff is $diff
     if [ "$diff" != "" ]; then
         echo Validation failed
