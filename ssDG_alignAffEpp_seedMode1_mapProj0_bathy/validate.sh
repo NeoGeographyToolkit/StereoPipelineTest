@@ -2,7 +2,7 @@
 
 export PATH=../bin:$PATH
 
-for file in run/run-DEM.tif run/clone-run-DEM.tif; do
+for file in run/run-DEM.tif; do
 
     gold=${file/run\//gold\/}
     
