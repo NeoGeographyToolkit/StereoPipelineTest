@@ -61,7 +61,7 @@ class TestSetup:
             for line in lines:
                 line = line.rstrip() # wipe the newline
 
-                # The tests to run
+                # The tests to run. This can be a regexp.
                 if re.match("runDirs", line):
                     for testName in line.split(" "):
                         self.runTests[testName] = 1
@@ -70,15 +70,21 @@ class TestSetup:
                 if re.match("skipTests", line):
                     for testName in line.split(" "):
                         self.skipTests[testName] = 1
-
+                
                 # Expand and store the environmental variables
                 a = re.match(r'export (\w+)=(.*?)$', line)
                 if a:
                     os.environ[a.group(1)] = replaceEnv(a.group(2))
 
     def checkIfRunTest(self, testName):
-        '''Returns true if this test is indicated by the runDirs line in the config file.'''
+        '''
+        Returns true if this test is indicated by the runDirs line in the config file,
+        and if it is not in the skipTests line.
+        '''
         for pattern in self.runTests:
+            if testName in self.skipTests:
+                return False
+            # Note how we match a pattern in the tests to run
             if fnmatch.fnmatch(testName, pattern):
                 return True
         return False

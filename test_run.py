@@ -6,11 +6,6 @@ def test_run(testName, setup):
     '''Function called for each test that is run.
        "setup" is populated by a TestSetup object from conftest.py'''
 
-    # Skip tests per the config file
-    if testName in setup.skipTests:
-        print("Will skip test: ", testName)
-        return 1
-
     # Switch to the base directory
     os.chdir(os.environ["BASE_DIR"])
 
