@@ -6,9 +6,10 @@ rm -rfv run
 # Run stereo with CSM cameras using images mapprojected with the RPC model
 
 # First create matches
+# This uses the DG session
 bundle_adjust ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.tif ../data/09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10.tif ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.xml ../data/09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10.xml -o run/ba/run --num-iterations 0
 
-# Then create CSM cameras
+# Then create CSM cameras created from linescan DG cameras
 jitter_solve ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.tif ../data/09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10.tif ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.xml ../data/09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10.xml -o run/jitter/run --num-iterations 0 --match-files-prefix run/ba/run
 
 # Create mapprojected images with RPC cameras
