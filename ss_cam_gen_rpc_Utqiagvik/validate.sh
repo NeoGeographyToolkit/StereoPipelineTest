@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run.json; do
+for file in run/run_radtan.json gold/run_transverse.json; do
 
   gold=${file/run\/run/gold\/run}
 
