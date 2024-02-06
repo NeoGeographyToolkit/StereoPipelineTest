@@ -3,6 +3,10 @@
 set -x verbose
 rm -rfv run
 
-stereo --enable-fill-holes ../data/WV01_11JAN131652222-P1BS-10200100104A0300_ortho1.0m_sub2_crop1.tif ../data/WV01_11JAN131653180-P1BS-1020010011862E00_ortho1.0m_sub2_crop1.tif ../data/WV01_11JAN131652222-P1BS-10200100104A0300.xml ../data/WV01_11JAN131653180-P1BS-1020010011862E00.xml run/run ../data/krigged_dem_nsidc_ndv0_fill.tif --left-image-crop-win 0 2048 512 512 --corr-search -30 -30 30 30 --subpixel-mode 1 --alignment-method none --erode-max-size 1000
-point2dem -r Earth run/run-PC.tif --nodata-value -32767
+# Test using images mapprojected with the dg session but now running with json cameras.
+# This requires loading the dg cameras to undo the mapprojection.
+# Test running stereo with no default file.
+
+stereo ../data/grand_mesa_WV03_left.map.dg.tif ../data/grand_mesa_WV03_right.map.dg.tif ../data/grand_mesa_WV03_left.json ../data/grand_mesa_WV03_right.json run/run ../data/grand_mesa_clip.tif
+point2dem run/run-PC.tif
 
