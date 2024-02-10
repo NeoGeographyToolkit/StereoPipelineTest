@@ -21,13 +21,13 @@ for file in run/run-DEM-iter2.tif; do
   rm -fv "$gold.aux.xml"
 
   cmp_stats.sh $file $gold
-  gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v xml > run.txt
-  gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold.txt
+  gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v xml > run/run.txt
+  gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold/gold.txt
 
-  diff run.txt gold.txt
+  diff run/run.txt gold/gold.txt
 
-  ../bin/max_err.pl run.txt gold.txt # print the error
-  ans=$(../bin/max_err.pl run.txt gold.txt 1e-9) # compare the error
+  ../bin/max_err.pl run/run.txt gold/gold.txt # print the error
+  ans=$(../bin/max_err.pl run/run.txt gold/gold.txt 1e-9) # compare the error
   if [ "$ans" -eq 0 ]; then
       echo Validation failed
       exit 1
