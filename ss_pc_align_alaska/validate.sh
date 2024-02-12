@@ -1,5 +1,4 @@
 #!/bin/bash
-export PATH=../bin:$PATH
 
 file=run/run-trans_reference.tif
 gold=gold/run-trans_reference.tif
@@ -18,14 +17,15 @@ fi
 rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
+export PATH=../bin:$PATH
 cmp_stats.sh $file $gold
-gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
-gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
+gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
+gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold/gold.txt
 
-diff=$(diff run.txt gold.txt | head -n 50)
-cat run.txt
+diff=$(diff run/run.txt gold/gold.txt | head -n 50)
+cat run/run.txt
 
-rm -f run.txt gold.txt
+rm -f run/run.txt gold/gold.txt
 
 echo diff is $diff
 if [ "$diff" != "" ]; then
