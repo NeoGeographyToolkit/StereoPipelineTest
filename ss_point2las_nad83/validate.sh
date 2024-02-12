@@ -1,4 +1,5 @@
 #!/bin/bash
+
 export PATH=../bin:$PATH
 
 file=run/run-LAS.las
@@ -19,24 +20,24 @@ if [ "$(uname -s)" = "Darwin" ]; then
    export DYLD_LIBRARY_PATH=$(dirname $(which pdal))/../lib
 fi
 
-pdal info --all $file | grep -v filename | grep -v date | grep -i -v software | grep -i -v software | grep -v now | grep -v creation | grep -v href > run.txt
+pdal info --all $file | grep -v filename | grep -v date | grep -i -v software | grep -i -v software | grep -v now | grep -v creation | grep -v href > run/run.txt
 status=$?
 if [ $status -ne 0 ]; then
     echo Validation failed
     exit 1
 fi
 
-pdal info --all $gold | grep -v filename | grep -v date | grep -i -v software | grep -i -v software | grep -v now | grep -v creation | grep -v href > gold.txt
+pdal info --all $gold | grep -v filename | grep -v date | grep -i -v software | grep -i -v software | grep -v now | grep -v creation | grep -v href > gold/run.txt
 status=$?
 if [ $status -ne 0 ]; then
     echo Validation failed
     exit 1
 fi
 
-diff=$(diff run.txt gold.txt)
-cat run.txt
+diff=$(diff run/run.txt gold/run.txt)
+cat run/run.txt
 
-rm -f run.txt gold.txt
+rm -f run/run.txt gold/run.txt
 
 echo diff is $diff
 if [ "$diff" != "" ]; then
