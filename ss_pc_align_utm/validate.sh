@@ -50,7 +50,7 @@ diff=$(diff $file $gold | head -n 50)
 echo Diff is $diff
 
 ../bin/max_err.pl $file $gold
-ans=$(../bin/max_err.pl $file $gold 1e-8)
+ans=$(../bin/max_err.pl $file $gold 1e-8 | tail -n 1)
 if [ "$ans" -eq 0 ]; then
      echo Validation failed
      exit 1
