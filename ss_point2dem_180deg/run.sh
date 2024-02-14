@@ -60,4 +60,3 @@ srs='
 
 point2dem --t_srs "$srs" --csv-format 1:lon,2:lat,3:height_above_datum ../data/cloud_180deg.csv -o run/run-json --tr 0.5
 
-
