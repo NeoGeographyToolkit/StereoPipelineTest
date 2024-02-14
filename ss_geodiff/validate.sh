@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-diff.tif; do
+for file in run/run-lonlat-diff.tif run/run-utm-lonat-diff.tif; do
 
   echo $file $gold
   gold=${file/run\/run/gold\/run}
