@@ -35,9 +35,6 @@ if [ $status -ne 0 ]; then
 fi
 
 diff=$(diff run/run.txt gold/run.txt)
-cat run/run.txt
-
-rm -f run/run.txt gold/run.txt
 
 echo diff is $diff
 if [ "$diff" != "" ]; then
