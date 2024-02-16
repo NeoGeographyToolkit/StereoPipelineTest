@@ -3,8 +3,9 @@
 set -x verbose
 rm -rfv run
 
-echo ../data/dem1_10pct.tif > list.txt
-echo ../data/dem2_10pct.tif >> list.txt
+mkdir -p run
+echo ../data/dem1_10pct.tif > run/list.txt
+echo ../data/dem2_10pct.tif >> run/list.txt
 
 for f in "" first last min max mean stddev median count block-max; do
 

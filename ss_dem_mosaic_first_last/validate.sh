@@ -19,10 +19,10 @@ for f in "" -first -last -min -max -mean -stddev -median -count -block-max; do
   fi
 
   cmp_stats.sh $file $gold
-  gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
-  gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
+  gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
+  gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold/run.txt
 
-  diff=$(diff run.txt gold.txt)
+  diff=$(diff run/run.txt gold/run.txt)
 
   if [ "$diff" != "" ]; then
     echo Validation failed
