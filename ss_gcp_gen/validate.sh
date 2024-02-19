@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run.gcp; do
+for file in run/run.gcp run/run-img_pitch_minus40.tsai; do
 
   gold=${file/run\/run/gold\/run}
 
