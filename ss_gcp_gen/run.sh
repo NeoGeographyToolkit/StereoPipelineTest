@@ -11,7 +11,7 @@ rm -rfv run
 # ../data/img_pitch_plus40.tsai ../data/img_pitch_plus40.tif 
 # ../data/sat_sim_DEM.tif ../data/sat_sim_ortho.tif
 
-gcp_gen --camera-image ../data/img_pitch_minus40.tif --ortho-image ../data/sat_sim_ortho.tif --dem ../data/sat_sim_DEM.tif -o run/run.gcp
+gcp_gen --camera-image ../data/img_pitch_minus40.tif --ortho-image ../data/sat_sim_ortho.tif --dem ../data/sat_sim_DEM.tif -o run/run.gcp --output-prefix run/run
 
 # bundle_adjust should be able to use this GCP file
 bundle_adjust ../data/img_pitch_minus40.tif ../data/img_pitch_minus40.tsai run/run.gcp -o run/run --num-iterations 100 --num-passes 1 --inline-adjustments -t nadirpinhole --datum D_MARS --robust-threshold 10 --threads 1 --camera-weight 0
