@@ -9,5 +9,5 @@ bundle_adjust --threads 1 ../data/B17_016219_1978_XN_17N282W.8bit.cub ../data/B1
 bundle_adjust --threads 1 ../data/B17_016219_1978_XN_17N282W.8bit.cub ../data/B18_016575_1978_XN_17N282W.8bit.cub run/run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json run/run-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json --match-files-prefix run/run --weight-image ../data/ctx_image_weight.tif -o run/run-weight --tri-weight 100 --tri-robust-threshold 0.5 --camera-weight 0 --num-iterations 10 --force-reuse-match-files
 
 # Re-run bundle adjustment with the model state files saved by the previous run
-bundle_adjust --threads 1 ../data/B17_016219_1978_XN_17N282W.8bit.cub ../data/B18_016575_1978_XN_17N282W.8bit.cub run/run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json run/run-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json -o run/run --force-reuse-match-files
+bundle_adjust --threads 1 ../data/B17_016219_1978_XN_17N282W.8bit.cub ../data/B18_016575_1978_XN_17N282W.8bit.cub run/run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json run/run-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json -o run/run-reuse --force-reuse-match-files --match-files-prefix run/run
 
