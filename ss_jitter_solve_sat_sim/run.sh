@@ -11,8 +11,8 @@ sat_sim --dem ../data/sat_sim_DEM.tif --ortho ../data/sat_sim_ortho.tif -o run/n
 bundle_adjust run/f.tif run/n.tif run/f.json run/n.json -o run/run --threads 1 --num-iterations 10 --num-passes 1
 
 # Solve for jitter with these cameras with the roll and yaw constraints
-jitter_solve run/f.tif run/n.tif run/f.json run/n.json -o run/run --match-files-prefix run/run --heights-from-dem ../data/sat_sim_DEM.tif --heights-from-dem-weight 0.1 --heights-from-dem-robust-threshold 0.1 --roll-weight 10000 --yaw-weight 10000 --rotation-weight 0.1 --translation-weight 0.1 --threads 1 --num-iterations 10
+jitter_solve run/f.tif run/n.tif run/f.json run/n.json -o run/run --match-files-prefix run/run --heights-from-dem ../data/sat_sim_DEM.tif --heights-from-dem-uncertainty 10 --heights-from-dem-robust-threshold 0.1 --roll-weight 10000 --yaw-weight 10000 --rotation-weight 0.1 --translation-weight 0.1 --threads 1 --num-iterations 10
 
 # Add test when there is a weight image
-jitter_solve run/f.tif run/n.tif run/f.json run/n.json -o run/run-weight --match-files-prefix run/run --heights-from-dem ../data/sat_sim_DEM.tif --heights-from-dem-weight 0.1 --heights-from-dem-robust-threshold 0.1 --threads 1 --num-iterations 10 --weight-image ../data/sat_sim_weight.tif
+jitter_solve run/f.tif run/n.tif run/f.json run/n.json -o run/run-weight --match-files-prefix run/run --heights-from-dem ../data/sat_sim_DEM.tif --heights-from-dem-uncertainty 10 --heights-from-dem-robust-threshold 0.1 --threads 1 --num-iterations 10 --weight-image ../data/sat_sim_weight.tif
 

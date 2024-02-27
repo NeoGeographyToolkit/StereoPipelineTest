@@ -13,5 +13,5 @@ sat_sim --dem ../data/sat_sim_DEM.tif --ortho ../data/sat_sim_ortho.tif -o run/r
 bundle_adjust --threads 1 --max-pairwise-matches 5000 run/run-l.tif run/run-p-1000[0-4].tif run/run-l.json run/run-p-1000[0-4].json -o run/run --output-cnet-type isis-cnet --num-iterations 10
 
 # Solve for jitter. Use the isis cnet format
-jitter_solve --num-iterations 10 --rotation-weight 0.1 --translation-weight 0.1 --threads 1 run/run-l.tif run/run-p-images.txt run/run-l.json run/run-p-cameras.txt -o run/jitter/run --roll-weight 0.1 --yaw-weight 0.1 --heights-from-dem ../data/sat_sim_DEM.tif --heights-from-dem-weight 0.1 --heights-from-dem-robust-threshold 0.1 --isis-cnet run/run.net
+jitter_solve --num-iterations 10 --rotation-weight 0.1 --translation-weight 0.1 --threads 1 run/run-l.tif run/run-p-images.txt run/run-l.json run/run-p-cameras.txt -o run/jitter/run --roll-weight 0.1 --yaw-weight 0.1 --heights-from-dem ../data/sat_sim_DEM.tif --heights-from-dem-uncertainty 10 --heights-from-dem-robust-threshold 0.1 --isis-cnet run/run.net
 
