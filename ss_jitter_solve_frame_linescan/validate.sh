@@ -4,7 +4,13 @@ export PATH=../bin:$PATH
 for file in run/run-run-l.adjusted_state.json         \
     run/run-run-p-1000{0,1,2,3,4}.adjusted_state.json \
     run/jitter/run-run-l.adjusted_state.json          \
-    run/jitter/run-run-p-1000{0,1,2,3,4}.adjusted_state.json; do
+    run/jitter/run-run-p-1000{0,1,2,3,4}.adjusted_state.json \
+	run/jitter/run-final_residuals_pointmap.csv \
+	run/jitter/run-final_residuals_anchor_points.csv \
+	run/jitter/run-camera_offsets.txt \
+	run/jitter/run-triangulation_offsets.txt\
+	run/jitter/run-final_residuals_anchor_points.csv; do 
+
 
     gold=${file/run\//gold\/}
 
