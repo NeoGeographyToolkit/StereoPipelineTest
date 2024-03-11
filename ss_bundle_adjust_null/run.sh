@@ -12,5 +12,5 @@ bundle_adjust --solve-intrinsics ../data/left_sub16.tif ../data/right_sub16.tif 
 bundle_adjust --threads 1 ../data/left_sub16.tif ../data/right_sub16.tif ../data/left_sub16.null.tsai ../data/right_sub16.null.tsai -t pinhole --datum WGS84 -o run/run --output-cnet-type isis-cnet
 
 # Test reading it back
-bundle_adjust --threads 1 ../data/left_sub16.tif ../data/right_sub16.tif ../data/left_sub16.null.tsai ../data/right_sub16.null.tsai -t pinhole --datum WGS84 -o run/run --output-cnet-type match-files --isis-cnet run/run.net
+bundle_adjust --threads 1 ../data/left_sub16.tif ../data/right_sub16.tif ../data/left_sub16.null.tsai ../data/right_sub16.null.tsai -t pinhole --datum WGS84 -o run/run-v2 --output-cnet-type match-files --isis-cnet run/run.net
 

@@ -1,7 +1,8 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/*tsai; do
+# Test .tsai files produced by first run, and then adjust files produced by last run
+for file in run/*tsai run/run-v2-left_sub16.null.adjust; do
 
   gold=${file/run\/run/gold\/run}
 
