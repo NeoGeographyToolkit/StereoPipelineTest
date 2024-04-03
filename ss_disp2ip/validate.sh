@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/theia_slog/cameras.nvm; do
+for file in run/theia_fltr/cameras.nvm; do
 
   gold=${file/run\/run/gold\/run}
   echo Comparing: $file $gold
