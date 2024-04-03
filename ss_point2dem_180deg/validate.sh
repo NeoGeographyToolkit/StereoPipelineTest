@@ -3,8 +3,9 @@ export PATH=../bin:$PATH
 
 for file in run/run-lonlat-DEM.tif run/run-stere-DEM.tif run/run-utm-DEM.tif run/run-json-DEM.tif; do
 
-  echo $file $gold
   gold=${file/run\/run/gold\/run}
+
+  echo Comparing: $file $gold
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."
