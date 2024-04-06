@@ -43,6 +43,7 @@ rig_calibrator                                       \
     --xyz_file ${dataDir}/xyz.txt                    \
     --export_to_voxblox                              \
     --save_transformed_depth_clouds                  \
+    --save-pinhole-cameras --save_matches            \
     --out_dir run
 
 rm -rfv run/rig_theia/matches # takes too much space
