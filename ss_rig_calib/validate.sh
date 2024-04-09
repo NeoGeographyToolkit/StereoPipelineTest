@@ -17,5 +17,12 @@ for file in run/rig_config.txt           \
   
 done
 
+# If the file run/pinhole/haz_cam/1637278316.7238007_haz_cam.tsai
+# does not exist, then bundle_adjust failed.
+if [ ! -e "run/pinhole/haz_cam/1637278316.7238007_haz_cam.tsai" ]; then
+    echo "ERROR: File run/pinhole/haz_cam/1637278316.7238007_haz_cam.tsai does not exist."
+    exit 1;
+fi
+
 echo Validation succeded
 exit 0

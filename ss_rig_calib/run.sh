@@ -49,6 +49,14 @@ rig_calibrator                                       \
 
 rm -rfv run/rig_theia/matches # takes too much space
 
+# Run bundle adjustment
+bundle_adjust                         \
+  --image-list run/image_list.txt     \
+  --camera-list run/camera_list.txt   \
+  --match-files-prefix run/matches/run\
+  --num-iterations 100                \
+  -o run/ba/run
+
 # Create a mesh using the images, depth clouds,
 # and obtained optimized cameras
 voxblox_mesh --index run/voxblox/haz_cam/index.txt \
