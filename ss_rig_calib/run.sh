@@ -6,11 +6,12 @@ rm -rfv run
 dataDir=../data/rig_calibrator_example_3_cameras
 
 # Create the camera poses using Theia
-theia_sfm --rig_config                            \
-    ${dataDir}/rig_input/rig_config.txt           \
+theia_sfm --rig_config                           \
+    ${dataDir}/rig_input/rig_config.txt          \
     --images "${dataDir}/rig_input/nav_cam/*tif
               ${dataDir}/rig_input/haz_cam/*tif 
-              ${dataDir}/rig_input/sci_cam/*tif"  \
+              ${dataDir}/rig_input/sci_cam/*tif" \
+    --theia_flags ../data/theia_flags.txt        \
     --out_dir run/rig_theia
 
 # Run the rig calibrator. It will register the cameras,
