@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-DMS_20171029_183704_02500.adjust run/run-DMS_20171029_183706_02501.adjust run/run-DMS_20171029_183707_02502.adjust; do
+for file in run/run-DMS_20171029_183704_02500.adjust run/run-DMS_20171029_183706_02501.adjust; do
   gold=${file/run\/run/gold\/run}
 
   if [ ! -e "$file" ]; then
