@@ -49,13 +49,21 @@ rig_calibrator                                       \
 
 rm -rfv run/rig_theia/matches # takes too much space
 
-# Run bundle adjustment
+# Run bundle adjustment with match files
 bundle_adjust                         \
   --image-list run/image_list.txt     \
   --camera-list run/camera_list.txt   \
   --match-files-prefix run/matches/run\
-  --num-iterations 100                \
-  -o run/ba/run
+  --num-iterations 5                  \
+  -o run/ba_matches/run
+
+# Run bundle adjustment with nvm
+bundle_adjust                         \
+  --image-list run/image_list.txt     \
+  --camera-list run/camera_list.txt   \
+  --nvm run/cameras.nvm               \
+  --num-iterations 5                  \
+  -o run/ba_nvm/run
 
 # Create a mesh using the images, depth clouds,
 # and obtained optimized cameras
