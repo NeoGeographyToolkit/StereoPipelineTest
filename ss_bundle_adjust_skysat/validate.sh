@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-a1000.adjust run/run-a1010.adjust run/run-a1020.adjust run/run-a1030.adjust run/run-a1040.adjust run/run-a1050.adjust; do 
+for file in run/run-a1000.adjust run/run-a1010.adjust run/run-a1020.adjust run/run-a1030.adjust run/run-a1040.adjust run/run-a1050.adjust run/run.nvm; do 
 
   gold=${file/run/gold}
 
