@@ -5,8 +5,8 @@ export PATH=../bin:$PATH
 # For now, just check if the files were at least successfully created
 for file in run/submap1.nvm run/submap2.nvm run/merged.nvm; do 
 
-  echo $file $gold
   gold=${file/run\//gold\/}
+  echo $file $gold
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."
