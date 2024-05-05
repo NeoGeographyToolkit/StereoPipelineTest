@@ -1,13 +1,34 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-# It is vary hard to do proper validation as the results are not unique.
-# For now, just check if the files were at least successfully created
-for file in run/rig_config.txt                \
-    run/cameras.txt                           \
-    run/convergence_angles.txt                \
-    run/ba_matches/run-convergence_angles.txt \
-    run/ba_nvm/run.nvm                        \
+# Some files are expected to be the same each time. Check for that
+for file in run/cameras.nvm \
+    run/ba_matches/run-final_residuals_pointmap.csv \
+    run/ba_nvm/run-final_residuals_pointmap.csv; do 
+
+  if [ ! -e "$file" ]; then
+      echo "ERROR: File $file does not exist."
+      exit 1
+  fi
+  
+  # replace run/ with gold/
+  gold=$(echo $file | perl -p -e "s#^run/#gold/#")
+    
+  if [ ! -e "$gold" ]; then
+      echo "ERROR: File $gold does not exist."
+      exit 1
+  fi
+  
+  diff=$(diff $file $gold | head -n 50)
+  echo diff is $diff
+  if [ "$diff" != "" ]; then
+      echo Validation failed
+      exit 1
+  fi
+done
+
+# For other files that may not be unique, just check for existence
+for file in                                   \
     run/fused_mesh.ply                        \
     run/texrecon_out/nav_cam/texture.obj      \
     run/texrecon_out/sci_cam/texture.obj; do 
