@@ -3,11 +3,26 @@
 set -x verbose
 rm -rfv run
 
+# Test no rig and --image_sensor_list
+
+mkdir -p run
+
+# Given a file like: ../data/bay4/queen_nav/1654694783.7586150.jpg
+# produce ../data/bay4/queen_nav/1654694783.7586150 queen_nav 1654694783.7586150
+for f in $(grep  jpg ../data/norig.nvm | awk '{print $1}'); do
+  g=$(basename $f)
+  time=$(echo $g | perl -p -e "s#\.jpg##g")
+  sensor=$(dirname $f | xargs basename)
+  echo $f $sensor $time
+done \
+> run/image_sensor_list.txt
+
 rig_calibrator                                     \
     --no_rig                                       \
     --read_nvm_no_shift                            \
     --rig_config                                   \
     ../data/norig_config.txt                       \
+    --image_sensor_list run/image_sensor_list.txt  \
     --save_nvm_no_shift                            \
     --nvm ../data/norig.nvm                        \
     --out_dir run                                  \
