@@ -15,7 +15,8 @@ for file in run/run-f.adjusted_state.json run/run-n.adjusted_state.json \
         echo "ERROR: File $gold does not exist."
         exit 1;
     fi
-    
+   
+    echo diff $file $gold
     diff=$(diff $file $gold | head -n 50)
     
     echo diff is $diff
