@@ -18,7 +18,8 @@ for file in run/run-10000.tif \
         echo "ERROR: File $gold does not exist."
         exit 1;
     fi
-    
+   
+    echo Comparing $file and $gold
     gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right | grep -v Min= > run.txt
     gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right | grep -v Min= > gold.txt
 

@@ -18,7 +18,8 @@ for file in run/run-10000.tsai \
         echo "ERROR: File $gold does not exist."
         exit 1;
     fi
-    
+
+    echo diff $file $gold
     diff=$(diff $file $gold | head -n 50)
     
     echo diff is $diff
