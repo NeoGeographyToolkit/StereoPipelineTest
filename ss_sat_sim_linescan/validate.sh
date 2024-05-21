@@ -14,7 +14,8 @@ for file in run/run_{c1,c2,c3}.tif run/run-run_c1.tif run/run_{c1,c2,c3}.map.tif
         echo "ERROR: File $gold does not exist."
         exit 1;
     fi
-    
+   
+    echo Comparing $file $gold
     gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right > run.txt
     gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right > gold.txt
 
