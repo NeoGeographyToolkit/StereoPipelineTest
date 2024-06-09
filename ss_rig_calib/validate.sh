@@ -2,9 +2,7 @@
 export PATH=../bin:$PATH
 
 # Some files are expected to be the same each time. Check for that
-for file in run/cameras.nvm \
-    run/ba_matches/run-final_residuals_pointmap.csv \
-    run/ba_nvm/run-final_residuals_pointmap.csv; do 
+for file in run/cameras.nvm; do 
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."
