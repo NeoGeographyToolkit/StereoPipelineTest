@@ -108,6 +108,6 @@ The script
 
 builds ASP and runs the tests for Mac in the cloud. The latest test results are
 saved, together with the build, as an artifact. The artifact can be fetched, and
-then the reference test results updated (or new tests added) with the script:
+the reference test results updated (or new tests added) with the script:
 
   StereoPipeline/.github/workflows/update_mac_tests.sh
