@@ -100,3 +100,14 @@ check_status.py:
   Tries to print the last run status of each test.  Use
   the "--conf-file" argument to limit the list to non-disabled tests.
 
+== Running tests in the cloud ==
+
+The script
+
+  StereoPipeline/.github/workflows/build_test.sh
+
+builds ASP and runs the tests for Mac in the cloud. The latest test results are
+saved, together with the build, as an artifact. The artifact can be fetched, and
+then the reference test results updated (or new tests added) with the script:
+
+  StereoPipeline/.github/workflows/update_mac_tests.sh
