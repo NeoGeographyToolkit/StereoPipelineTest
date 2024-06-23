@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 # Input of DEM mosaic must be same as output
 file=run/run-tile-0.tif
-gold=../data/dem1_10pct.tif
+gold=gold/run-tile-0.tif
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."
