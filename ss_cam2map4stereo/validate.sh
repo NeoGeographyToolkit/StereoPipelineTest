@@ -20,14 +20,13 @@ for file in run/*cub; do
   rm -fv "$file.aux.xml"
   rm -fv "$gold.aux.xml"
 
+  echo Comparing $file $gold
   cmp_stats.sh $file $gold
-  gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v xml > run.txt
-  gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold.txt
+  gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v xml > run/run.txt
+  gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold/run.txt
 
-  diff=$(diff run.txt gold.txt)
+  diff=$(diff run/run.txt gold/run.txt)
   cat run.txt
-
-  rm -f run.txt gold.txt
 
   echo diff is $diff
   if [ "$diff" != "" ]; then
