@@ -14,6 +14,7 @@ if [ ! -e "$gold" ]; then
     exit 1;
 fi
 
+echo Comparing $file and $gold
 diff=$(cmp $file $gold)
 
 if [ "$diff" != "" ]; then
