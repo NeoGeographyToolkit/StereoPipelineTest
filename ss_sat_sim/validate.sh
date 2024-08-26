@@ -29,6 +29,22 @@ for file in run/run-0009996.795966815-c1.tif run/run-0009996.795966815-c3.map.ti
 
 done
 
+# Also validate the tsai files
+for file in \
+  run/run-0010003.204033185-c1.tsai \
+  run/run-0010003.204033185-c1-ref.tsai \
+  run/run-0010003.204033185-c2.tsai run/run-0010003.204033185-c2-ref.tsai\
+  ; do 
+    gold=${file/run\//gold\/}
+    echo Comparing $file and $gold 
+    diff=$(diff $file $gold | head -n 50)
+    echo diff is $diff
+    if [ "$diff" != "" ]; then
+        echo Validation failed
+        exit 1
+    fi
+done
+
 echo Validation succeded
 exit 0
 
