@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-{c1,c2,c3}.tif run/run-run-c1.tif run/run-{c1,c2,c3}.map.tif; do
+for file in run/run-run-c1.tif; do
     
     gold=${file/run\//gold\/}
 
@@ -14,13 +14,13 @@ for file in run/run-{c1,c2,c3}.tif run/run-run-c1.tif run/run-{c1,c2,c3}.map.tif
         echo "ERROR: File $gold does not exist."
         exit 1;
     fi
-   
-    echo Comparing $file $gold
-    gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right > run.txt
-    gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right > gold.txt
+    
+    echo Comparing $file and $gold
+    gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right > run/run.txt
+    gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right > gold/run.txt
 
-    diff=$(diff run.txt gold.txt |grep -E "Minimum=|Maximum=")
-    rm -f run.txt gold.txt
+    diff=$(diff run/run.txt gold/run.txt |grep -E "Minimum=|Maximum=")
+    rm -f run/run.txt gold/run.txt
     
     echo diff is $diff
     if [ "$diff" != "" ]; then
@@ -28,6 +28,17 @@ for file in run/run-{c1,c2,c3}.tif run/run-run-c1.tif run/run-{c1,c2,c3}.map.tif
         exit 1
     fi
 
+done
+
+for file in run/jitter/run-final_residuals_stats.txt; do
+    
+    gold=${file/run\//gold\/}
+    echo Comparing $file and $gold
+    diff=$(diff $file $gold)
+    if [ "$diff" != "" ]; then
+        echo Validation failed
+        exit 1
+    fi
 done
 
 echo Validation succeded
