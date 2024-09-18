@@ -13,6 +13,9 @@ bundle_adjust run/f.tif run/n.tif run/f.json run/n.json -o run/run --threads 1 -
 # Solve for jitter with these cameras with the roll and yaw constraints
 jitter_solve run/f.tif run/n.tif run/f.json run/n.json -o run/run --match-files-prefix run/run --heights-from-dem ../data/sat_sim_DEM.tif --heights-from-dem-uncertainty 10 --heights-from-dem-robust-threshold 0.1 --roll-weight 10000 --yaw-weight 10000 --rotation-weight 0.1 --threads 1 --num-iterations 10
 
-# Add test when there is a weight image
-jitter_solve run/f.tif run/n.tif run/f.json run/n.json -o run/run-weight --match-files-prefix run/run --heights-from-dem ../data/sat_sim_DEM.tif --heights-from-dem-uncertainty 10 --heights-from-dem-robust-threshold 0.1 --threads 1 --num-iterations 10 --weight-image ../data/sat_sim_weight.tif
+stereo run/f.tif run/n.tif run/f.json run/n.json run/stereo/run --match-files-prefix run/run
+echo run/stereo/run > run/stereo_list.txt
+
+# Add test when there is a weight image and reference terrain
+jitter_solve run/f.tif run/n.tif run/f.json run/n.json -o run/run-weight --match-files-prefix run/run --heights-from-dem ../data/sat_sim_DEM.tif --heights-from-dem-uncertainty 10 --heights-from-dem-robust-threshold 0.1 --threads 1 --weight-image ../data/sat_sim_weight.tif --reference-terrain ../data/sat_sim_DEM.tif --stereo-prefix-list run/stereo_list.txt --max-num-reference-points 1000 --num-iterations 3 --num-passes 1
 
