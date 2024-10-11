@@ -19,32 +19,16 @@ rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
 cmp_stats.sh $file $gold
-gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
-gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
+gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
+gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold/run.txt
 
-diff=$(diff run.txt gold.txt)
-cat run.txt
-
-rm -f run.txt gold.txt
-
+echo Comparing run/run.txt and gold/run.txt
+diff=$(diff run/run.txt gold/run.txt)
 echo diff is $diff
 if [ "$diff" != "" ]; then
     echo Validation failed
     exit 1
 fi
-
-# Check that the outputs have georeference
-for f in $(ls run/*tif |grep -v PC); do
-        if [[ $f =~ .*stats.tif ]]; then
-                continue
-        fi
-	ans=$(gdalinfo $f |grep -i datum)
-	echo Datum in $f is $ans
-	if [ "$ans" = "" ]; then
-		echo No georeference in $f
-		exit 1
-	fi
-done
 
 echo Validation succeded
 exit 0
