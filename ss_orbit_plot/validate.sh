@@ -1,8 +1,8 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-file=run/run-DEM.tif
-gold=gold/run-DEM.tif
+file=run/run.png
+gold=gold/run.png
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."
