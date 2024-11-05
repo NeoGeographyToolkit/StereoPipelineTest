@@ -18,6 +18,5 @@ suff=001001427B900.r100,0010014761800.r100
   --dataset $pref1,$pref2               \
   --orbit-id $suff                      \
   --output-file run/run.png             \
-  --dataset-label before,after &
-
+  --dataset-label before,after
 
