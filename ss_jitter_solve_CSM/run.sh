@@ -17,7 +17,7 @@ jitter_solve --threads 1                       \
   ../data/B18_016575_1978_XN_17N282W.8bit.json \
   --input-adjustments-prefix run/run           \
   --match-files-prefix run/run                 \
-  --num-iterations 5                           \
+  --num-iterations 10                          \
   --update-isis-cubes-with-csm-state           \
   -o run/jitter
 
