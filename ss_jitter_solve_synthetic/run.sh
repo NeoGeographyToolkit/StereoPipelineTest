@@ -13,7 +13,7 @@ jitterDir=run
 /usr/bin/time                          \
 jitter_solve                           \
   --smoothness-weight 1                \
-  --threads 16                         \
+  --threads 1                          \
   --camera-position-weight 1e+4        \
   --max-pairwise-matches 20000         \
   --match-files-prefix ../data/run     \
