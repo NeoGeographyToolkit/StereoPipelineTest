@@ -4,6 +4,8 @@ set -x verbose
 rm -rfv run
 
 # This tests the smoothness weight constraint in a realistic setting.
+# Very useful for making changes to this logic. See also the dataset:
+# ss_jitter_solve_synthetic.
 
 # Normally one should double max-pairwise-matches, do two passes, and 10 iterations.
 
