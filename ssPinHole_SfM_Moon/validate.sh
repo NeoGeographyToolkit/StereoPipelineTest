@@ -20,13 +20,13 @@ for file in run/run-DEM.tif; do
     rm -fv "$file.aux.xml"
     rm -fv "$gold.aux.xml"
     
-    cmp_stats.sh $file $gold
+    ../bin/cmp_stats.sh $file $gold
     gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
     gdalinfo -stats $gold | grep -v Files | grep -v -i tif > run/gold.txt
 
     # Do not make the error small, because Theia is not deterministic
-    max_err.pl run/run.txt run/gold.txt # print the error
-    ans=$(max_err.pl run.txt gold.txt 1e-2) # compare the error
+    ../bin/max_err.pl run/run.txt run/gold.txt # print the error
+    ans=$(../bin/max_err.pl run/run.txt gold/run.txt 1e-2) # compare the error
     if [ "$ans" != "1" ]; then
         echo Validation failed
         exit 1
