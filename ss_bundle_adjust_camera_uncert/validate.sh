@@ -1,8 +1,11 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json \
-            run/run-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json \
+for file in \
+	run/ba-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json  \
+	run/ba-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json \
+	run/jitter-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json \
+	run/jitter-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json \
 			; do 
 
   gold=${file/run\/run/gold\/run}
@@ -30,3 +33,4 @@ done
 
 echo Validation succeded
 exit 0
+
