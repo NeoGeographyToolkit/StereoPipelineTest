@@ -54,6 +54,5 @@ jitter_solve                                \
   
 # Sanity check. Test loading a prior camera
 ls run/run-c1.json > run/list.txt
-sat_sim --dem $dem --ortho ../data/sat_sim_ortho.tif -o run/run --first 450 1000 10000 --last 450 1050 10000 --num 2 --first-ground-pos 450 1000 --last-ground-pos 450 1050 --roll 0 --pitch 40 --yaw 0 --sensor-type linescan --velocity 7000 --horizontal-uncertainty '0 0 0'  --save-as-csm --camera-list run/list.txt --image-size 100 100 --focal-length 1000 --optical-center 50 50
-
+sat_sim --dem $dem --ortho ../data/sat_sim_ortho.tif -o run/reload/run --first 450 1000 10000 --last 450 1050 10000 --num 2 --first-ground-pos 450 1000 --last-ground-pos 450 1050 --roll 0 --pitch 40 --yaw 0 --sensor-type linescan --velocity 7000 --horizontal-uncertainty '0 0 0'  --save-as-csm --camera-list run/list.txt --image-size 100 100 --focal-length 1000 --optical-center 50 50
 
