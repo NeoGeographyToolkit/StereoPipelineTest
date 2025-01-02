@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-DEM-iter2.tif; do
+for file in run/run-DEM-iter2.tif run/run-height-error.tif; do 
 
   echo $file $gold
   gold=${file/run\/run/gold\/run}
