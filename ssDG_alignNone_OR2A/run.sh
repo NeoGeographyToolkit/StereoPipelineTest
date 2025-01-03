@@ -3,7 +3,7 @@
 set -x verbose
 rm -rfv run
 
-stereo -t dg                    \
+parallel_stereo -t dg           \
   --stereo-algorithm asp_mgm    \
   --ortho-heights -23.1 -23.3   \
   ../data/left_bathy_ortho.tif  \
