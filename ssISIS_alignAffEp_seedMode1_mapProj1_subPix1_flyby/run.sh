@@ -17,4 +17,3 @@ gdal_translate -srcwin 200 0 186 386 run/run-L.tif run/run-crop2-L.tif
 
 point2dem run/run-crop*-PC.tif run/run-crop*-L.tif  --remove-outliers --orthoimage -o run/run
 
-
