@@ -21,5 +21,5 @@ bundle_adjust ../data/lsz_03821_1cd_xku_16n196_v1_clamp_crop.tif ../data/lsz_038
 
 # Second bundle adjustment, to see if we can load back the state.
 # This run does not like the previously created match points much. Need to figure out why.
-bundle_adjust ../data/lsz_03821_1cd_xku_16n196_v1_clamp_crop.tif ../data/lsz_03822_1cd_xku_23n196_v1_clamp_crop.tif run/ba/run-lsz_03821_1cd_xku_16n196_v1.adjusted_state.json run/ba/run-lsz_03822_1cd_xku_23n196_v1.adjusted_state.json --mapprojected-data "run/lsz_03821_1cd_xku_16n196_v1.map.tif run/lsz_03822_1cd_xku_23n196_v1.map.tif run/run-DEM-blur.tif" -o run/ba_state/run --ip-per-tile 20000 --threads 1 --num-iterations 10 --match-files-prefix run/ba/run  --remove-outliers-params '3 75 100 100' --num-passes 1
+bundle_adjust ../data/lsz_03821_1cd_xku_16n196_v1_clamp_crop.tif ../data/lsz_03822_1cd_xku_23n196_v1_clamp_crop.tif run/ba/run-lsz_03821_1cd_xku_16n196_v1.adjusted_state.json run/ba/run-lsz_03822_1cd_xku_23n196_v1.adjusted_state.json --mapprojected-data "run/lsz_03821_1cd_xku_16n196_v1.map.tif run/lsz_03822_1cd_xku_23n196_v1.map.tif run/run-DEM-blur.tif" -o run/ba_state/run --ip-per-tile 20000 --threads 1 --num-iterations 10 --match-files-prefix run/ba/run  --remove-outliers-params '3 75 100 100' --num-passes 1  --forced-triangulation-distance 100000
 
