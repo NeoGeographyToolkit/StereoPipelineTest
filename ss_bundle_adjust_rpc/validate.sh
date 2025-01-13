@@ -1,10 +1,13 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.adjust \
-	        run/run-09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10.adjust \
-			run/run-convergence_angles.txt                                    \
-			run/run-triangulation_uncertainty.txt; do
+for file in run/run-09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.adjust           \
+            run/run-09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10.adjust           \
+            run/run-convergence_angles.txt                                              \
+            run/run-triangulation_uncertainty.txt                                       \
+            run/run-09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.adjusted_rpc.xml \
+            run/run-09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10.adjusted_rpc.xml \
+            ; do
 
   gold=${file/run\/run/gold\/run}
 
@@ -29,5 +32,5 @@ for file in run/run-09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.adjust \
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
