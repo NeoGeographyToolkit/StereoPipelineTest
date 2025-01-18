@@ -6,7 +6,7 @@ rm -rfv run
 dem=../data/sat_sim_DEM.tif
 
 # sat sim with a linescan and frame rig
-sat_sim --dem $dem --ortho ../data/sat_sim_ortho.tif -o run/run --first 450 1000 10000 --last 450 1050 10000 --num 2 --first-ground-pos 450 1000 --last-ground-pos 450 1050 --roll 0 --pitch 40 --yaw 0 --sensor-type linescan,frame,frame --velocity 7000 --horizontal-uncertainty '0 0 0' --rig-config ../data/sim_rig_linescan_frame.txt --save-as-csm
+sat_sim --dem $dem --ortho ../data/sat_sim_ortho.tif -o run/run --first 450 1000 10000 --last 450 1050 10000 --num 2 --first-ground-pos 450 1000 --last-ground-pos 450 1050 --roll 0 --pitch 40 --yaw 0 --sensor-type linescan,frame,frame --velocity 7000 --horizontal-uncertainty '0 0 0' --rig-config ../data/sim_rig_ls_frame.txt --save-as-csm
 
 # mapproject each image and camera
 for img in run/run*c{1,2,3}.tif; do 
@@ -49,7 +49,9 @@ jitter_solve                                \
   run/run-cameras-c2.txt                    \
   run/run-cameras-c3.txt                    \
   --match-files-prefix run/ba/run           \
-  --rig-config ../data/sim_rig_linescan_frame.txt \
+  --rig-config ../data/sim_rig_ls_frame.txt \
+  --min-matches 0                           \
+  --max-initial-reprojection-error 1000     \
   -o run/jitter/run
   
 # Sanity check. Test loading a prior camera
