@@ -13,7 +13,7 @@ bundle_adjust ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.tif ../
 jitter_solve ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.tif ../data/09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10.tif ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.xml ../data/09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10.xml -o run/jitter/run --num-iterations 0 --match-files-prefix run/ba/run
 
 # Create mapprojected images with RPC cameras
-mapproject --tr 0.000053725423641 -t rpc ../data/stereo-DEM-09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.tif ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.tif ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.xml run/left_map.tif 
+mapproject -t rpc ../data/stereo-DEM-09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.tif ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.tif ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.xml run/left_map.tif 
 
 # Borrow the projection string and grid size from the previous image
 mapproject -t rpc ../data/stereo-DEM-09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.tif ../data/09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10.tif ../data/09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10.xml run/right_map.tif --ref-map run/left_map.tif
