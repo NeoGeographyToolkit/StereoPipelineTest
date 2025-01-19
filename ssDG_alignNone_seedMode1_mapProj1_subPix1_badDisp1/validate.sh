@@ -46,5 +46,5 @@ for f in $(ls run/*tif |grep -v PC); do
 	fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

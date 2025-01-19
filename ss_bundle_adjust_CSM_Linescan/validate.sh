@@ -31,5 +31,5 @@ for file in run/run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json \
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

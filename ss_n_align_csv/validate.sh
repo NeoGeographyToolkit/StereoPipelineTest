@@ -21,5 +21,5 @@ for ((i = 0; i < 3; i++)); do
 	fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

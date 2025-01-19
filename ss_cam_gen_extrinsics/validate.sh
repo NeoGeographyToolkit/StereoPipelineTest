@@ -26,5 +26,5 @@ for file in run/20190819-172719.4215.tsai run/20190819-173237.9216.tsai; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

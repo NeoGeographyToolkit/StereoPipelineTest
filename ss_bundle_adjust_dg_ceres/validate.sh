@@ -33,5 +33,5 @@ for file in run/run-WV01_11JAN131652275-P1BS-10200100104A0300.r12.adjust \
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

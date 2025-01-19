@@ -23,6 +23,6 @@ for file in run/run.gcp run/run-img_pitch_minus40.tsai; do
   fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 

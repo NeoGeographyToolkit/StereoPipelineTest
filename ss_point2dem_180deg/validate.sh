@@ -38,5 +38,5 @@ for file in run/run-lonlat-DEM.tif run/run-stere-DEM.tif run/run-utm-DEM.tif run
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

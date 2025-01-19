@@ -37,5 +37,5 @@ for file in run/run-DEM.tif run/run-L-R-disp-diff.tif; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

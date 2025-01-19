@@ -28,5 +28,5 @@ for file in run/run-a1000.adjust run/run-a1010.adjust run/run-a1020.adjust run/r
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

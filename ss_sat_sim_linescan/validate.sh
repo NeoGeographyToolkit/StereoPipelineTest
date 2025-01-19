@@ -41,6 +41,6 @@ for file in run/jitter/run-final_residuals_stats.txt; do
     fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 

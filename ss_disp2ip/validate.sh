@@ -26,5 +26,5 @@ for file in run/theia_fltr/cameras.nvm; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

@@ -28,5 +28,5 @@ for file in run/submap1.nvm run/submap2.nvm run/merged.nvm; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

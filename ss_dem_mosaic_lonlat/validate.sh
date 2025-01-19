@@ -44,5 +44,5 @@ for i in 0 1 08 13; do
     
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

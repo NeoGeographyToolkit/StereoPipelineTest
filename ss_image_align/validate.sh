@@ -35,6 +35,6 @@ for file in run/run-align.tif run/run-corr-align.tif; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 

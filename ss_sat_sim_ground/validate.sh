@@ -34,6 +34,6 @@ for file in run/run-10000.tif \
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 

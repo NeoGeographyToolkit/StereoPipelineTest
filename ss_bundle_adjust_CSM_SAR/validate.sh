@@ -26,5 +26,5 @@ for file in run/run-LSZ_02330_1CD_XKU_00S120_S1.8bit.state.adjusted_state.json; 
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

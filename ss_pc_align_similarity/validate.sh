@@ -22,6 +22,6 @@ for file in run/run-trans_reference.csv run/run-trans_source.csv; do
 	fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 

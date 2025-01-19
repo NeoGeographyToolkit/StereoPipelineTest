@@ -1,7 +1,12 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/*tsai; do
+for file in                                      \
+    run/indiv/run-left_sub16.brownconrady.tsai   \
+    run/indiv/run-right_sub16.brownconrady.tsai  \
+    run/shared/run-left_sub16.brownconrady.tsai  \
+    run/shared/run-right_sub16.brownconrady.tsai \
+    ; do 
 
   gold=${file/run\/run/gold\/run}
 

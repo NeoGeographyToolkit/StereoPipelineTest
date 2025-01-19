@@ -26,5 +26,5 @@ for file in run/run-2024-08-08-02-33-49_UMBRA-05_GEC.adjust run/run-2024-06-30-0
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

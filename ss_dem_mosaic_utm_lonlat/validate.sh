@@ -35,5 +35,5 @@ for file in run/run1-tile-0.tif run/run2-tile-0.tif run/run-tile-0-first-index-m
 	fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

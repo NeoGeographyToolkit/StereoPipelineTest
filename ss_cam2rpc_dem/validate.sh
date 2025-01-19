@@ -14,5 +14,5 @@ for file in run/dem_cam.xml run/llh_cam.xml; do
   fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

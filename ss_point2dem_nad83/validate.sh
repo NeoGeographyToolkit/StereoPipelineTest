@@ -39,5 +39,5 @@ for val in "" -min -max -mean -median -stddev -count -nmad -50-pct -50.1-pct; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

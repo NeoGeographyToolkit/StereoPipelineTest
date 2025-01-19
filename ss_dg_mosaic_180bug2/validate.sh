@@ -25,6 +25,6 @@ for g in  gold/run.r100.xml; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 

@@ -58,6 +58,6 @@ for f in run/ba/run-lsz_03821_1cd_xku_16n196_v1.adjusted_state.json \
     fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 

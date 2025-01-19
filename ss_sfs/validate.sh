@@ -35,5 +35,5 @@ for file in run/run-DEM-iter2.tif run/run-height-error.tif; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

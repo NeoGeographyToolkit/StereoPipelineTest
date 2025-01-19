@@ -37,5 +37,5 @@ for file in run/run-DEM.tif run/run-HorizontalStdDev.tif run/run-VerticalStdDev.
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

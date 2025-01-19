@@ -28,5 +28,5 @@ for file in run/run-AS15-M-0759.lev1_crop.adjust run/run-AS15-M-0760.lev1_crop.a
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

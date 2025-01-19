@@ -35,6 +35,6 @@ for file in run/run-run-l.adjusted_state.json         \
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 

@@ -30,6 +30,6 @@ for file in run/run-10000.tsai \
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 

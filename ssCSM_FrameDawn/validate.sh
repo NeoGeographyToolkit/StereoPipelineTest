@@ -54,6 +54,6 @@ for f in run/ba/run-FC21B0004011_11224024300F1E.adjusted_state.json \
     fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 

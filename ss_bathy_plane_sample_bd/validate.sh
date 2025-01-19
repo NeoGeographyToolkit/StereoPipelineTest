@@ -22,5 +22,5 @@ if [ "$diff" != "" ]; then
     exit 1
 fi
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

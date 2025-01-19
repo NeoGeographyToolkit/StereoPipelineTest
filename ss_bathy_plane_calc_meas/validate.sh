@@ -28,5 +28,5 @@ for file in run/meas_plane.txt run/meas_inliers.shp; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

@@ -27,5 +27,5 @@ for file in run/run-left_sub16.adj.tsai run/run-right_sub16.adj.tsai; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

@@ -25,5 +25,5 @@ for file in run/run-DMS_20171029_183704_02500.adjust run/run-DMS_20171029_183706
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

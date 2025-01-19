@@ -26,5 +26,5 @@ for file in run/run.json run/run.txt; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

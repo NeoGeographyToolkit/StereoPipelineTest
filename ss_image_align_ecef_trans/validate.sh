@@ -24,6 +24,6 @@ for file in run/aligned_image2.tif run/run-transform.txt run/run-ecef-transform.
     fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 

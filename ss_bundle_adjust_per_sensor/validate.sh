@@ -29,5 +29,5 @@ for file in run/run-TC1W2B0_01_02934N034E0959.adjusted_state.json \
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

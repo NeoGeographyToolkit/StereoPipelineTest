@@ -31,5 +31,5 @@ for f in "" -first -last -min -max -mean -stddev -median -count -block-max; do
   fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

@@ -26,5 +26,5 @@ for file in run/run_radtan.json gold/run_transverse.json gold/run_transverse2.js
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

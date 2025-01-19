@@ -52,7 +52,7 @@ if [ "$ans" -eq 0 ]; then
     exit 1
 fi
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 
 

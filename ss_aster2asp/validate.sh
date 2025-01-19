@@ -60,5 +60,5 @@ for gold in gold/run-Band3N.tif gold/run-Band3B.tif; do
     fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

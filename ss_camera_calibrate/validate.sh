@@ -27,5 +27,5 @@ for file in run/ocv_cam_params.yml run/solve_cam_params.txt run/vw_cam_params.ts
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

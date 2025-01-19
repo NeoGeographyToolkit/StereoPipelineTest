@@ -28,6 +28,6 @@ for file in run/run-f.adjusted_state.json run/run-n.adjusted_state.json \
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
 

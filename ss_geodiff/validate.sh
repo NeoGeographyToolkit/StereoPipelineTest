@@ -37,5 +37,5 @@ for file in run/run-lonlat-diff.tif run/run-utm-lonat-diff.tif; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

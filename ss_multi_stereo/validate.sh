@@ -12,5 +12,5 @@ for file in run/stereo/nav_cam/fused_mesh.ply; do
     
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

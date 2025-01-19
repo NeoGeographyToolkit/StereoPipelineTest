@@ -28,5 +28,5 @@ for file in run/ba/out-AS15-M-1134.lev1.adjust run/ba/out-AS15-M-1135.lev1.adjus
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

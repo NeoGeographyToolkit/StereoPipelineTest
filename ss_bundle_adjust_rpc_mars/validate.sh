@@ -26,5 +26,5 @@ for file in run/run-left_mars_rpc.adjust run/run-right_mars_rpc.adjust; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

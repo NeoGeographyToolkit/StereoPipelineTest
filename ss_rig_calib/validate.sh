@@ -45,5 +45,5 @@ if [ ! -e "run/pinhole/haz_cam/1637278316.7238007_haz_cam.tsai" ]; then
     exit 1;
 fi
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

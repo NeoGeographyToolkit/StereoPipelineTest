@@ -29,5 +29,5 @@ for file in run/*adjust \
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

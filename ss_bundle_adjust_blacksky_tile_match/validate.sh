@@ -28,5 +28,5 @@ for file in run/run-BSG-102-20220425-215106-22900060_georeferenced-pan.adjust  r
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

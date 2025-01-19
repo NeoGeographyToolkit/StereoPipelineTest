@@ -26,5 +26,5 @@ for file in run/*tsai run/run-mapproj_match_offsets.txt run/run-mapproj_match_of
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

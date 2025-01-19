@@ -25,5 +25,5 @@ for file in run/rig_config.txt                \
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

@@ -34,5 +34,5 @@ for file in run/run-tile-0-weight-dem-index-0.tif run/run-tile-0-weight-dem-inde
 	fi
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

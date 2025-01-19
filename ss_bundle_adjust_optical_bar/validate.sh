@@ -26,5 +26,5 @@ for file in run/run-DS1105-2248DA079.tsai run/run-DS1105-2248DA079_crop.tsai; do
 
 done
 
-echo Validation succeded
+echo Validation succeeded
 exit 0
