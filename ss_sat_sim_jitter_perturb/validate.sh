@@ -1,11 +1,13 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-jitter-camera_041_VZ_030_VA_000.tsai \
-	        run/run-jitter-camera_041_VZ_030_VA_000.tsai\
-			run/run-rand-camera_041_VZ_030_VA_000.tsai  \
-			run/run-rand-camera_041_VZ_030_VA_000.tsai; 
-			do 
+for file in run/run-jitter-camera_041_VZ_030_VA_000.tsai        \
+            run/run-jitter-camera_041_VZ_030_VA_000.tsai        \
+            run/run-rand-pose-camera_041_VZ_030_VA_000.tsai     \
+            run/run-rand-pose-camera_041_VZ_030_VA_000.tsai     \
+            run/run-rand-position-camera_041_VZ_030_VA_000.tsai \
+            run/run-rand-position-camera_041_VZ_030_VA_000.tsai \
+            ; do 
 
     gold=${file/run\//gold\/}
 
@@ -31,4 +33,3 @@ done
 
 echo Validation succeeded
 exit 0
-
