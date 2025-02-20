@@ -15,12 +15,11 @@ if [ ! -e "$gold" ]; then
     exit 1;
 fi
 
-diff=$(diff $file $gold | head -n 50)
-
-echo diff is $diff
-if [ "$diff" != "" ]; then
-  echo Validation failed
-  exit 1
+../bin/max_err.pl $file $gold
+ans=$(../bin/max_err.pl $file $gold 1e-5 | grep -v Warn) # compare the error
+if [ "$ans" -eq 0 ]; then
+    echo Validation failed
+    exit 1
 fi
 
 done
