@@ -30,7 +30,7 @@ done
 # Test that the cnet got produced.
 # This file may contain a creation time, so 
 # its actual content will change just because of that.
-for file in run/run.net; do 
+for file in run/run-cnet.net; do 
  gold=${file/run\/run/gold\/run}
 
   if [ ! -e "$file" ]; then
