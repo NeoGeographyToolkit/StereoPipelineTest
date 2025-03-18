@@ -12,3 +12,6 @@ cam_gen --camera-type rpc ../data/2024-08-08-02-33-49_UMBRA-05_GEC.tif -o run/ru
 # Export RPC embedded in rpb
 cam_gen ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.tif --input-camera ../data/camera.rpb --camera-type rpc -o run/run_rpc3.xml
 
+# Export RPC embedded in _RPC.txt
+cam_gen ../data/cartosatA.tif --camera-type rpc -o run/run_rpc4.xml
+
