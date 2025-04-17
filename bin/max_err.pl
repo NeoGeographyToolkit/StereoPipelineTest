@@ -14,7 +14,7 @@ MAIN:{
   # files is less than the third argument.
   if (scalar(@ARGV) < 2){
     print "Usage: $0 file1 file2\n";
-    exit(0);
+    exit(1);
   }
 
   my $file1 = shift @ARGV;
@@ -28,7 +28,8 @@ MAIN:{
   open(FILE, "<$file1");  my @val1 = split("\n", <FILE>);  close(FILE);
   open(FILE, "<$file2");  my @val2 = split("\n", <FILE>);  close(FILE);
   if ( scalar(@val1) != scalar(@val2) ){
-    print "Warning: Files $file1 and $file2 do not have the same number of rows.\n";
+    print "Error: Files $file1 and $file2 do not have the same number of rows.\n";
+	exit(1);
   }
   my $numRows = min( scalar(@val1), scalar(@val2) );
 
