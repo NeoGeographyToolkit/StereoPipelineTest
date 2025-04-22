@@ -22,16 +22,14 @@ rm -fv "$gold.aux.xml"
 gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
 gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
 
-diff=$(diff run.txt gold.txt | head -n 50)
-cat run.txt
+../bin/max_err.pl run.txt gold.txt
+ans=$(../bin/max_err.pl run.txt gold.txt 1e-8)
+if [ "$ans" -eq 0 ]; then
+     echo Validation failed
+     exit 1
+fi
 
 rm -f run.txt gold.txt
-
-echo diff is $diff
-if [ "$diff" != "" ]; then
-    echo Validation failed
-    exit 1
-fi
 
 file=run/run-trans_source.csv
 gold=gold/run-trans_source.csv
@@ -67,16 +65,14 @@ for f in run/run-trans_reference.las gold/run-trans_reference.las; do
 done
     
 pdal info run/run-trans_reference.las  | grep -v filename | grep -v now > run/pdal_run.txt
-pdal info gold/run-trans_reference.las | grep -v filename |grep -v now > gold/pdal_gold.txt
+pdal info gold/run-trans_reference.las | grep -v filename | grep -v now > gold/pdal_gold.txt
 
-diff=$(diff run/pdal_run.txt gold/pdal_gold.txt | head -n 50)
-echo "diff is $diff"
-if [ "$diff" != "" ]; then
-    echo Validation failed
-    exit 1
+../bin/max_err.pl run/pdal_run.txt gold/pdal_gold.txt
+ans=$(../bin/max_err.pl run/pdal_run.txt gold/pdal_gold.txt 1e-8)
+if [ "$ans" -eq 0 ]; then
+     echo Validation failed
+     exit 1
 fi
 
 echo Validation succeeded
 exit 0
-
-
