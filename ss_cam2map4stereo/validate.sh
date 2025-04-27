@@ -26,7 +26,6 @@ for file in run/*cub; do
   gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold/run.txt
 
   diff=$(diff run/run.txt gold/run.txt)
-  cat run.txt
 
   echo diff is $diff
   if [ "$diff" != "" ]; then
