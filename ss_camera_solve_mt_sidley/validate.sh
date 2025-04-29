@@ -1,9 +1,11 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/out-DEM.tif run/out-DEM.tif; do
+for file in run/run-DEM.tif; do
 
-  gold=${file/run\/run/gold\/run}
+  gold=${file/run\//gold\/}
+  echo file=$file
+  echo gold=$gold
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."
