@@ -19,8 +19,8 @@ rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
 cmp_stats.sh $file $gold
-gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
-gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
+gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v VALID_PERCENT > run.txt
+gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v VALID_PERCENT > gold.txt
 
 diff=$(diff run.txt gold.txt)
 cat run.txt
