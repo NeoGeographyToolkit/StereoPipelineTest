@@ -14,33 +14,27 @@ if [ ! -e "$gold" ]; then
     exit 1;
 fi
 
-# Oddly enough, this is necessary
-if [ "$(uname -s)" = "Darwin" ]; then
-   export DYLD_LIBRARY_PATH=$(dirname $(which pdal))/../lib
-fi
-
 pdal info --all $file | grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href > run/run.txt
-status=$?
-if [ $status -ne 0 ]; then
-    echo Validation failed
+ans=$?
+if [ $ans -ne 0 ]; then
+    echo Validation failed1
     exit 1
 fi
 
 pdal info --all $gold |grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href > gold/run.txt
-status=$?
-if [ $status -ne 0 ]; then
-    echo Validation failed
+ans=$?
+if [ $ans -ne 0 ]; then
+    echo Validation failed2
     exit 1
 fi
 
 diff=$(diff run/run.txt gold/run.txt | head -n 50)
-cat run/run.txt
 
 rm -f run/run.txt gold/run.txt
 
 echo diff is $diff
 if [ "$diff" != "" ]; then
-    echo Validation failed
+    echo Validation failed3
     exit 1
 fi
 
@@ -59,7 +53,10 @@ fi
 
 diff=$(diff $file $gold| head -n 100)
 echo "diff is $diff"
-if [ "$diff" != "" ]; then
+
+../bin/max_err.pl $file $gold
+ans=$(../bin/max_err.pl $file $gold 1e-10 | grep -v Warn) # compare the error
+if [ "$ans" -eq 0 ]; then
     echo Validation failed
     exit 1
 fi
