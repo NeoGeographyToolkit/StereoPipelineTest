@@ -17,14 +17,14 @@ fi
 pdal info --all $file | grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href > run/run.txt
 ans=$?
 if [ $ans -ne 0 ]; then
-    echo Validation failed1
+    echo Validation failed
     exit 1
 fi
 
 pdal info --all $gold |grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href > gold/run.txt
 ans=$?
 if [ $ans -ne 0 ]; then
-    echo Validation failed2
+    echo Validation failed
     exit 1
 fi
 
@@ -34,7 +34,7 @@ rm -f run/run.txt gold/run.txt
 
 echo diff is $diff
 if [ "$diff" != "" ]; then
-    echo Validation failed3
+    echo Validation failed
     exit 1
 fi
 
