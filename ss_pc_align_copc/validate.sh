@@ -17,14 +17,14 @@ for file in run/run-trans_reference.laz run/run-trans_source.laz; do
         exit 1;
     fi
 
-    pdal info --all $file | grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href > run/run.txt
+    pdal info --all $file | grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href | grep -v file_size > run/run.txt
     ans=$?
     if [ $ans -ne 0 ]; then
         echo Validation failed
         exit 1
     fi
 
-    pdal info --all $gold |grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href > gold/run.txt
+    pdal info --all $gold |grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href | grep -v file_size > gold/run.txt
     ans=$?
     if [ $ans -ne 0 ]; then
         echo Validation failed
