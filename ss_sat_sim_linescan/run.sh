@@ -28,7 +28,7 @@ echo map is $map
 # Test bundle_adjust
 bundle_adjust                          \
   --threads 1                          \
-  --ip-per-image 5000                  \
+  --ip-per-image 20000                 \
   --forced-triangulation-distance 1000 \
   --min-triangulation-angle 1e-10      \
   --min-matches 0                      \
