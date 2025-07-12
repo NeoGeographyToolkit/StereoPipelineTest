@@ -13,6 +13,7 @@ dem2gcp                                                      \
   --right-camera ../data/dem2gcp/14001_rpc_deg3_sub16.tsai   \
   --match-file ../data/dem2gcp/13001_sub16__14001_sub16.match\
   --search-len 5                                             \
-  --gcp-sigma 1e-2                                           \
+  --gcp-sigma 1                                              \
+  --max-num-gcp 1000                                         \
   --output-gcp run/run.gcp
 
