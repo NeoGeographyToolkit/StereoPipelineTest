@@ -1,8 +1,8 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-file=run/run-LAS.laz
-gold=gold/run-LAS.laz
+file=run/run-LAS.las
+gold=gold/run-LAS.las
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."
