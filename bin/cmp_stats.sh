@@ -23,7 +23,9 @@ gdalinfo -stats $img1 | grep -E "Origin|STATISTICS_" | grep -v Min= | grep -v .t
 gdalinfo -stats $img2 | grep -E "Origin|STATISTICS_" | grep -v Min= | grep -v .tif | perl -p -e 's#([=,\(\)])# $1 #g' >> $out2
 
 diff $out1 $out2
-max_err.pl $out1 $out2
+
+toolPath=$(dirname $0)
+$toolPath/max_err.pl $out1 $out2
 rm -f $out1 $out2
 
 rm -fv "$img1.aux.xml"
