@@ -1,0 +1,32 @@
+#!/bin/bash
+export PATH=../bin:$PATH
+
+rm -f run/*xml gold/*xml
+
+file=run/run.tif
+gold=gold/run.tif
+
+if [ ! -e "$file" ]; then
+    echo "ERROR: File $file does not exist."
+    exit 1;
+fi
+
+if [ ! -e "$gold" ]; then
+    echo "ERROR: File $gold does not exist."
+    exit 1;
+fi
+
+cmp_stats.sh $file $gold
+gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
+gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold/run.txt
+
+diff=$(diff run/run.txt gold/run.txt)
+
+if [ "$diff" != "" ]; then
+  echo Validation failed
+  echo diff is $diff
+  exit 1
+fi
+
+echo Validation succeeded
+exit 0
