@@ -8,7 +8,7 @@ for file in \
 	run/jitter-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json \
 			; do 
 
-  gold=${file/run\/run/gold\/run}
+  gold=${file/run\//gold\/}
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."
