@@ -23,9 +23,10 @@ bundle_adjust                                  \
   --match-files-prefix ../data/run             \
   -o run/ba
 
+# Use a very small smoothness weight, to avoid instability
 jitter_solve                                   \
   --camera-position-uncertainty $pos           \
-  --smoothness-weight 1                        \
+  --smoothness-weight 0.001                    \
   --threads 1                                  \
   --num-passes 1                               \
   --num-iterations 10                          \
