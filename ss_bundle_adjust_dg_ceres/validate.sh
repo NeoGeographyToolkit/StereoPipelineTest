@@ -23,7 +23,7 @@ for file in run/run-WV01_11JAN131652275-P1BS-10200100104A0300.r12.adjust \
   echo diff is $diff
   ../bin/max_err.pl $file $gold
 
-  tol=0.1
+  tol=0.01
   echo Comparing absolute error with $tol
   ans=$(../bin/max_err.pl $file $gold | grep abs | awk '{print ($5 < '$tol')}')
   if [ "$ans" -ne 1 ]; then
