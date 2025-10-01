@@ -17,6 +17,5 @@ parallel_bundle_adjust                         \
   --ip-per-image 200                           \
   --auto-overlap-params                        \
     "../data/skysat/uluru_copernicus.tif 10 2" \
-	--match-first-to-last                      \
+  --match-first-to-last                        \
   -o run/run
-
