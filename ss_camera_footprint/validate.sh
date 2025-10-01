@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run_datum.kml run/run_dem.kml; do 
+for file in run/run_datum.kml run/run_dem.kml run/run_datum.shp run/run_dem.shp; do
 
     gold=gold/$(basename $file)
 
