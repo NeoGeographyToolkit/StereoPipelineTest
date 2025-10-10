@@ -16,6 +16,7 @@ bundle_adjust --solve-intrinsics                                  \
     --intrinsics-to-float "distortion"                            \
     -t pinhole                                                    \
     --threads 1                                                   \
+    --num-iterations 10                                           \
     --image-list run/sensor1_images.txt,run/sensor2_images.txt    \
     --camera-list run/sensor1_cameras.txt,run/sensor2_cameras.txt \
     -o run/run
