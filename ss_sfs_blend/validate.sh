@@ -1,10 +1,9 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in  run/run-blend.tif run/run-weight.tif; do 
+for file in run/sfs_blend_clip.tif run/sfs_weight_clip.tif; do 
 
-  echo $file $gold
-  gold=${file/run\/run/gold\/run}
+  gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."
@@ -21,13 +20,11 @@ for file in  run/run-blend.tif run/run-weight.tif; do
   rm -fv "$gold.aux.xml"
 
   cmp_stats.sh $file $gold
-  gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v xml > run.txt
-  gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold.txt
+  gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v xml > run/run.txt
+  gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold/run.txt
 
-  diff=$(diff run.txt gold.txt)
-  cat run.txt
-
-  rm -f run.txt gold.txt
+  diff=$(diff run/run.txt gold/run.txt)
+  cat run/run.txt
 
   echo diff is $diff
   if [ "$diff" != "" ]; then
