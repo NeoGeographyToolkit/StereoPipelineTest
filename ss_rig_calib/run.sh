@@ -41,8 +41,6 @@ rig_calibrator                                       \
     --num_threads 1                                  \
     --out_dir run
 
-rm -rfv run/rig_theia/matches # takes too much space
-
 # Run bundle adjustment with match files
 bundle_adjust                         \
   --image-list run/image_list.txt     \
