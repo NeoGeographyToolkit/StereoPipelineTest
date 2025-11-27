@@ -7,7 +7,7 @@ rm -rfv run
 image_align                                                                 \
     ../data/zone10-CA_SanLuisResevoir-9m_crop_ned_shift_90_135_0.tif        \
     ../data/zone10-CA_SanLuisResevoir-9m_crop.tif                           \
-	--alignment-transform translation                                       \
+    --alignment-transform translation                                       \
     --ecef-transform-type translation                                       \
     --dem1 ../data/zone10-CA_SanLuisResevoir-9m_crop_ned_shift_90_135_0.tif \
     --dem2 ../data/zone10-CA_SanLuisResevoir-9m_crop.tif                    \
