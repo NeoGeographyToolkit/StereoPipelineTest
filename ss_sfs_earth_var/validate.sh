@@ -1,10 +1,11 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-DEM-final.tif run/run-albedo-final.tif; do 
+# Must add the sfs variance
+for file in run/run-DEM-final.tif run/run-albedo-final.tif run/run-albedo-variance.tif; do 
 
+  gold=gold/$(basename $file)
   echo $file $gold
-  gold=${file/run\/run/gold\/run}
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."
