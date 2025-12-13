@@ -9,6 +9,6 @@ rm -rfv run
 # Test gcp_gen on this synthetic data
 gcp_gen --camera-image ../data/img_pitch_minus40.tif --ortho-image ../data/sat_sim_ortho.tif --dem ../data/sat_sim_DEM.tif -o run/run.gcp --output-prefix run/run
 
-# bundle_adjust should be able to use this GCP file
-bundle_adjust ../data/img_pitch_minus40.tif ../data/img_pitch_minus40.tsai run/run.gcp -o run/run --num-iterations 100 --num-passes 1 --inline-adjustments -t nadirpinhole --datum D_MARS --robust-threshold 10 --threads 1 --camera-weight 0
+# bundle_adjust should be able to use this GCP file. Test --max-gcp-reproj-err.
+bundle_adjust ../data/img_pitch_minus40.tif ../data/img_pitch_minus40.tsai run/run.gcp -o run/run --num-iterations 100 --num-passes 2 --inline-adjustments -t nadirpinhole --datum D_MARS --robust-threshold 10 --threads 1 --camera-weight 0 --max-gcp-reproj-err 0.5
 
