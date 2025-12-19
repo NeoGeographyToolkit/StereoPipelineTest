@@ -31,6 +31,7 @@ if [ "$diff" != "" ]; then
     exit 1
 fi
 
+# Test shp and qml files produced by parallel_stereo
 for file in run/run-tiles.shp run/run-tiles.qml; do 
     gold=gold/$(basename $file)
     # Use cmp to test these. It should hopefully fail if a file does not exist as well.
