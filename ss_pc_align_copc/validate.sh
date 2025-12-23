@@ -1,13 +1,6 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-# This fails reandomly because of bug in COPC in PDAL. Will be fixed when PDAL gets upgraded.
-# For now, decare this a success.
-# TODO(oalexan1): Must fix this.
-
-echo Fake success, must revisit.
-exit 0
-
 for file in run/run-trans_reference.laz run/run-trans_source.laz; do 
   
   gold=gold/$(basename $file)
@@ -24,14 +17,14 @@ for file in run/run-trans_reference.laz run/run-trans_source.laz; do
         exit 1;
     fi
 
-    pdal info --all $file | grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href | grep -v file_size > run/run.txt
+    pdal info --metadata $file | grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href | grep -v file_size > run/run.txt
     ans=$?
     if [ $ans -ne 0 ]; then
         echo Validation failed
         exit 1
     fi
 
-    pdal info --all $gold |grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href | grep -v file_size > gold/run.txt
+    pdal info --metadata $gold |grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href | grep -v file_size > gold/run.txt
     ans=$?
     if [ $ans -ne 0 ]; then
         echo Validation failed
