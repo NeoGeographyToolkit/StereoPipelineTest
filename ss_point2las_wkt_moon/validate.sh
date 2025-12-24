@@ -22,14 +22,14 @@ fi
 # Need this to avoid a pdal crash
 export PROJ_IGNORE_CELESTIAL_BODY=YES
 
-pdal info --all $file | grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href > run.txt
+pdal info --metadata $file | grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href > run.txt
 status=$?
 if [ $status -ne 0 ]; then
     echo Validation failed
     exit 1
 fi
 
-pdal info --all $gold | grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href > gold.txt
+pdal info --metadata $gold | grep -v filename | grep -v date | grep -i -v software | grep -v now | grep -v creation | grep -v href > gold.txt
 status=$?
 if [ $status -ne 0 ]; then
     echo Validation failed

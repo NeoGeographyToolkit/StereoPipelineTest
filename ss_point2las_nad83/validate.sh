@@ -20,14 +20,14 @@ if [ "$(uname -s)" = "Darwin" ]; then
    export DYLD_LIBRARY_PATH=$(dirname $(which pdal))/../lib
 fi
 
-pdal info --all $file | grep -v filename | grep -v date | grep -i -v software | grep -i -v software | grep -v now | grep -v creation | grep -v href > run/run.txt
+pdal info --metadata $file | grep -v filename | grep -v date | grep -i -v software | grep -i -v software | grep -v now | grep -v creation | grep -v href > run/run.txt
 status=$?
 if [ $status -ne 0 ]; then
     echo Validation failed
     exit 1
 fi
 
-pdal info --all $gold | grep -v filename | grep -v date | grep -i -v software | grep -i -v software | grep -v now | grep -v creation | grep -v href > gold/run.txt
+pdal info --metadata $gold | grep -v filename | grep -v date | grep -i -v software | grep -i -v software | grep -v now | grep -v creation | grep -v href > gold/run.txt
 status=$?
 if [ $status -ne 0 ]; then
     echo Validation failed

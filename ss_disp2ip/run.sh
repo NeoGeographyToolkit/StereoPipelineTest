@@ -24,7 +24,7 @@ for f in $(cat run/right_filtered.txt); do
   echo $f 1055 1032 
 done >> run/optical_centers.txt
 
-# This can produce non-0unique results, so run just once
+# This can produce non-unique results, so run just once
 # theia_sfm --rig_config ../data/disp2ip/rig_config.txt \
 #     --theia_flags ../data/disp2ip/theia_flags.txt     \
 #     --images '../data/disp2ip/raw/left/left_raw*.png' \
