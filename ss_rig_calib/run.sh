@@ -31,6 +31,7 @@ rig_calibrator                                       \
     --mesh                                           \
    ../data/rig_calibrator_example_3_cameras/mesh.py  \
    --depth-mesh-weight 1                             \
+   --camera-position-weight 1                        \
    --num_iterations 5                                \
     --calibrator_num_passes 2                        \
     --num_overlaps 3                                 \
