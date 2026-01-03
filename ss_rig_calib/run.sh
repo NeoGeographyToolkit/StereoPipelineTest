@@ -29,10 +29,11 @@ rig_calibrator                                       \
     --tri-weight 10                                  \
     --tri_robust_threshold 0.1                       \
     --mesh                                           \
-   ../data/rig_calibrator_example_3_cameras/mesh.py  \
-   --depth-mesh-weight 1                             \
-   --camera-position-weight 1                        \
-   --num_iterations 5                                \
+    ../data/rig_calibrator_example_3_cameras/mesh.py \
+    --depth-mesh-weight 1                            \
+    --mesh-tri-weight 0.1                            \
+    --camera-position-weight 1                       \
+    --num_iterations 5                               \
     --calibrator_num_passes 2                        \
     --num_overlaps 3                                 \
     --registration                                   \
