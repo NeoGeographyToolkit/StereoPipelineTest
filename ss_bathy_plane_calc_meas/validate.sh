@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/meas_plane.txt run/meas_inliers.shp; do
+for file in run/meas_plane.txt run/meas_inliers.shp run/diff.tif; do
 
   gold=${file/run\//gold\/}
   
