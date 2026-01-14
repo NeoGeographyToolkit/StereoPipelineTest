@@ -20,9 +20,6 @@ stereo run/left_bathy_b3_corr.tif run/right_bathy_b3_corr.tif \
     run/run-nobathy
 point2dem run/run-nobathy-PC.tif --orthoimage run/run-nobathy-L.tif 
 
-#    --left-image-crop-win -415 3295 1724 1844               \
-#    --right-image-crop-win -189 3895 1413 1258              \
-
 # Find the bathy plane using a DEM and a shapefile
 bathy_plane_calc --shapefile ../data/bathy_shoreline.shp    \
     --dem run/run-nobathy-DEM.tif --outlier-threshold 0.2   \
@@ -37,9 +34,6 @@ bathy_plane_calc --dem run/run-nobathy-DEM.tif       \
   --outlier-threshold 0.5                            \
   --output-inlier-shapefile run/run-mask-inliers.shp \
   --num-samples 10000
-
-#    --left-image-crop-win -415 3295 1724 1844               \
-#    --right-image-crop-win -189 3895 1413 1258              \
 
 # Run with bathy with --prev-run-prefix
 parallel_stereo run/left_bathy_b3_corr.tif         \
