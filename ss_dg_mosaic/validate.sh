@@ -44,24 +44,24 @@ for ot in Byte UInt16 Int16 UInt32 Int32 Float32; do
 	rm -fv "$gold.aux.xml"
 
 	cmp_stats.sh $file $gold
-	gdalinfo -stats $file | grep -v Files | grep -v -i -E "tif|xml|imd" > run.txt
+	gdalinfo -stats $file | grep -v Files | grep -v -i -E "tif|xml|imd" > run/run.txt
         ans=$?
         if [ "$ans" -ne 0 ]; then
             echo Validation failed
             exit 1
         fi
         
-        gdalinfo -stats $gold | grep -v Files | grep -v -i -E "tif|xml|imd" > gold.txt
+        gdalinfo -stats $gold | grep -v Files | grep -v -i -E "tif|xml|imd" > gold/run.txt
         ans=$?
         if [ "$ans" -ne 0 ]; then
             echo Validation failed
             exit 1
         fi
         
-	diff=$(diff run.txt gold.txt)
-	cat run.txt
+	diff=$(diff run/run.txt gold/run.txt)
+	cat run/run.txt
 
-	rm -f run.txt gold.txt
+	rm -f run/run.txt gold/run.txt
 
 	echo diff is $diff
 	if [ "$diff" != "" ]; then

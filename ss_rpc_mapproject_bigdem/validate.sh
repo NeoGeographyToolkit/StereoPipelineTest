@@ -19,19 +19,19 @@ rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
 cmp_stats.sh $file $gold
-gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
-gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
+gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
+gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold/run.txt
 
-diff run.txt gold.txt
+diff run/run.txt gold/run.txt
 
-max_err.pl run.txt gold.txt # print the error
-ans=$(max_err.pl run.txt gold.txt 1e-10) # compare the error
+max_err.pl run/run.txt gold/run.txt # print the error
+ans=$(max_err.pl run/run.txt gold/run.txt 1e-10) # compare the error
 if [ "$ans" != "1" ]; then
     echo Validation failed
     exit 1
 fi
 
-rm -f run.txt gold.txt
+rm -f run/run.txt gold/run.txt
 
 echo diff is $diff
 if [ "$diff" != "" ]; then

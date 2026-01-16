@@ -23,19 +23,19 @@ runErr=$(grep "Output: mean of smallest errors" $runLog | awk '{print $17}' | pe
 goldLog=$(ls -atrd gold/*log* | tail -n 1)
 goldErr=$(grep "Output: mean of smallest errors" $goldLog | awk '{print $17}' | perl -pi -e 's#(0.\d+).*?$#int($1*100+0.5)/100#eg')
 
-echo $runErr > run.txt
-echo $goldErr > gold.txt
+echo $runErr > run/run.txt
+echo $goldErr > gold/run.txt
 
-diff run.txt gold.txt
+diff run/run.txt gold/run.txt
 
-max_err.pl run.txt gold.txt # print the error
-ans=$(max_err.pl run.txt gold.txt 0.75) # compare the error
+max_err.pl run/run.txt gold/run.txt # print the error
+ans=$(max_err.pl run/run.txt gold/run.txt 0.75) # compare the error
 if [ "$ans" -eq 0 ]; then
     echo Validation failed
     exit 1
 fi
 
-rm -f run.txt gold.txt
+rm -f run/run.txt gold/run.txt
 
 echo Validation succeeded
 exit 0

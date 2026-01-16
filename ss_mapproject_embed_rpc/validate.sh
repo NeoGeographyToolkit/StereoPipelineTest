@@ -18,21 +18,21 @@ fi
 rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
-gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v -E min | grep -i -v max > run.txt
-gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v -E min | grep -i -v max > gold.txt
+gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v -E min | grep -i -v max > run/run.txt
+gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v -E min | grep -i -v max > gold/run.txt
 
-diff=$(diff run.txt gold.txt | head -n 50)
-#cat run.txt
+diff=$(diff run/run.txt gold/run.txt | head -n 50)
+#cat run/run.txt
 #echo Diff is $diff
 
-../bin/max_err.pl run.txt gold.txt
-ans=$(../bin/max_err.pl run.txt gold.txt 1e-6)
+../bin/max_err.pl run/run.txt gold/run.txt
+ans=$(../bin/max_err.pl run/run.txt gold/run.txt 1e-6)
 if [ "$ans" -eq 0 ]; then
      echo Validation failed
      exit 1
 fi
 
-rm -f run.txt gold.txt
+rm -f run/run.txt gold/run.txt
 
 echo Validation succeded
 exit 0

@@ -19,17 +19,17 @@ rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
 ../bin/cmp_stats.sh $file $gold
-gdalinfo -stats $file | grep -v Files | grep -v -i tif > run.txt
-gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold.txt
+gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
+gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold/run.txt
 
-../bin/max_err.pl run.txt gold.txt
-ans=$(../bin/max_err.pl run.txt gold.txt 1e-8)
+../bin/max_err.pl run/run.txt gold/run.txt
+ans=$(../bin/max_err.pl run/run.txt gold/run.txt 1e-8)
 if [ "$ans" -eq 0 ]; then
      echo Validation failed
      exit 1
 fi
 
-rm -f run.txt gold.txt
+rm -f run/run.txt gold/run.txt
 
 file=run/run-trans_source.csv
 gold=gold/run-trans_source.csv
@@ -64,11 +64,11 @@ for f in run/run-trans_reference.las gold/run-trans_reference.las; do
   fi
 done
     
-pdal info run/run-trans_reference.las  | grep -v filename | grep -v now > run/pdal_run.txt
-pdal info gold/run-trans_reference.las | grep -v filename | grep -v now > gold/pdal_gold.txt
+pdal info run/run-trans_reference.las  | grep -v filename | grep -v now > run/pdal_run/run.txt
+pdal info gold/run-trans_reference.las | grep -v filename | grep -v now > gold/pdal_gold/run.txt
 
-../bin/max_err.pl run/pdal_run.txt gold/pdal_gold.txt
-ans=$(../bin/max_err.pl run/pdal_run.txt gold/pdal_gold.txt 1e-8)
+../bin/max_err.pl run/pdal_run/run.txt gold/pdal_gold/run.txt
+ans=$(../bin/max_err.pl run/pdal_run/run.txt gold/pdal_gold/run.txt 1e-8)
 if [ "$ans" -eq 0 ]; then
      echo Validation failed
      exit 1

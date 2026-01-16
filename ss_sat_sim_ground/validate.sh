@@ -20,11 +20,11 @@ for file in run/run-10000.tif \
     fi
    
     echo Comparing $file and $gold
-    gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right | grep -v Min= > run.txt
-    gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right | grep -v Min= > gold.txt
+    gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right | grep -v Min= > run/run.txt
+    gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right | grep -v Min= > gold/run.txt
 
-    diff=$(diff run.txt gold.txt)
-    rm -f run.txt gold.txt
+    diff=$(diff run/run.txt gold/run.txt)
+    rm -f run/run.txt gold/run.txt
     
     echo diff is $diff
     if [ "$diff" != "" ]; then

@@ -21,13 +21,13 @@ for file in run/run-hillshade.tif; do
   rm -fv "$gold.aux.xml"
 
   cmp_stats.sh $file $gold
-  gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v xml > run.txt
-  gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold.txt
+  gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v xml > run/run.txt
+  gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold/run.txt
 
-  diff=$(diff run.txt gold.txt)
-  cat run.txt
+  diff=$(diff run/run.txt gold/run.txt)
+  cat run/run.txt
 
-  rm -f run.txt gold.txt
+  rm -f run/run.txt gold/run.txt
 
   echo diff is $diff
   if [ "$diff" != "" ]; then
