@@ -17,4 +17,6 @@ bundle_adjust                           \
   --bathy-mask-list run/mask_list.txt   \
   --refraction-index 1.333              \
   --bathy-plane ../data/bathy-plane.txt \
+  --threads 1                           \
   -o run/run
+

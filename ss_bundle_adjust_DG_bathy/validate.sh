@@ -24,7 +24,7 @@ export PATH=../bin:$PATH
         exit 1
     fi
 
-    ans=$(../bin/max_err.pl $file $gold 5e-6)
+    ans=$(../bin/max_err.pl $file $gold 5e-8)
     if [ "$ans" != "1" ]; then
         echo Validation failed
         exit 1
