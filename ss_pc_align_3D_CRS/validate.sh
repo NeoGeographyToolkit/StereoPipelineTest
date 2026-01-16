@@ -1,7 +1,7 @@
 #!/bin/bash
 
 file=run/run-trans_reference.tif
-gold=gold/run-trans_reference.tif
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

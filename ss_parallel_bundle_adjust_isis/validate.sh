@@ -6,7 +6,7 @@ for file in run/*adjust \
 	run/run-cnet-final_residuals_pointmap.csv \
 	run/run-cnet2-final_residuals_pointmap.csv; do
 
-  gold=${file/run\/run/gold\/run}
+  gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

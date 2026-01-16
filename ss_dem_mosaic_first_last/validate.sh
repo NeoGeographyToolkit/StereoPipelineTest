@@ -6,7 +6,7 @@ rm -f run/*xml gold/*xml
 for f in "" -first -last -min -max -mean -stddev -median -count -block-max; do
 
   file=run/run-tile-0"$f".tif
-  gold=gold/run-tile-0"$f".tif
+  gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

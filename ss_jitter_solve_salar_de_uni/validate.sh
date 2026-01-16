@@ -32,7 +32,7 @@ done
 
 # Validate the orbit_plot.py results
 file=run/run.png
-gold=gold/run.png
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

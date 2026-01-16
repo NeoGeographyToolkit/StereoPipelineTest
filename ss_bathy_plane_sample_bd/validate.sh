@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 file=run/run-sample.shp
-gold=gold/run-sample.shp
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

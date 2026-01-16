@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 file=run/output.tif
-gold=gold/output.tif
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

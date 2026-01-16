@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/run-DEM.tif; do
 
-    gold=${file/run\//gold\/};
+    gold=gold/$(basename $file)
     echo $file $gold
     
     if [ ! -e "$file" ]; then

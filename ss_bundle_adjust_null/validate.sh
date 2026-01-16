@@ -4,7 +4,7 @@ export PATH=../bin:$PATH
 # Test .tsai files produced by first run, and then adjust files produced by last run
 for file in run/*tsai run/run-v2-left_sub16.null.adjust; do
 
-  gold=${file/run\/run/gold\/run}
+  gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."
@@ -31,7 +31,7 @@ done
 # This file may contain a creation time, so 
 # its actual content will change just because of that.
 for file in run/run-cnet.net; do 
- gold=${file/run\/run/gold\/run}
+ gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

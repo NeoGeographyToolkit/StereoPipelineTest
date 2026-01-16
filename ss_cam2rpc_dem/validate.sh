@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/dem_cam.xml run/llh_cam.xml; do 
 
-  gold=${file/run\//gold\/}
+  gold=gold/$(basename $file)
 
   echo Comparing $file and $gold 
   diff=$(diff $file $gold | head -n 50)

@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 file=run/run-DEM.tif
-gold=gold/run-DEM.tif
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."
@@ -34,7 +34,7 @@ if [ "$diff" != "" ]; then
 fi
 
 file=run/run-disp-B17_016219_1978_XN_17N282W.8bit__B18_016575_1978_XN_17N282W.8bit.match
-gold=${file/run\//gold\/}
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

@@ -4,7 +4,7 @@ export PATH=../bin:$PATH
 for ot in Byte UInt16 Int16 UInt32 Int32 Float32; do
 
 	file=run/run-RPC_${ot}.tif
-	gold=gold/run-RPC_${ot}.tif
+	gold=gold/$(basename $file)
 
 	if [ ! -e "$file" ]; then
 	    echo "ERROR: File $file does not exist."

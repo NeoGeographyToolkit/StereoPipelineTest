@@ -5,7 +5,7 @@ for file in run/run-f.adjusted_state.json run/run-n.adjusted_state.json \
     run/run-weight-f.adjusted_state.json run/run-weight-n.adjusted_state.json \
     run/run-weight-mapproj_match_offset_stats.txt; do
     
-    gold=${file/run\//gold\/}
+    gold=gold/$(basename $file)
 
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."

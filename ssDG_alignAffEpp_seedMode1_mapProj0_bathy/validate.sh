@@ -4,7 +4,7 @@ export PATH=../bin:$PATH
 
 for file in run/run-DEM.tif; do
 
-    gold=${file/run\//gold\/}
+    gold=gold/$(basename $file)
     
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."
@@ -38,7 +38,7 @@ done
 
 # Bathy threshold validatoin
 file=run/run-threshold.txt
-gold=gold/run-threshold.txt
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

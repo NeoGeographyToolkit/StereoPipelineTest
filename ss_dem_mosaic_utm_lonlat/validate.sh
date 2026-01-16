@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/run1-tile-0.tif run/run2-tile-0.tif run/run-tile-0-first-index-map.tif; do
 
-	gold=${file/run\/run/gold\/run}
+	gold=gold/$(basename $file)
 
 	if [ ! -e "$file" ]; then
     	echo "ERROR: File $file does not exist."

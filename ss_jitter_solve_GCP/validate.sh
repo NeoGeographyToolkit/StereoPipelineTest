@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json; do 
 
-  gold=${file/run\//gold\/}
+  gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

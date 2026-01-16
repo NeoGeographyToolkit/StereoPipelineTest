@@ -8,7 +8,7 @@ for file in \
 	run/run-linescan-nadir-c2.adjusted_state.json\
 	; do 
 
-    gold=${file/run\//gold\/}
+    gold=gold/$(basename $file)
 
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."

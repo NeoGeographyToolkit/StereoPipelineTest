@@ -12,7 +12,7 @@ for file in run/run-run-l.adjusted_state.json         \
 	run/jitter/run-final_residuals_anchor_points.csv; do 
 
 
-    gold=${file/run\//gold\/}
+    gold=gold/$(basename $file)
 
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."

@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 for file in run/ba1/run-M0100115.adjust run/ba1/run-E0201461.adjust; do 
-	 gold=${file/run\//gold\/}
+	 gold=gold/$(basename $file)
 
     if [ ! -e "$file" ] || [ ! -f "$gold" ]; then
         echo "ERROR: Either $file or $gold does not exist."
@@ -12,7 +12,7 @@ done
 
 for file in run/run-L.tif; do 
     
-    gold=${file/run\//gold\/}
+    gold=gold/$(basename $file)
 
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."

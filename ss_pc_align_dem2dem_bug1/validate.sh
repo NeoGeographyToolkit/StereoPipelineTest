@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 for file in run/run-trans_reference.tif run/run-trans_source.tif; do
-	gold=${file/run\//gold\/}
+	gold=gold/$(basename $file)
 	echo $run $gold
 
   if [ ! -e "$file" ]; then

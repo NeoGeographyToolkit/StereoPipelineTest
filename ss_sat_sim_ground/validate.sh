@@ -7,7 +7,7 @@ for file in run/run-10000.tif \
             run/run-10003.tif \
             run/run-10004.tif; do 
 
-    gold=${file/run\//gold\/}
+    gold=gold/$(basename $file)
 
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."

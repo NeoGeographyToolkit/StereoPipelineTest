@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 file=run/run.png
-gold=gold/run.png
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

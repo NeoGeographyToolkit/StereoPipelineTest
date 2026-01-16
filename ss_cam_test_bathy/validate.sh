@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/run.txt; do
 
-  gold=${file/run\/run/gold\/run}
+  gold=gold/$(basename $file)
   
   echo $file $gold
 

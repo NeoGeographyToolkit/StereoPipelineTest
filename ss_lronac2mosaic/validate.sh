@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 file=run/M120168714LE.lronaccal.lronacecho.cropped.noproj.mosaic.norm.cub
-gold=gold/M120168714LE.lronaccal.lronacecho.cropped.noproj.mosaic.norm.cub
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

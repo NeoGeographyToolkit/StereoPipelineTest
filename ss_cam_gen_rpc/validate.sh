@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/run_rpc1.xml run/run_rpc2.xml run/run_rpc3.xml run/run_rpc4.xml; do
 
-  gold=${file/run\/run/gold\/run}
+  gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

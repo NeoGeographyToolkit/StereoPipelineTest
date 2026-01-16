@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/run-BSG-102-20220425-215106-22900060_georeferenced-pan.adjust  run/run-BSG-102-20220425-215147-22900061_georeferenced-pan.adjust; do 
 
-  gold=${file/run/gold}
+  gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

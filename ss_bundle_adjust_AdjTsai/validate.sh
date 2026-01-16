@@ -4,7 +4,7 @@ export PATH=../bin:$PATH
 # Test .tsai files produced by first run, and then adjust files produced by last run
 for file in run/run-left_sub16.adj.tsai run/run-right_sub16.adj.tsai; do
 
-  gold=${file/run\/run/gold\/run}
+  gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

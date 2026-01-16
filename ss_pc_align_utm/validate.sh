@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 file=run/run-trans_reference.tif
-gold=gold/run-trans_reference.tif
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."
@@ -32,7 +32,7 @@ fi
 rm -f run/run.txt gold/run.txt
 
 file=run/run-trans_source.csv
-gold=gold/run-trans_source.csv
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

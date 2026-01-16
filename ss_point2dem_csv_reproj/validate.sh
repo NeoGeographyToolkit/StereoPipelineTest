@@ -4,7 +4,7 @@ export PATH=../bin:$PATH
 for file in run/run-DEM.tif; do
 
   echo $file $gold
-  gold=${file/run\/run/gold\/run}
+  gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

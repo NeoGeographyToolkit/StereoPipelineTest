@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 
 file=run/run-transform.txt
-gold=gold/run-transform.txt
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 # Input of DEM mosaic must be same as output
 file=run/blur.tif
-gold=run/blur.tif
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

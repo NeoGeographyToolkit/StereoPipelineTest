@@ -5,7 +5,7 @@ export PATH=../bin:$PATH
 # For now, just check if the files were at least successfully created
 for file in run/submap1.nvm run/submap2.nvm run/merged.nvm; do 
 
-  gold=${file/run\//gold\/}
+  gold=gold/$(basename $file)
   echo $file $gold
 
   if [ ! -e "$file" ]; then

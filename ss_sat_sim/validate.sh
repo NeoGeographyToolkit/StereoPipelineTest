@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/run-0009996.795966815-c1.tif run/run-0009996.795966815-c3.map.tif; do
     
-    gold=${file/run\//gold\/}
+    gold=gold/$(basename $file)
 
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."
@@ -35,7 +35,7 @@ for file in \
   run/run-0010003.204033185-c1-ref.tsai \
   run/run-0010003.204033185-c2.tsai run/run-0010003.204033185-c2-ref.tsai\
   ; do 
-    gold=${file/run\//gold\/}
+    gold=gold/$(basename $file)
     echo Comparing $file and $gold 
     diff=$(diff $file $gold | head -n 50)
     echo diff is $diff

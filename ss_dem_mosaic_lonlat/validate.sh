@@ -13,7 +13,7 @@ for i in 0 1 08 13; do
         file=run/run-tile-${i}.tif
     fi
     
-    gold=${file/run\//gold\/}
+    gold=gold/$(basename $file)
     
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."

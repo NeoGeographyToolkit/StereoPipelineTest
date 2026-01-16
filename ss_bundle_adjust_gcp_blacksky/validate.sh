@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 file=run/run-BSG-118-20220730-123737-33360052_georeferenced-pan.tsai 
-gold=gold/run-BSG-118-20220730-123737-33360052_georeferenced-pan.tsai
+gold=gold/$(basename $file)
 
 if [ ! -f "$file" ] || [ ! -f "$gold" ]; then
 	echo Missing $file or $gold

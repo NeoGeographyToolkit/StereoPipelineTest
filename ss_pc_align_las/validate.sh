@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 file=run/run-trans_reference.laz
-gold=gold/run-trans_reference.laz
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."
@@ -39,7 +39,7 @@ if [ "$diff" != "" ]; then
 fi
 
 file=run/run-trans_source.csv
-gold=gold/run-trans_source.csv
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

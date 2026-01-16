@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 file=run/subset.txt
-gold=gold/subset.txt
+gold=gold/$(basename $file)
 
 # Both must exist
 if [ ! -e "$file" ]; then

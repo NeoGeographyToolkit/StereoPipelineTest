@@ -3,7 +3,7 @@
 export PATH=../bin:$PATH
 
 file=run/run-ortho.tif
-gold=gold/run-ortho.tif
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

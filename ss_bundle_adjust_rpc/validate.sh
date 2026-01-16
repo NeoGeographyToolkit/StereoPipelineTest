@@ -9,7 +9,7 @@ for file in run/run-09OCT11191503-P1BS_R1C1-052783426010_01_P001_sub10.adjust   
             run/run-09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10.adjusted_rpc.xml \
             ; do
 
-  gold=${file/run\/run/gold\/run}
+  gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

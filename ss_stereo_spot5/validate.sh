@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 file=run/run.txt
-gold=gold/run.txt
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

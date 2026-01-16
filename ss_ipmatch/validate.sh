@@ -16,7 +16,7 @@ for file in \
     run/orb/matches_v2.txt
   do 
 
-    gold=$(echo $file | perl -p -e "s#^run#gold#g")
+    gold=gold/$(basename $file)
     
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."

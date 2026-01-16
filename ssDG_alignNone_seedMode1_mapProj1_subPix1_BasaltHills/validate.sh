@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/run-DEM.tif run/run-L-R-disp-diff.tif; do 
     
-    gold=${file/run\//gold\/}
+    gold=gold/$(basename $file)
 
 
     if [ ! -e "$file" ]; then

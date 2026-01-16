@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/theia_fltr/cameras.nvm; do
 
-  gold=${file/run\/run/gold\/run}
+  gold=gold/$(basename $file)
   echo Comparing: $file $gold
 
   if [ ! -e "$file" ]; then

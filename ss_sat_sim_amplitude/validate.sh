@@ -7,7 +7,7 @@ for file in run/run-10000.tsai \
             run/run-10003.tsai \
             run/run-10004.tsai; do 
             
-    gold=${file/run\//gold\/}
+    gold=gold/$(basename $file)
 
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."

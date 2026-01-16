@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 for file in run/run-trans_reference.csv run/run-trans_source.csv; do
-	gold=${file/run\/run/gold\/run}
+	gold=gold/$(basename $file)
 
 	if [ ! -e "$file" ]; then
     	echo "ERROR: File $file does not exist."

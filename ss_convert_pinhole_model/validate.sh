@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 file=run/run-rpc.tsai
-gold=gold/run-rpc.tsai
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

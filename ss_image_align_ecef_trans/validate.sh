@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/aligned_image2.tif run/run-transform.txt run/run-ecef-transform.txt; do
     
-    gold=${file/run\/run/gold\/run}
+    gold=gold/$(basename $file)
 
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."

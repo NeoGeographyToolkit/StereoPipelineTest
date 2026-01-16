@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/20190819-172719.4215.tsai run/20190819-173237.9216.tsai; do
 
-  gold=${file/run\/run/gold\/run}
+  gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

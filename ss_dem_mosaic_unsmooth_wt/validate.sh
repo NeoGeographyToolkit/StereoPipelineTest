@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 for file in run/run-tile-0-weight-dem-index-0.tif run/run-tile-0-weight-dem-index-1.tif; do
-	gold=${file/run\//gold\/}
+	gold=gold/$(basename $file)
 
 	if [ ! -e "$file" ]; then
     	echo "ERROR: File $file does not exist."

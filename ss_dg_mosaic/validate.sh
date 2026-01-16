@@ -25,7 +25,7 @@ for ot in Byte UInt16 Int16 UInt32 Int32 Float32; do
         fi
         
         file=run/run_${ot}.r25.tif
-	gold=gold/run_${ot}.r25.tif
+	gold=gold/$(basename $file)
 
 	echo Comparing $file $gold
 

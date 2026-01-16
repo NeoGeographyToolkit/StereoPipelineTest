@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/meas_plane.txt run/meas_inliers.shp; do
 
-  gold=${file/run\//gold\/}
+  gold=gold/$(basename $file)
   
   echo $file $gold
 

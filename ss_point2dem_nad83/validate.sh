@@ -6,7 +6,7 @@ for val in "" -min -max -mean -median -stddev -count -nmad -50-pct -50.1-pct; do
   file=run/run$val-DEM.tif
 
   echo $file $gold
-  gold=${file/run\/run/gold\/run}
+  gold=gold/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

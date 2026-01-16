@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/run-lonlat-DEM.tif run/run-stere-DEM.tif run/run-utm-DEM.tif run/run-json-DEM.tif; do
 
-  gold=${file/run\/run/gold\/run}
+  gold=gold/$(basename $file)
 
   echo Comparing: $file $gold
 

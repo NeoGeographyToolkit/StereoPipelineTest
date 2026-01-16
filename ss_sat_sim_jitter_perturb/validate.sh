@@ -9,7 +9,7 @@ for file in run/run-jitter-camera_041_VZ_030_VA_000.tsai        \
             run/run-rand-position-camera_041_VZ_030_VA_000.tsai \
             ; do 
 
-    gold=${file/run\//gold\/}
+    gold=gold/$(basename $file)
 
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."

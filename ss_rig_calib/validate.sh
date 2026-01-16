@@ -10,7 +10,7 @@ for file in run/cameras.nvm; do
   fi
   
   # replace run/ with gold/
-  gold=$(echo $file | perl -p -e "s#^run/#gold/#")
+  gold=gold/$(basename $file)
     
   if [ ! -e "$gold" ]; then
       echo "ERROR: File $gold does not exist."

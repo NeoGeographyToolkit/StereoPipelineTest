@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 file=run/run-RPC.tif
-gold=gold/run-RPC.tif
+gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."

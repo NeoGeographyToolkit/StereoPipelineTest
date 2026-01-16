@@ -5,7 +5,7 @@ export PATH=../bin:$PATH
 FILES="run/run-DEM.tif run/run-tiles.shp run/run-tiles.qml"
 
 for file in $FILES; do
-    gold="gold/$(basename "$file")"
+    gold=gold/$(basename $file)
 
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."
