@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/ba/out-AS15-M-1134.lev1.adjust run/ba/out-AS15-M-1135.lev1.adjust; do 
 
-  gold=gold/$(basename $file)
+  gold=$(echo $file | perl -p -e "s#run/#gold/#g")
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

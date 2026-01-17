@@ -3,8 +3,8 @@ export PATH=../bin:$PATH
 
 for file in run/ocv_cam_params.yml run/solve_cam_params.txt run/vw_cam_params.tsai; do
 
-  echo $file $gold
   gold=gold/$(basename $file)
+  echo $file $gold
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."
@@ -16,8 +16,13 @@ for file in run/ocv_cam_params.yml run/solve_cam_params.txt run/vw_cam_params.ts
       exit 1;
   fi
 
-
-  diff=$(diff $file $gold | head -n 50)
+  # Rm timestamp
+  clean_file=$file.clean
+  clean_gold=$gold.clean
+  cat $file | grep -v calibration_time > $clean_file
+  cat $gold | grep -v calibration_time > $clean_gold
+  
+  diff=$(diff $clean_file $clean_gold | head -n 50)
 
   echo diff is $diff
   if [ "$diff" != "" ]; then

@@ -11,8 +11,7 @@ for file in run/run-run-l.adjusted_state.json         \
 	run/jitter/run-triangulation_offsets.txt\
 	run/jitter/run-final_residuals_anchor_points.csv; do 
 
-
-    gold=gold/$(basename $file)
+    gold=$(echo $file | perl -p -e "s#run/#gold/#g")
 
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."

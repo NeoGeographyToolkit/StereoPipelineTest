@@ -8,7 +8,7 @@ for file in                                      \
     run/shared/run-right_sub16.brownconrady.tsai \
     ; do 
 
-  gold=gold/$(basename $file)
+  gold=$(echo $file | perl -p -e "s#run/#gold/#g")
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."

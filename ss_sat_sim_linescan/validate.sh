@@ -2,8 +2,8 @@
 export PATH=../bin:$PATH
 
 for file in run/run-c1.tif run/reload/run-run-c1.tif; do
-    
-    gold=gold/$(basename $file)
+
+    gold=$(echo $file | perl -p -e "s#run/#gold/#g")
 
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."
@@ -31,8 +31,7 @@ for file in run/run-c1.tif run/reload/run-run-c1.tif; do
 done
 
 for file in run/jitter/run-final_residuals_stats.txt; do
-    
-    gold=gold/$(basename $file)
+    gold=$(echo $file | perl -p -e "s#run/#gold/#g")
     echo Comparing $file and $gold
     diff=$(diff $file $gold)
     if [ "$diff" != "" ]; then
