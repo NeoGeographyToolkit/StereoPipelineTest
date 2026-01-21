@@ -36,7 +36,7 @@ for file in run/run-DEM.tif; do
     fi
 done
 
-# Bathy threshold validatoin
+# Bathy threshold validation
 file=run/run-threshold.txt
 gold=gold/$(basename $file)
 
