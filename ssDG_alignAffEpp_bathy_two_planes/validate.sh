@@ -33,5 +33,28 @@ if [ "$diff" != "" ]; then
     exit 1
 fi
 
+for file in run/ba/run-left_bathy.adjust \
+            run/ba/run-right_bathy.adjust; do
+    
+    gold=$(echo $file | perl -p -e "s#run/#gold/#g")
+
+    if [ ! -e "$file" ]; then
+        echo "ERROR: File $file does not exist."
+        exit 1;
+    fi
+
+    if [ ! -e "$gold" ]; then
+        echo "ERROR: File $gold does not exist."
+        exit 1;
+    fi
+
+   echo Comparing $file and $gold
+    diff=$(diff $file $gold)
+    if [ "$diff" != "" ]; then
+        echo Validation failed
+        exit 1
+    fi
+done
+
 echo Validation succeeded
 exit 0
