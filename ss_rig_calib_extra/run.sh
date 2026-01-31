@@ -4,28 +4,28 @@ set -x verbose
 rm -rfv run
 
 # Test adding additional images, using initial rig transforms,
-# and --image_sensor_list
+# and --image-sensor-list
 
 dataDir=../data/rig_calibrator_example_3_cameras
 cams="nav_cam sci_cam haz_cam"
 float_intr=""
 
 rig_calibrator                                                     \
-    --rig_config ${dataDir}/rig_input/rig_config.txt               \
+    --rig-config ${dataDir}/rig_input/rig_config.txt               \
     --nvm ${dataDir}/rig_input/submap.nvm                          \
-    --image_sensor_list ${dataDir}/rig_input/image_sensor_list.txt \
+    --image-sensor-list ${dataDir}/rig_input/image_sensor_list.txt \
     --extra-list ${dataDir}/rig_input/extra_list.txt               \
     --use-initial-rig-transforms                                   \
-    --camera_poses_to_float "$cams"                                \
-    --intrinsics_to_float "$float_intr"                            \
-    --depth_to_image_transforms_to_float "$cams"                   \
-    --affine_depth_to_image                                        \
-    --bracket_len 2.0                                              \
-    --depth_tri_weight 1000                                        \
+    --camera-poses-to-float "$cams"                                \
+    --intrinsics-to-float "$float_intr"                            \
+    --depth-to-image-transforms-to-float "$cams"                   \
+    --affine-depth-to-image                                        \
+    --bracket-len 2.0                                              \
+    --depth-tri-weight 1000                                        \
     --tri-weight 10                                                \
-    --tri_robust_threshold 0.1                                     \
-    --num_iterations 5                                             \
-    --calibrator_num_passes 1                                      \
-    --num_overlaps 5                                               \
-    --num_threads 1                                                \
-    --out_dir run
+    --tri-robust-threshold 0.1                                     \
+    --num-iterations 5                                             \
+    --calibrator-num-passes 1                                      \
+    --num-overlaps 5                                               \
+    --num-threads 1                                                \
+    --out-dir run

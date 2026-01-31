@@ -12,18 +12,18 @@ cams="nav_cam sci_cam haz_cam"
 float_intr=""
 
 rig_calibrator                                 \
-  --rig_config ${dataDir}/rig_config.txt       \
+  --rig-config ${dataDir}/rig_config.txt       \
   --nvm $dataDir/cameras.nvm                   \
-  --camera_poses_to_float "$cams"              \
-  --intrinsics_to_float "$float_intr"          \
-  --depth_to_image_transforms_to_float "$cams" \
-  --affine_depth_to_image                      \
-  --bracket_len 2.0                            \
-  --depth_tri_weight 1000                      \
+  --camera-poses-to-float "$cams"              \
+  --intrinsics-to-float "$float_intr"          \
+  --depth-to-image-transforms-to-float "$cams" \
+  --affine-depth-to-image                      \
+  --bracket-len 2.0                            \
+  --depth-tri-weight 1000                      \
   --tri-weight 10                              \
-  --tri_robust_threshold 0.1                   \
-  --num_iterations 5                           \
-  --calibrator_num_passes 2                    \
-  --num_overlaps 0 -num_match_threads 8        \
-  --num_threads 1                              \
-  --out_dir run 
+  --tri-robust-threshold 0.1                   \
+  --num-iterations 5                           \
+  --calibrator-num-passes 2                    \
+  --num-overlaps 0 --num-match-threads 8       \
+  --num-threads 1                              \
+  --out-dir run
