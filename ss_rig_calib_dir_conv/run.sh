@@ -1,8 +1,7 @@
 #!/bin/bash
 set -x verbose
 rm -rfv run
-# Run the rig calibrator. The convention for images is 
-# assumed to be path/sensor/timestamp.tif
+# Run the rig calibrator. Test the ability to follow the convention for images from the doc. 
 dataDir=../data/rig_calibrator_dir_conv
 cams="nav_cam sci_cam haz_cam"
 # Floating intrinsics
@@ -27,3 +26,4 @@ rig_calibrator                                 \
   --num-overlaps 0 --num-match-threads 8       \
   --num-threads 1                              \
   --out-dir run
+ 
