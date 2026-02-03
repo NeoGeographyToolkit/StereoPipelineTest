@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# In this testcase the various xml files have different pitches. We put a bugfix for that.
+# Test aster2asp with hdf input
 
 set -x verbose
 rm -rfv run
