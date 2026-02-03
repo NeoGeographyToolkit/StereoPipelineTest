@@ -34,7 +34,7 @@ rig_calibrator                                       \
     --mesh-tri-weight 0.1                            \
     --camera-position-weight 1                       \
     --num-iterations 5                               \
-    --calibrator-num-passes 2                        \
+    --num-passes 2                                   \
     --num-overlaps 3                                 \
     --registration                                   \
     --hugin-file ${dataDir}/control_points.pto       \

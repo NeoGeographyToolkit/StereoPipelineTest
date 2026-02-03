@@ -35,7 +35,7 @@ rig_calibrator                                     \
     --tri-weight 0.1                               \
     --tri-robust-threshold 0.1                     \
     --num-iterations 5                             \
-    --calibrator-num-passes 1                      \
+    --num-passes 1                                 \
     --export-to-voxblox                            \
     --num-overlaps 0                               \
     --max-reprojection-error 50                    \

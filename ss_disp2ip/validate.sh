@@ -3,7 +3,7 @@ export PATH=../bin:$PATH
 
 for file in run/theia_fltr/cameras.nvm; do
 
-  gold=$(echo $file | perl -p -e "s#run/#gold/#g")
+  gold=${file/run\/run/gold\/run}
   echo Comparing: $file $gold
 
   if [ ! -e "$file" ]; then
@@ -26,5 +26,5 @@ for file in run/theia_fltr/cameras.nvm; do
 
 done
 
-echo Validation succeeded
+echo Validation succeded
 exit 0

@@ -25,10 +25,10 @@ for f in $(cat run/right_filtered.txt); do
 done >> run/optical_centers.txt
 
 # This can produce non-unique results, so run just once
-# theia_sfm --rig_config ../data/disp2ip/rig_config.txt \
-#     --theia_flags ../data/disp2ip/theia_flags.txt     \
+# theia_sfm --rig-config ../data/disp2ip/rig_config.txt \
+#     --theia-flags ../data/disp2ip/theia_flags.txt     \
 #     --images '../data/disp2ip/raw/left/left_raw*.png' \
-#     --out_dir ../data/disp2ip/theia_left
+#     --out-dir ../data/disp2ip/theia_left
 
 disp2ip --left-raw-image-list run/left_raw.txt       \
   --left-filtered-image-list run/left_filtered.txt   \

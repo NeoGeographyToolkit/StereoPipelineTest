@@ -25,7 +25,7 @@ rig_calibrator                                                     \
     --tri-weight 10                                                \
     --tri-robust-threshold 0.1                                     \
     --num-iterations 5                                             \
-    --calibrator-num-passes 1                                      \
+    --num-passes 1                                                 \
     --num-overlaps 5                                               \
     --num-threads 1                                                \
     --out-dir run

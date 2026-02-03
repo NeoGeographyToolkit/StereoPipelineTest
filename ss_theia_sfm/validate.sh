@@ -12,5 +12,5 @@ for file in run/cameras.nvm; do
   
 done
 
-echo Validation succeeded
+echo Validation succeded
 exit 0
