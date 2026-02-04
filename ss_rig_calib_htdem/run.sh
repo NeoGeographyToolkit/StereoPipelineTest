@@ -89,7 +89,7 @@ rig_calibrator                                                      \
   --camera-poses-to-float "left right"                              \
   --intrinsics-to-float                                             \
   "left:focal_length right:focal_length"                            \
-  --camera-position-weight 1.0                                      \
+  --camera-position-uncertainty 1.0                                 \
   --tri-weight 1.0                                                  \
   --save-pinhole-cameras                                            \
   --num-iterations 10                                               \

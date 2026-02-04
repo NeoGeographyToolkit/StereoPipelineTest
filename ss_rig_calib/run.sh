@@ -32,7 +32,7 @@ rig_calibrator                                       \
     ../data/rig_calibrator_example_3_cameras/mesh.py \
     --depth-mesh-weight 1                            \
     --mesh-tri-weight 0.1                            \
-    --camera-position-weight 1                       \
+    --camera-position-uncertainty 1                  \
     --num-iterations 5                               \
     --num-passes 2                                   \
     --num-overlaps 3                                 \
