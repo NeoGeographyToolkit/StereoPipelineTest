@@ -4,9 +4,10 @@ set -x verbose
 rm -rfv run
 
 # This tests rig_calibrator with the option --heights-from-dem.
-# First, a stereo pair is produced with ASTER dataset 
+# This test uses synthetic orbital rig data created from ASTER dataset 
 # ../data/AST_L1A_00404012022185436_20250920182851.hdf
-# Stereo is run creating a DEM and orthoimage.
+# The rig_calibrator constrains triangulated point heights to the ASTER DEM
+# to demonstrate the new DEM height constraint functionality.
 
 # Ensure that focal length is 1/20 of the altitude (700000 m). This should
 # result in a pixel size of about 20 m which is somewhat more than nominal ASTER
@@ -82,7 +83,7 @@ rm -rfv run
 #   ../data/orbital_rig/sat_sim/*{left,right}.tsai \
 #   -o ../data/orbital_rig/ba/run
 
-# Run the rig calibrator
+# Run the rig calibrator with DEM height constraints
 rig_calibrator                                                      \
   --rig-config ../data/orbital_rig/sat_sim/run-nadir-rig_config.txt \
   --nvm ../data/orbital_rig/ba/run.nvm                              \
@@ -90,6 +91,9 @@ rig_calibrator                                                      \
   --intrinsics-to-float                                             \
   "left:focal_length right:focal_length"                            \
   --camera-position-uncertainty 1.0                                 \
+  --heights-from-dem ../data/aster-dem.tif                          \
+  --heights-from-dem-uncertainty 2.0                                \
+  --heights-from-dem-robust-threshold 0.1                           \
   --tri-weight 1.0                                                  \
   --save-pinhole-cameras                                            \
   --num-iterations 10                                               \
