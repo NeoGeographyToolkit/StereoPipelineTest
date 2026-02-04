@@ -92,6 +92,6 @@ rig_calibrator                                                      \
   --camera-position-weight 1.0                                      \
   --tri-weight 1.0                                                  \
   --save-pinhole-cameras                                            \
-  --num-iterations 100                                              \
+  --num-iterations 10                                               \
   --num-threads 1                                                   \
   --out-dir run
