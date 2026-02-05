@@ -75,6 +75,9 @@ rm -rfv run
 
 # Move the data to ../data/orbital_rig to not recreate it every time. 
 
+# Shorten the rig config name
+# cp ../data/orbital_rig/sat_sim/run-nadir-rig_config.txt ../data/orbital_rig/rig_config.txt
+
 # Bundle adjust, producing nvm
 # parallel_bundle_adjust   \
 #   --ip-per-image 10000   \
@@ -84,18 +87,21 @@ rm -rfv run
 #   -o ../data/orbital_rig/ba/run
 
 # Run the rig calibrator with DEM height constraints
-rig_calibrator                                                      \
-  --rig-config ../data/orbital_rig/sat_sim/run-nadir-rig_config.txt \
-  --nvm ../data/orbital_rig/ba/run.nvm                              \
-  --camera-poses-to-float "left right"                              \
-  --intrinsics-to-float                                             \
-  "left:focal_length right:focal_length"                            \
-  --camera-position-uncertainty 1.0                                 \
-  --heights-from-dem ../data/aster-dem.tif                          \
-  --heights-from-dem-uncertainty 2.0                                \
-  --heights-from-dem-robust-threshold 0.1                           \
-  --tri-weight 1.0                                                  \
-  --save-pinhole-cameras                                            \
-  --num-iterations 10                                               \
-  --num-threads 1                                                   \
+rig_calibrator                             \
+  --rig-config                             \
+  ../data/orbital_rig/rig_config.txt       \
+  --nvm ../data/orbital_rig/ba/run.nvm     \
+  --use-initial-rig-transforms             \
+  --fix-rig-translations                   \
+  --camera-poses-to-float "left right"     \
+  --intrinsics-to-float                    \
+  "left:focal_length right:focal_length"   \
+  --camera-position-uncertainty 1.0        \
+  --heights-from-dem ../data/aster-dem.tif \
+  --heights-from-dem-uncertainty 2.0       \
+  --heights-from-dem-robust-threshold 0.1  \
+  --tri-weight 1.0                         \
+  --save-pinhole-cameras                   \
+  --num-iterations 10                      \
+  --num-threads 1                          \
   --out-dir run
