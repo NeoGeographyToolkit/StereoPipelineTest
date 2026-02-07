@@ -5,10 +5,10 @@ rm -rfv run
 
 # Run ipfind and ipmatch for the most used methods
 
-for method in obalog sift orb; do
+for method in log obalog sift orb; do
     
     desc=$method
-    if [ "$method" = "obalog" ]; then
+    if [ "$method" = "obalog" ] || [ "$method" = "log" ]; then 
         desc="sgrad"
     fi
     

@@ -2,12 +2,16 @@
 export PATH=../bin:$PATH
 
 for file in \
+    run/log/run-left_sub16__right_sub16.match       \
+    run/log/run-left_sub16__right_sub16_v2.match    \
     run/obalog/run-left_sub16__right_sub16.match    \
     run/obalog/run-left_sub16__right_sub16_v2.match \
     run/sift/run-left_sub16__right_sub16.match      \
     run/sift/run-left_sub16__right_sub16_v2.match   \
     run/orb/run-left_sub16__right_sub16.match       \
     run/orb/run-left_sub16__right_sub16_v2.match    \
+    run/log/matches.txt                             \
+    run/log/matches_v2.txt                          \
     run/obalog/matches.txt                          \
     run/obalog/matches_v2.txt                       \
     run/sift/matches.txt                            \
