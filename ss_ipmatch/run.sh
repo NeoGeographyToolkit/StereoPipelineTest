@@ -22,7 +22,7 @@ for method in log obalog sift orb; do
     ipmatch --distance-metric $distance_metric ../data/left_sub16.tif run/${method}/left_sub16.vwip ../data/right_sub16.tif run/${method}/right_sub16.vwip -o run/${method}/run
     
     # Convert the matches to txt and vice-versa
-    $ISISROOT/bin/python $(which parse_match_file.py) run/${method}/run-left_sub16__right_sub16.match run/${method}/matches.txt
+    $ISISROOT/bin/python $(which parse_match_file.py) --save-descriptors run/${method}/run-left_sub16__right_sub16.match run/${method}/matches.txt
     $ISISROOT/bin/python $(which parse_match_file.py) -rev run/${method}/matches.txt run/${method}/run-left_sub16__right_sub16_v2.match
 
     # Ensure that this tool can read the match file it just created
