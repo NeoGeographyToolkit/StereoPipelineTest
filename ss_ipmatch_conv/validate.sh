@@ -1,25 +1,27 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-file=run/subset.txt
-gold=gold/subset.txt
+file=run/merged-left_sub16__right_sub16.match
+gold=gold/merged-left_sub16__right_sub16.match
 
-# Both must exist
 if [ ! -e "$file" ]; then
     echo "ERROR: File $file does not exist."
-    exit 1;
-fi
-if [ ! -e "$gold" ]; then
-    echo "ERROR: File $gold does not exist."
-    exit 1;
+    exit 1
 fi
 
-# They must agree
-diff=$(diff $file $gold)
+if [ ! -e "$gold" ]; then
+    echo "ERROR: File $gold does not exist."
+    exit 1
+fi
+
+echo Comparing $file and $gold
+
+diff=$(cmp $file $gold 2>&1)
+
 if [ "$diff" != "" ]; then
     echo Validation failed
     exit 1
 fi
 
-echo Validation succeded
+echo Validation succeeded
 exit 0

@@ -35,7 +35,7 @@ for file in $FILES; do
 
     # Logic for SHP and QML (using cmp)
     else
-        echo "Comparing $file and $gold using cmp..."
+        echo "Comparing $file and $gold using cmp"
         if ! cmp -s "$file" "$gold"; then
             echo "ERROR: Binary/Exact match validation failed for $file"
             exit 1

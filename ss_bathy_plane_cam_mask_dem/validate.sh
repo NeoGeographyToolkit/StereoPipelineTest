@@ -17,7 +17,7 @@ for file in run/mask-bathy-plane.txt \
     fi
 
     echo Comparing $file and $gold
-    diff=$(cmp $file $gold)
+    diff=$(cmp $file $gold 2>&1)
 
     if [ "$diff" != "" ]; then
         echo Validation failed

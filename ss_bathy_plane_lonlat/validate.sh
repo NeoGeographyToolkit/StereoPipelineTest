@@ -18,7 +18,7 @@ for file in run/meas_plane.txt run/meas_inliers.shp; do
   fi
 
   
-  diff=$(cmp $file $gold)
+  diff=$(cmp $file $gold 2>&1)
 
   echo diff is $diff
   if [ "$diff" != "" ]; then

@@ -34,7 +34,7 @@ for file in \
     
     echo Comparing $file and $gold
     
-    ans=$(cmp $file $gold)
+    ans=$(cmp $file $gold 2>&1)
     
     if [ "$ans" != "" ]; then
         echo Validation failed

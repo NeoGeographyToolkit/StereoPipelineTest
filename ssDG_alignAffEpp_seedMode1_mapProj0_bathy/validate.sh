@@ -64,7 +64,7 @@ for f in run/inliers.shp run/run-mask-inliers.shp; do
 		echo Cannot find inlier files $f or $g. Validation failed.
 		exit 1
 	fi
-	ans=$(cmp $f $g)
+	ans=$(cmp $f $g 2>&1)
 	if [ "$ans" != "" ]; then 
 		echo Files $f and $g differ. Validation failed.
 	    exit 1
