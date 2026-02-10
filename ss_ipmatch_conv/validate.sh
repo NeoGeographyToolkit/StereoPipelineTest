@@ -1,27 +1,33 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-file=run/merged-left_sub16__right_sub16.match
-gold=gold/merged-left_sub16__right_sub16.match
+for file in \
+    run/merged-left_sub16__right_sub16.match \
+    run/sift-left_sub16__right_sub16.txt     \
+    run/sift-left_sub16__right_sub16.match; do
 
-if [ ! -e "$file" ]; then
-    echo "ERROR: File $file does not exist."
-    exit 1
-fi
+    gold=$(echo $file | perl -p -e "s#run/#gold/#g")
 
-if [ ! -e "$gold" ]; then
-    echo "ERROR: File $gold does not exist."
-    exit 1
-fi
+    if [ ! -e "$file" ]; then
+        echo "ERROR: File $file does not exist."
+        exit 1
+    fi
 
-echo Comparing $file and $gold
+    if [ ! -e "$gold" ]; then
+        echo "ERROR: File $gold does not exist."
+        exit 1
+    fi
 
-diff=$(cmp $file $gold 2>&1)
+    echo Comparing $file and $gold
 
-if [ "$diff" != "" ]; then
-    echo Validation failed
-    exit 1
-fi
+    diff=$(cmp $file $gold 2>&1)
+
+    if [ "$diff" != "" ]; then
+        echo Validation failed
+        exit 1
+    fi
+
+done
 
 echo Validation succeeded
 exit 0
