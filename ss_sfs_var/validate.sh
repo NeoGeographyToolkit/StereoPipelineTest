@@ -1,7 +1,13 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-DEM-iter2.tif run/run-DEM-variance.tif; do 
+for file in \
+  run/run-DEM-final.tif \
+  run/run-DEM-variance.tif \
+  run/run-DEM-left-covariance.tif \
+  run/run-DEM-right-covariance.tif \
+  run/run-DEM-bottom-covariance.tif \
+  run/run-DEM-top-covariance.tif; do
 
   echo $file $gold
   gold=gold/$(basename $file)
