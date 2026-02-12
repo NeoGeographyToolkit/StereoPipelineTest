@@ -64,11 +64,11 @@ for f in run/run-trans_reference.las gold/run-trans_reference.las; do
   fi
 done
     
-pdal info run/run-trans_reference.las  | grep -v filename | grep -v now > run/pdal_run/run.txt
-pdal info gold/run-trans_reference.las | grep -v filename | grep -v now > gold/pdal_gold/run.txt
+pdal info run/run-trans_reference.las  | grep -v filename | grep -v now > run/pdal.txt
+pdal info gold/run-trans_reference.las | grep -v filename | grep -v now > gold/pdal.txt
 
-../bin/max_err.pl run/pdal_run/run.txt gold/pdal_gold/run.txt
-ans=$(../bin/max_err.pl run/pdal_run/run.txt gold/pdal_gold/run.txt 1e-8)
+../bin/max_err.pl run/pdal.txt gold/pdal.txt
+ans=$(../bin/max_err.pl run/pdal.txt gold/pdal.txt 1e-8)
 if [ "$ans" -eq 0 ]; then
      echo Validation failed
      exit 1
