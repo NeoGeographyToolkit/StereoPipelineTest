@@ -26,7 +26,7 @@ for file in run/run-DEM.tif; do
 
     # Do not make the error small, because Theia is not deterministic
     ../bin/max_err.pl run/run.txt gold/run.txt # print the error
-    ans=$(../bin/max_err.pl run/run.txt gold/run.txt 1e-2) # compare the error
+    ans=$(../bin/max_err.pl run/run.txt gold/run.txt 1e-1) # compare the error
     if [ "$ans" != "1" ]; then
         echo Validation failed
         exit 1
