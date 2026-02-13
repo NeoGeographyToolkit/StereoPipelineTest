@@ -33,7 +33,7 @@ if [ "$diff" != "" ]; then
     exit 1
 fi
 
-file=run/run-disp-B17_016219_1978_XN_17N282W.8bit__B18_016575_1978_XN_17N282W.8bit.match
+file=run/run-disp-B17_016219_1978_XN_17N282W.8bit__B18_016575_1978_XN_17N282W.8bit.txt
 gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then
