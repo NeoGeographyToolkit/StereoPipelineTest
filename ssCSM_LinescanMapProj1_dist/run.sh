@@ -5,7 +5,5 @@
 set -x verbose
 rm -rfv run
 
-parallel_stereo ../data/B17_016219_1978_XN_17N282W.8bit.crop.map.tif ../data/B18_016575_1978_XN_17N282W.8bit.crop.map.tif ../data/B17_016219_1978_XN_17N282W.8bit.json ../data/B18_016575_1978_XN_17N282W.8bit.json run/run ../data/linescanDEM.tif --threads 1
-
-point2dem run/run-PC.tif
+stereo_dist ../data/B17_016219_1978_XN_17N282W.8bit.crop.map.tif ../data/B18_016575_1978_XN_17N282W.8bit.crop.map.tif ../data/B17_016219_1978_XN_17N282W.8bit.json ../data/B18_016575_1978_XN_17N282W.8bit.json run/run ../data/linescanDEM.tif --tile-size 512 --tile-padding 128 --point2dem-options '--tr 10'
 
