@@ -13,7 +13,7 @@ parallel_stereo                                                       \
   ../data/09OCT11191555-P1BS_R1C1-052783426010_01_P001_sub10_copy.xml \
   run/run                                                             \
   --ip-per-image 20000                                                \
-  --left-image-crop-win  2676 1541 600 600                            \
+  --left-image-crop-win  2792 1524 500 526                            \
   --job-size-h 900                                                    \
   --job-size-w 900                                                    \
   --corr-max-levels 5                                                 \
