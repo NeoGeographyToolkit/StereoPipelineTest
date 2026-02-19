@@ -9,7 +9,7 @@ dem="../data/img_01__img_02_rpc_dem.tif"
 img1="../data/img_01_crop.tif"
 img2="../data/img_02.tif"
 
-pdopt='--tr 0.75'
+pdopt='--tr 0.75 --orthoimage --errorimage'
 
 stereo_dist                      \
   --mapproject                   \

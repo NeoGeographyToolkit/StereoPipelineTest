@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=../bin:$PATH
 
-for file in run/run-DEM.tif; do
+for file in run/run-DEM.tif run/run-DRG.tif run/run-IntersectionErr.tif; do
 
     gold=gold/$(basename $file)
 
