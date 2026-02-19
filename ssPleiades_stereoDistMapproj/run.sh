@@ -13,7 +13,7 @@ cam1="../data/RPC_PHR1B_P_202204132246314_SEN_6304928201-1.XML"
 cam2="../data/RPC_PHR1B_P_202204132247161_SEN_6304929201-1.XML"
 
 srs='+proj=stere +lat_0=90 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs'
-projwin="-827855 1928110 -827631 1927887"
+projwin="-828030 1928229 -827662 1927866"
 pdopt='--stereographic --proj-lon 0 --proj-lat 90 --tr 0.5'
 
 stereo_dist                      \
@@ -27,8 +27,8 @@ stereo_dist                      \
   run/run                        \
   --alignment-method none        \
   --corr-seed-mode 1             \
-  --subpixel-mode 1              \
-  --tile-size 600                \
+  --subpixel-mode 9              \
+  --tile-size 2048               \
   --tile-padding 128             \
   --stereo-algorithm asp_mgm     \
   --point2dem-options "$pdopt"
