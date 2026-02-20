@@ -11,8 +11,8 @@ parallel_stereo --matches-as-txt \
     --corr-seed-mode 1 --session-type pinhole \
 	--horizontal-stddev 1 1 \
 	--propagate-errors \
-	--left-image-crop-win 0 0 2000 2000 \
-	--right-image-crop-win 0 0 2000 2000 \
+	--left-image-crop-win 1904 485 551 616 \
+	--right-image-crop-win 687 485 641 624 \
     ../data/img_icebridge2.tif ../data/img_icebridge3.tif \
     ../data/img_icebridge2.tsai ../data/img_icebridge3.tsai \
     run/run
