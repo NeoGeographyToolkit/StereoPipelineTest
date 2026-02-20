@@ -20,4 +20,5 @@ stereo_dist                      \
   --subpixel-mode 1              \
   --tile-size 600                \
   --tile-padding 128             \
-  --point2dem-options '--tr 4'
+  --point2dem-options '--tr 4'   \
+  --t_projwin 482 -5155 1110 -4545
