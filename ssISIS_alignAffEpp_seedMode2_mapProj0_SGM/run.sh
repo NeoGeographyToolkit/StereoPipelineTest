@@ -10,8 +10,8 @@ parallel_stereo                            \
   run/run                                  \
   -s stereo.default                        \
   --disable-fill-holes                     \
-  --left-image-crop-win  145 1591 506 584  \
-  --right-image-crop-win  90 976 1025 1360 \
+  --left-image-crop-win  145 1591 250 280  \
+  --right-image-crop-win  90 976 510 650   \
   --disparity-estimation-dem               \
   ../data/seed-mode-2-init-DEM.tif         \
   --disparity-estimation-dem-error 5       \

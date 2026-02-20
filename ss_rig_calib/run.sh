@@ -33,9 +33,9 @@ rig_calibrator                                       \
     --depth-mesh-weight 1                            \
     --mesh-tri-weight 0.1                            \
     --camera-position-uncertainty 1                  \
-    --num-iterations 5                               \
-    --num-passes 2                                   \
-    --num-overlaps 3                                 \
+    --num-iterations 3                               \
+    --num-passes 1                                   \
+    --num-overlaps 2                                 \
     --registration                                   \
     --hugin-file ${dataDir}/control_points.pto       \
     --xyz-file ${dataDir}/xyz.txt                    \
@@ -51,7 +51,7 @@ bundle_adjust                         \
   --image-list run/image_list.txt     \
   --camera-list run/camera_list.txt   \
   --match-files-prefix run/matches/run\
-  --num-iterations 5                  \
+  --num-iterations 3                  \
   --threads 1                         \
   -o run/ba_matches/run
 
@@ -60,7 +60,7 @@ bundle_adjust                         \
   --image-list run/image_list.txt     \
   --camera-list run/camera_list.txt   \
   --nvm run/cameras.nvm               \
-  --num-iterations 5                  \
+  --num-iterations 3                  \
   --threads 1                         \
   -o run/ba_nvm/run
 
