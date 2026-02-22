@@ -24,8 +24,8 @@ for file in run/run-DEM.tif; do
     gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
     gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold/run.txt
 
-    # Theia uses --random_seed=1 for reproducibility, but minor
-    # floating-point variation remains from the Ceres/MKL solver.
+    # Theia uses --random_seed=1 for reproducibility on all platforms.
+    # Minor floating-point variation may remain from the Ceres solver.
     ../bin/max_err.pl run/run.txt gold/run.txt # print the error
     ans=$(../bin/max_err.pl run/run.txt gold/run.txt 1e-2) # compare the error
     if [ "$ans" != "1" ]; then
