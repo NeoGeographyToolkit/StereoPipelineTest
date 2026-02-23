@@ -12,14 +12,14 @@ for method in log obalog sift orb; do
         desc="sgrad"
     fi
     
-    ipfind --ip-per-tile 2000 --interest-operator $method --descriptor-generator $desc ../data/left_sub16.tif ../data/right_sub16.tif --output-folder run/${method}
+    ipfind --ip-per-tile 2000 --interest-operator $method --descriptor-generator $desc --threads 1 ../data/left_sub16.tif ../data/right_sub16.tif --output-folder run/${method}
     
     distance_metric="l2"
     if [ "$method" = "orb" ]; then
         distance_metric="hamming"
     fi
     
-    ipmatch --distance-metric $distance_metric ../data/left_sub16.tif run/${method}/left_sub16.vwip ../data/right_sub16.tif run/${method}/right_sub16.vwip -o run/${method}/run
+    ipmatch --distance-metric $distance_metric --threads 1 ../data/left_sub16.tif run/${method}/left_sub16.vwip ../data/right_sub16.tif run/${method}/right_sub16.vwip -o run/${method}/run
     
     # Convert the matches to txt and vice-versa
     $ISISROOT/bin/python $(which parse_match_file.py) --save-descriptors run/${method}/run-left_sub16__right_sub16.match run/${method}/matches.txt

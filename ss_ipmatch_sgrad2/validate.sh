@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# TODO(oalexan1): This test needs gold generated on lunokhod1 before it can
-# be enabled. Run with the release build, rename run to gold, then remove
-# the early exit below.
+# TODO(oalexan1): Gold needs to be regenerated on lunokhod1 with --threads 1.
 exit 0
 
 for file in \
