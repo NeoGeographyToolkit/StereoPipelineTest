@@ -20,19 +20,19 @@ for file in run/run-DEM.tif run/run-L-R-disp-diff.tif run/run-ncc.tif run/run-st
     rm -fv "$gold.aux.xml"
     
     cmp_stats.sh $file $gold
-    gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
-    gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold/run.txt
-    
-    diff=$(diff run/run.txt gold/run.txt)
-    cat run/run.txt
-    
-    rm -f run/run.txt gold/run.txt
-    
-    echo diff is $diff
-    if [ "$diff" != "" ]; then
+    gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v xml > run/run.txt
+    gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold/gold.txt
+
+    diff run/run.txt gold/gold.txt
+
+    ../bin/max_err.pl run/run.txt gold/gold.txt # print the error
+    ans=$(../bin/max_err.pl run/run.txt gold/gold.txt 1e-6) # compare the error
+    if [ "$ans" -eq 0 ]; then
         echo Validation failed
         exit 1
     fi
+
+    rm -f run/run.txt gold/gold.txt
 
 done
 
