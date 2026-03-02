@@ -33,6 +33,38 @@ if [ "$diff" != "" ]; then
     exit 1
 fi
 
+# Validate the orthoimage (DRG) output
+ortho=run/run-ortho-DRG.tif
+ortho_gold=gold/run-ortho-DRG.tif
+
+if [ ! -e "$ortho" ]; then
+    echo "ERROR: File $ortho does not exist."
+    exit 1;
+fi
+
+if [ ! -e "$ortho_gold" ]; then
+    echo "ERROR: File $ortho_gold does not exist."
+    exit 1;
+fi
+
+rm -fv "$ortho.aux.xml"
+rm -fv "$ortho_gold.aux.xml"
+
+cmp_stats.sh $ortho $ortho_gold
+gdalinfo -stats $ortho | grep -v Files | grep -v -i tif > run/ortho.txt
+gdalinfo -stats $ortho_gold | grep -v Files | grep -v -i tif > gold/ortho.txt
+
+diff=$(diff run/ortho.txt gold/ortho.txt)
+cat run/ortho.txt
+
+rm -f run/ortho.txt gold/ortho.txt
+
+echo ortho diff is $diff
+if [ "$diff" != "" ]; then
+    echo Validation failed
+    exit 1
+fi
+
 # Check the state files
 for f in run/ba/run-FC21B0004011_11224024300F1E.adjusted_state.json \
          run/ba/run-FC21B0004012_11224030401F1E.adjusted_state.json \

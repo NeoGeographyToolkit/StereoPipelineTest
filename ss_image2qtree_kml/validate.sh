@@ -1,5 +1,4 @@
 #!/bin/bash
-exit 0
 
 # Check that the top-level KML file exists
 kml=run/kml_out/kml_out.kml
