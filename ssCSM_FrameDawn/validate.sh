@@ -2,7 +2,7 @@
 export PATH=../bin:$PATH
 
 # Validate DEM and orthoimage (DRG) outputs
-for file in run/run-DEM.tif run/run-ortho-DRG.tif; do
+for file in run/run-DEM.tif run/run-DRG.tif; do
 
     gold=gold/$(basename $file)
 
