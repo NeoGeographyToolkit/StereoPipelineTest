@@ -3,8 +3,8 @@
 set -x verbose
 rm -rfv run
 
-lthresh=171.4873
-rthresh=180.2035
+lthresh=300
+rthresh=300
 waterRefractionIndex=1.333
 
 # Apply wv_correct
