@@ -57,7 +57,7 @@ bathy_plane_calc --dem ../data/dem_nobathy.tif       \
 #     run/right_bathy_b3_corr.map.tif
 # The results were moved to the data dir for speed.
 
-# Masks
+# Form masks with 0 in water and 1 on land
 image_calc -c "sign(max($lthresh, var_0)-$lthresh)" --output-nodata-value -1 \
     ../data/left_bathy_b3_corr.map.tif -o run/left_bathy_b3_corr.map.mask.tif
 image_calc -c "sign(max($rthresh, var_0)-$rthresh)" --output-nodata-value -1 \
