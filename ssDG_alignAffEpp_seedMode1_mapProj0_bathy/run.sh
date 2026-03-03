@@ -58,9 +58,9 @@ bathy_plane_calc --dem ../data/dem_nobathy.tif       \
 # The results were moved to the data dir for speed.
 
 # Masks
-image_calc -c "max($lthresh, var_0)" --output-nodata-value $lthresh \
+image_calc -c "sign(max($lthresh, var_0)-$lthresh)" --output-nodata-value -1 \
     ../data/left_bathy_b3_corr.map.tif -o run/left_bathy_b3_corr.map.mask.tif
-image_calc -c "max($rthresh, var_0)" --output-nodata-value $rthresh \
+image_calc -c "sign(max($rthresh, var_0)-$rthresh)" --output-nodata-value -1 \
     ../data/right_bathy_b3_corr.map.tif -o run/right_bathy_b3_corr.map.mask.tif
 
 # Run with bathy on a cip
