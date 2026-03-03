@@ -175,3 +175,29 @@ parallel_stereo \
 #    ss_bathy_plane_sample_shapefile, ss_otsu_threshold,
 #    ss_refr_index - these don't use --mask or --ortho-mask in
 #    bathy_plane_calc and don't use bathy masks in stereo/BA.
+#
+# 9. DRAFT RESPONSE TO MONICA
+#    (Edit as needed before sending)
+#
+# Hi Monica,
+#
+# Thanks for tracking this down, it was a real bug. The mask reading logic
+# only looked at the file's nodata value to decide what is water, so a
+# simple 0/1 mask (or one without a nodata tag at all) would silently fail
+# to apply bathy correction.
+#
+# I fixed it so the mask now accepts any of these:
+#   - A mask with no nodata metadata at all (e.g., just 0 and 1)
+#   - A mask with a nodata tag set to any value
+#
+# The rule is: pixels with non-positive values are water, pixels matching
+# the file's nodata value are also water, and all positive pixels that are
+# not nodata are land. Both conditions are checked, so it works regardless
+# of whether nodata is set, what its value is, or whether water pixels
+# are 0 or some negative value.
+#
+# The fix is in read_bathy_mask() in VW, which is used by stereo,
+# bundle_adjust, jitter_solve, and bathy_plane_calc. The doc and help
+# text were updated to clarify the convention.
+#
+# Oleg
