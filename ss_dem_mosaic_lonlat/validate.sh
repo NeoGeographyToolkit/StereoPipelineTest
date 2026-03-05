@@ -1,5 +1,6 @@
 #!/bin/bash
 export PATH=../bin:$PATH
+source ../bin/check_gdalinfo.sh
 
 for i in 0 1 08 13; do
     if [ "$i" -eq 0 ]; then 

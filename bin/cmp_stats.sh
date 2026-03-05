@@ -4,6 +4,11 @@
 
 if [ "$#" -lt 2 ]; then echo Usage: $0 img1.tif img2.tif; exit 1; fi
 
+if ! command -v gdalinfo > /dev/null 2>&1; then
+  echo "ERROR: gdalinfo not found in PATH"
+  exit 1
+fi
+
 img1=$1
 img2=$2
 
