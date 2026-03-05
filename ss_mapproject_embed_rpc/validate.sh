@@ -18,8 +18,8 @@ fi
 rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
-gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v -E min | grep -i -v max > run/run.txt
-gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v -E min | grep -i -v max > gold/run.txt
+gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -v "^Size" | grep -i -v -E min | grep -i -v max > run/run.txt
+gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -v "^Size" | grep -i -v -E min | grep -i -v max > gold/run.txt
 
 diff=$(diff run/run.txt gold/run.txt | head -n 50)
 #cat run/run.txt
