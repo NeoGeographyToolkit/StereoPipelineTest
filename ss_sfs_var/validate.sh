@@ -4,10 +4,10 @@ export PATH=../bin:$PATH
 for file in \
   run/run-DEM-final.tif \
   run/run-DEM-variance.tif \
-  run/run-DEM-left-covariance.tif \
-  run/run-DEM-right-covariance.tif \
-  run/run-DEM-bottom-covariance.tif \
-  run/run-DEM-top-covariance.tif; do
+  run/run-DEM-dr0_dc2-covariance.tif \
+  run/run-DEM-dr1_dc1-covariance.tif \
+  run/run-DEM-dr1_dcn1-covariance.tif \
+  run/run-DEM-dr2_dc0-covariance.tif; do
 
   echo $file $gold
   gold=gold/$(basename $file)
