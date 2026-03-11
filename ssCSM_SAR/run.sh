@@ -3,7 +3,7 @@
 set -x verbose
 rm -rfv run
 
-parallel_stereo ../data/lsz_03821_1cd_xku_16n196_v1_clamp_crop.tif ../data/lsz_03822_1cd_xku_23n196_v1_clamp_crop.tif ../data/lsz_03821_1cd_xku_16n196_v1.json ../data/lsz_03822_1cd_xku_23n196_v1.json --stereo-algorithm asp_mgm --skip-rough-homography --no-datum --ip-per-tile 6000 --left-image-crop-win 469 8005 1831 1822 --right-image-crop-win 562 27190 1404 1696 run/run
+parallel_stereo ../data/lsz_03821_1cd_xku_16n196_v1_clamp_crop.tif ../data/lsz_03822_1cd_xku_23n196_v1_clamp_crop.tif ../data/lsz_03821_1cd_xku_16n196_v1.json ../data/lsz_03822_1cd_xku_23n196_v1.json --stereo-algorithm asp_mgm --skip-rough-homography --no-datum --ip-per-tile 6000 --left-image-crop-win 834 8366 1100 1100 --right-image-crop-win 839 27528 850 1020 run/run
 
 point2dem --geographic run/run-PC.tif
 
@@ -12,12 +12,12 @@ dem_mosaic --dem-blur-sigma 10 run/run-DEM.tif -o run/run-DEM-blur.tif
 
 # A geographic projection must be explicitly set
 proj="+proj=longlat +R=1737400 +no_defs"
-mapproject run/run-DEM-blur.tif ../data/lsz_03821_1cd_xku_16n196_v1_clamp_crop.tif ../data/lsz_03821_1cd_xku_16n196_v1.json run/lsz_03821_1cd_xku_16n196_v1.map.tif --t_projwin 196.277 22.247 196.611 21.847 --tr 0.00037 --t_srs "$proj"
-mapproject run/run-DEM-blur.tif ../data/lsz_03822_1cd_xku_23n196_v1_clamp_crop.tif ../data/lsz_03822_1cd_xku_23n196_v1.json run/lsz_03822_1cd_xku_23n196_v1.map.tif --t_projwin 196.277 22.247 196.611 21.847 --tr 0.00037 --t_srs "$proj"
+mapproject run/run-DEM-blur.tif ../data/lsz_03821_1cd_xku_16n196_v1_clamp_crop.tif ../data/lsz_03821_1cd_xku_16n196_v1.json run/lsz_03821_1cd_xku_16n196_v1.map.tif --t_projwin 196.347 22.163 196.511 21.922 --tr 0.00037 --t_srs "$proj"
+mapproject run/run-DEM-blur.tif ../data/lsz_03822_1cd_xku_23n196_v1_clamp_crop.tif ../data/lsz_03822_1cd_xku_23n196_v1.json run/lsz_03822_1cd_xku_23n196_v1.map.tif --t_projwin 196.347 22.163 196.511 21.922 --tr 0.00037 --t_srs "$proj"
 
 # Now test bundle adjustment. It is tricky to find match points, that is why 
 # use mapprojection after stereo
-bundle_adjust ../data/lsz_03821_1cd_xku_16n196_v1_clamp_crop.tif ../data/lsz_03822_1cd_xku_23n196_v1_clamp_crop.tif ../data/lsz_03821_1cd_xku_16n196_v1.json ../data/lsz_03822_1cd_xku_23n196_v1.json --mapprojected-data "run/lsz_03821_1cd_xku_16n196_v1.map.tif run/lsz_03822_1cd_xku_23n196_v1.map.tif run/run-DEM-blur.tif" -o run/ba/run --ip-per-tile 60000 --matches-per-tile 60000 --threads 1 --min-matches 5 --remove-outliers-params '3 75 10000 10000' --num-iterations 10
+bundle_adjust ../data/lsz_03821_1cd_xku_16n196_v1_clamp_crop.tif ../data/lsz_03822_1cd_xku_23n196_v1_clamp_crop.tif ../data/lsz_03821_1cd_xku_16n196_v1.json ../data/lsz_03822_1cd_xku_23n196_v1.json --mapprojected-data "run/lsz_03821_1cd_xku_16n196_v1.map.tif run/lsz_03822_1cd_xku_23n196_v1.map.tif run/run-DEM-blur.tif" -o run/ba/run --ip-per-tile 20000 --matches-per-tile 20000 --threads 1 --min-matches 5 --remove-outliers-params '3 75 10000 10000' --num-iterations 10
 
 # Second bundle adjustment, to see if we can load back the state.
 # This run does not like the previously created match points much. Need to figure out why.
