@@ -27,5 +27,5 @@ parallel_stereo                                                       \
   --subpixel-v-kernel 19                                              \
   --corr-seed-mode 1
 
-point2dem -r Earth run/run-PC.tif --nodata-value -32767 --orthoimage run/run-L.tif --orthoimage-hole-fill-len 30 --dem-hole-fill-len 30
+point2dem -r Earth run/run-PC.tif --nodata-value -32767 --orthoimage run/run-L.tif --orthoimage-hole-fill-len 10 --dem-hole-fill-len 10
 
