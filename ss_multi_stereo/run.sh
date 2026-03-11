@@ -35,7 +35,7 @@ mesh_gen_opts="
 multi_stereo                                     \
     --rig_config ../data/rig_test/rig_config.txt \
     --camera_poses ../data/rig_test/cameras.txt  \
-    --undistorted_crop_win '1100 700'            \
+    --undistorted_crop_win '700 500'             \
     --rig_sensor nav_cam                         \
     --first_step stereo                          \
     --last_step  mesh_gen                        \
