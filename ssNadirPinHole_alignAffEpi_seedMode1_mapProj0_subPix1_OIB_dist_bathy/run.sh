@@ -17,8 +17,8 @@ parallel_stereo --alignment-method affineepipolar           \
     --right-bathy-mask run/right_mask.tif                   \
     --refraction-index 1.333                                \
     --bathy-plane ../data/bathy_plane_pinhole.txt           \
-    --left-image-crop-win 4089 386 888 786                  \
-    --right-image-crop-win 3170 489 1011 725                \
+    --left-image-crop-win 4089 486 550 500                  \
+    --right-image-crop-win 3170 589 650 450                 \
     --corr-seed-mode 1 --threads 8                          \
     ../data/img_icebridge2.tif ../data/img_icebridge3.tif   \
     ../data/img_icebridge2.tsai ../data/img_icebridge3.tsai \
