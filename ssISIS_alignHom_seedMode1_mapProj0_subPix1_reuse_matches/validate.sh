@@ -33,17 +33,18 @@ for file in run/run-L.tif; do
     gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right > run/run.txt
     gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right > gold/run.txt
 
-    diff run/run.txt gold/run.txt
-
     max_err.pl run/run.txt gold/run.txt # print the error
-    ans=$(max_err.pl run/run.txt gold/run.txt 1e-5) # compare the error
+    ans=$(max_err.pl run/run.txt gold/run.txt 1e-5) # returns 1 if error below tol
     if [ "$ans" -eq 0 ]; then
         echo Validation failed
         exit 1
     fi
-    
+
+    diff run/run.txt gold/run.txt # print result for inspection
+    diff=$(diff run/run.txt gold/run.txt)
+
     rm -f run/run.txt gold/run.txt
-    
+
     echo diff is $diff
     if [ "$diff" != "" ]; then
         echo Validation failed

@@ -22,14 +22,15 @@ cmp_stats.sh $file $gold
 gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
 gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold/run.txt
 
-diff run/run.txt gold/run.txt
-
 max_err.pl run/run.txt gold/run.txt # print the error
-ans=$(max_err.pl run/run.txt gold/run.txt 1e-10) # compare the error
+ans=$(max_err.pl run/run.txt gold/run.txt 1e-10) # returns 1 if error below tol
 if [ "$ans" != "1" ]; then
     echo Validation failed
     exit 1
 fi
+
+diff run/run.txt gold/run.txt # print result for inspection
+diff=$(diff run/run.txt gold/run.txt)
 
 rm -f run/run.txt gold/run.txt
 
