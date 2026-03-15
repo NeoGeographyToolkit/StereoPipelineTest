@@ -21,13 +21,15 @@ gdal_rasterize -i -burn 0                                           \
   ../data/09OCT11191555-P1BS_R1C1-052783426010_01_P001_rpc_5mpp.shp \
   run/right.tif
 
-parallel_stereo                                                \
-  --job-size-w 1024 --job-size-h 1024                          \
-  run/left.tif                                                 \
-  run/right.tif                                                \
-  ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_rpc.xml \
-  ../data/09OCT11191555-P1BS_R1C1-052783426010_01_P001_rpc.xml \
-  run/run                                                      \
+parallel_stereo                                                     \
+  --job-size-w 512 --job-size-h 512                                 \
+  --left-image-crop-win  1940 997 675 728                           \
+  --right-image-crop-win 2401 1629 684 743                          \
+  run/left.tif                                                      \
+  run/right.tif                                                     \
+  ../data/09OCT11191503-P1BS_R1C1-052783426010_01_P001_rpc.xml      \
+  ../data/09OCT11191555-P1BS_R1C1-052783426010_01_P001_rpc.xml      \
+  run/run                                                           \
   ../data/zone10-CA_SanLuisResevoir-9m.tif
 
 point2dem -r Earth run/run-PC.tif 
