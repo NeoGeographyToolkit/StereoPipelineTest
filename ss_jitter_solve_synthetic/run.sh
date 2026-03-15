@@ -7,7 +7,7 @@ rm -rfv run
 # Very useful for making changes to this logic. See also the dataset:
 # ss_jitter_solve_salar_de_uni
 
-dem=../data/run-DEM_sub4_fill4_sub4.tif
+dem=../data/linescan-dem.tif
 camDir=sim_hirise_jitter2.0
 jitterDir=run
 /usr/bin/time                          \
@@ -17,7 +17,7 @@ jitter_solve                           \
   --camera-position-weight 1e+4        \
   --max-pairwise-matches 20000         \
   --match-files-prefix ../data/run     \
-  --num-iterations 10                  \
+  --num-iterations 2                   \
   --num-passes 1                       \
   --heights-from-dem $dem              \
   --heights-from-dem-uncertainty 10    \
