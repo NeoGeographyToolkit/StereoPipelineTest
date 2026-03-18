@@ -20,6 +20,8 @@ export PATH=../bin:$PATH
         exit 1;
     fi
 
+   echo Comparing $file and $gold
+
     # Print the error and check the status
     ../bin/max_err.pl $file $gold 
     ans=$?
