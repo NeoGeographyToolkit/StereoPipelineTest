@@ -25,9 +25,11 @@ set -x verbose
 rm -rfv run
 
 parallel_stereo --stereo-algorithm asp_mgm --subpixel-mode 9 \
+  --left-image-crop-win 0 0 888 730                          \
+  --right-image-crop-win 0 0 800 800                         \
   ../data/IMG_PNEO4_202304032140366_PAN_SEN_PWOI_000079416_1_2_F_1_P_R1C1_crop.tif \
   ../data/IMG_PNEO4_202304032140266_PAN_SEN_PWOI_000079416_1_2_F_1_P_R1C1_crop.tif \
-  ../data/DIM_SYNTH_SPOT6_LEFT.XML \
+  ../data/DIM_SYNTH_SPOT6_LEFT.XML  \
   ../data/DIM_SYNTH_SPOT6_RIGHT.XML \
   run/run
 
