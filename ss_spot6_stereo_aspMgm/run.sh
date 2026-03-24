@@ -14,11 +14,11 @@
 # To regenerate the synthetic cameras:
 #   python ~/bin/neo_to_synth_spot6.py \
 #     ../data/DIM_PNEO4_202304032140366_PAN_SEN_PWOI_000079416_1_2_F_1.XML \
-#     <real_spot6_dim.xml> \
+#     ../data/DIM_SPOT6_P_202404211020526_SEN_6979210101.XML \
 #     ../data/DIM_SYNTH_SPOT6_LEFT.XML
 #   python ~/bin/neo_to_synth_spot6.py \
 #     ../data/DIM_PNEO4_202304032140266_PAN_SEN_PWOI_000079416_1_2_F_1.XML \
-#     <real_spot6_dim.xml> \
+#     ../data/DIM_SPOT6_P_202404211020526_SEN_6979210101.XML \
 #     ../data/DIM_SYNTH_SPOT6_RIGHT.XML
 
 set -x verbose
