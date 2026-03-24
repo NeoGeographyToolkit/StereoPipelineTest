@@ -1,4 +1,5 @@
 #!/bin/bash
+source ../bin/setup_env.sh
 
 # Check that the top-level KML file exists
 kml=run/kml_out/kml_out.kml

@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-DEM.tif run/run-F-H.tif run/run-F-V.tif; do
 

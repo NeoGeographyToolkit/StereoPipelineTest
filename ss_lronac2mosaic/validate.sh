@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 file=run/M120168714LE.lronaccal.lronacecho.cropped.noproj.mosaic.norm.cub
 gold=gold/$(basename $file)

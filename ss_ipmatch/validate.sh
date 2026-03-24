@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in \
     run/log/run-left_sub16__right_sub16.match       \

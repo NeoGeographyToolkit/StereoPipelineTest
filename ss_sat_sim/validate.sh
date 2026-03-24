@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-0009996.795966815-c1.tif run/run-0009996.795966815-c3.map.tif; do
     

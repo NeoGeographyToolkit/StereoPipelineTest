@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-trans_reference.csv run/run-trans_source.csv; do
 	gold=gold/$(basename $file)

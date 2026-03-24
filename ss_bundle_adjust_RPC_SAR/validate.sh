@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-2024-08-08-02-33-49_UMBRA-05_GEC.adjust run/run-2024-06-30-03-03-56_UMBRA-04_GEC.adjust; do 
 

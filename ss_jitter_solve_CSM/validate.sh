@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-B17_016219_1978_XN_17N282W.8bit.adjusted_state.json \
             run/run-B18_016575_1978_XN_17N282W.8bit.adjusted_state.json \

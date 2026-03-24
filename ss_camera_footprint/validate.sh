@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run_datum.kml run/run_dem.kml run/run_datum.shp run/run_dem.shp; do
 

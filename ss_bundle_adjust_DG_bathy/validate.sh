@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
  for file in run/run-left_bathy.adjusted_state.json \
              run/run-right_bathy.adjusted_state.json; do \

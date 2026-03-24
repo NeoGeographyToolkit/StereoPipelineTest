@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/ocv_cam_params.yml run/solve_cam_params.txt run/vw_cam_params.tsai; do
 

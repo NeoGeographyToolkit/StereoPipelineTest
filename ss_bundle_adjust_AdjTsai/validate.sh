@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 # Test .tsai files produced by first run, and then adjust files produced by last run
 for file in run/run-left_sub16.adj.tsai run/run-right_sub16.adj.tsai; do

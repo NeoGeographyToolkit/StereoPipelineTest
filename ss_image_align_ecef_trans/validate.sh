@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/aligned_image2.tif run/run-transform.txt run/run-ecef-transform.txt; do
     

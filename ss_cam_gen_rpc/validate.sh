@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run_rpc1.xml run/run_rpc2.xml run/run_rpc3.xml run/run_rpc4.xml; do
 

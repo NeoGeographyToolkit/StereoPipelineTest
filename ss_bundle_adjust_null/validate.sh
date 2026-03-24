@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 # Test .tsai files produced by first run, and then adjust files produced by last run
 for file in run/*tsai run/run-v2-left_sub16.null.adjust; do

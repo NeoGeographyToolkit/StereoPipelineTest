@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-jitter-camera_041_VZ_030_VA_000.tsai        \
             run/run-jitter-camera_041_VZ_030_VA_000.tsai        \

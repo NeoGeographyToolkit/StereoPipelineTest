@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-DMS_20171029_183704_02500.fisheye.adjust run/run-DMS_20171029_183706_02501.fisheye.adjust; do
   gold=gold/$(basename $file)

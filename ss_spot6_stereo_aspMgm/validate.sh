@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 # List of files to validate
 FILES="run/run-DEM.tif run/run-tiles.shp run/run-tiles.qml"

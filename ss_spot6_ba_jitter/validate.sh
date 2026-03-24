@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/ba/run-DIM_SYNTH_SPOT6_LEFT.adjusted_state.json          \
             run/ba/run-DIM_SYNTH_SPOT6_RIGHT.adjusted_state.json         \

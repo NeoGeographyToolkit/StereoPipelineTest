@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 # Input of DEM mosaic must be same as output
 file=run/run-tile-0.tif

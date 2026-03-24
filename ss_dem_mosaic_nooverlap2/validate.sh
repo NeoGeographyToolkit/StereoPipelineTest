@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 file=run/run-tile-0.tif
 gold=gold/$(basename $file)

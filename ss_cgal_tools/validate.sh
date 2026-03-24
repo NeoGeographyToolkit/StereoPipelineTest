@@ -1,4 +1,5 @@
 #!/bin/bash
+source ../bin/setup_env.sh
 
 pass=true
 

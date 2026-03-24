@@ -1,4 +1,5 @@
 #!/bin/bash
+source ../bin/setup_env.sh
 
 for file in \
     run/left_sub16.vwip                       \

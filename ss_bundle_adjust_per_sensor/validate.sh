@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-TC1W2B0_01_02934N034E0959.adjusted_state.json \
     run/run-TC1W2B0_01_02935N034E0949.adjusted_state.json \

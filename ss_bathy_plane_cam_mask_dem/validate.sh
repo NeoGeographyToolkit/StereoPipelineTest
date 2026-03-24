@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/mask-bathy-plane.txt \
             run/run-mask-inliers.shp; do

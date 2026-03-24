@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-AS15-M-0759.lev1_crop.adjust run/run-AS15-M-0760.lev1_crop.adjust; do
 

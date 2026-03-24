@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for ot in Byte UInt16 Int16 UInt32 Int32 Float32; do
 	f=run/run_${ot}.r25.xml

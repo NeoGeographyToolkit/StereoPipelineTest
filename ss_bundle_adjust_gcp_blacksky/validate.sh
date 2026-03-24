@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 file=run/run-BSG-118-20220730-123737-33360052_georeferenced-pan.tsai 
 gold=gold/$(basename $file)

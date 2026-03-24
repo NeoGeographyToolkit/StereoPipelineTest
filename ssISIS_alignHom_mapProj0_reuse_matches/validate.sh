@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/ba1/run-M0100115.adjust run/ba1/run-E0201461.adjust; do 
      

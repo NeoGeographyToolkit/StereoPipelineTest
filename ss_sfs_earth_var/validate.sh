@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 # Must add the sfs variance
 for file in run/run-DEM-final.tif run/run-albedo-final.tif run/run-DEM-variance.tif run/run-albedo-variance.tif; do 

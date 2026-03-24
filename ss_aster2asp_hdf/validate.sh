@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for gold in gold/run-Band3N.xml gold/run-Band3B.xml; do
 

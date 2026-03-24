@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-tile-0-weight-dem-index-0.tif run/run-tile-0-weight-dem-index-1.tif; do
 	gold=gold/$(basename $file)

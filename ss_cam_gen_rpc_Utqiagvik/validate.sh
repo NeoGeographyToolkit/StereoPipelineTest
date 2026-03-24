@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run_radtan.json gold/run_transverse.json gold/run_transverse2.json; do
 

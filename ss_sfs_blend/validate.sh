@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/sfs_blend_clip.tif run/sfs_weight_clip.tif; do 
 

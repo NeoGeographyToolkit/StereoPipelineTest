@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 file=run/run-RPC.tif
 gold=gold/$(basename $file)

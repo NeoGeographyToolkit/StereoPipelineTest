@@ -1,4 +1,5 @@
 #!/bin/bash
+source ../bin/setup_env.sh
 
 for ((i = 0; i < 3; i++)); do
 	runTrans=run/run-transform-${i}.txt

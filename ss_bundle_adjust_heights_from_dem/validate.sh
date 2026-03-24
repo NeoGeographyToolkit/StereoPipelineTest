@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/*tsai run/run-mapproj_match_offsets.txt run/run-mapproj_match_offset_stats.txt; do
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/20190819-172719.4215.tsai run/20190819-173237.9216.tsai; do
 

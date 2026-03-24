@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 # Some files are expected to be the same each time. Check for that
 for file in run/cameras.nvm; do 

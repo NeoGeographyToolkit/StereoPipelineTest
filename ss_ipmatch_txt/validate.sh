@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/obalog/run-left_sub16__right_sub16.txt; do 
     gold=$(echo $file | perl -p -e "s#run/#gold/#g")

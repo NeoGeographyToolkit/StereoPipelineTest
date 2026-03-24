@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/ba/out-AS15-M-1134.lev1.adjust run/ba/out-AS15-M-1135.lev1.adjust; do 
 

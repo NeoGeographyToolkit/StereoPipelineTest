@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 # This validation script has to deal with the fact that this test returns close but non-unque
 # results. For example, two runs can return these values for the output errors:

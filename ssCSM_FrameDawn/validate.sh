@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 # Validate DEM and orthoimage (DRG) outputs
 for file in run/run-DEM.tif run/run-DRG.tif; do

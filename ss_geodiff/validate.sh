@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-lonlat-diff.tif run/run-utm-lonat-diff.tif; do
 

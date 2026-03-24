@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 # Check the state files
 for f in run/run1-FC21B0004011_11224024300F1E.adjusted_state.json \

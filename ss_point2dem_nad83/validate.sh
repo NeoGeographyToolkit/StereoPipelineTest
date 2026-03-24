@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for val in "" -min -max -mean -median -stddev -count -nmad -50-pct -50.1-pct; do
 

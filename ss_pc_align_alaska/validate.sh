@@ -17,7 +17,7 @@ fi
 rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 cmp_stats.sh $file $gold
 gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
 gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold/gold.txt

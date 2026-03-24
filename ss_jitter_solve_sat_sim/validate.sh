@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-f.adjusted_state.json run/run-n.adjusted_state.json \
     run/run-weight-f.adjusted_state.json run/run-weight-n.adjusted_state.json \

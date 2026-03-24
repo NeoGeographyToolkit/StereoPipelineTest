@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 # It is vary hard to do proper validation as the results are not unique.
 # For now, just check if the files were at least successfully created

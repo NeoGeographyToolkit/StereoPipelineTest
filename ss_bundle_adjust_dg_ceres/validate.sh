@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-WV01_11JAN131652275-P1BS-10200100104A0300.r12.adjust \
         	run/run-WV01_11JAN131653225-P1BS-1020010011862E00.r12.adjust \

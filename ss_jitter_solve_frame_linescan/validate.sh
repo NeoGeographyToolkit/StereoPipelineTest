@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-run-l.adjusted_state.json         \
     run/run-run-p-1000{0,1,2,3,4}.adjusted_state.json \

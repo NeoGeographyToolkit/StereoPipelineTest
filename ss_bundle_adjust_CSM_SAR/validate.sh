@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run-LSZ_02330_1CD_XKU_00S120_S1.8bit.state.adjusted_state.json; do 
 

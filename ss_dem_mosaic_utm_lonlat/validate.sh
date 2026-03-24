@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=../bin:$PATH
+source ../bin/setup_env.sh
 
 for file in run/run1-tile-0.tif run/run2-tile-0.tif run/run-tile-0-first-index-map.tif; do
 
