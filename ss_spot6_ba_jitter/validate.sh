@@ -1,12 +1,14 @@
 #!/bin/bash
 source ../bin/setup_env.sh
 
-for file in run/ba/run-DIM_SYNTH_SPOT6_LEFT.adjusted_state.json          \
-            run/ba/run-DIM_SYNTH_SPOT6_RIGHT.adjusted_state.json         \
-            run/jitter/run-run-DIM_SYNTH_SPOT6_LEFT.adjusted_state.json  \
+for file in run/ba/run-DIM_SYNTH_SPOT6_LEFT.adjusted_state.json              \
+            run/ba/run-DIM_SYNTH_SPOT6_RIGHT.adjusted_state.json             \
+            run/jitter/run-run-DIM_SYNTH_SPOT6_LEFT.adjusted_state.json      \
             run/jitter/run-run-DIM_SYNTH_SPOT6_RIGHT.adjusted_state.json; do
 
-  gold=gold/$(basename $file)
+  # Preserve subdir structure: run/ba/foo -> gold/ba/foo
+  subdir=$(dirname $file | sed 's|^run/||')
+  gold=gold/$subdir/$(basename $file)
 
   if [ ! -e "$file" ]; then
       echo "ERROR: File $file does not exist."
