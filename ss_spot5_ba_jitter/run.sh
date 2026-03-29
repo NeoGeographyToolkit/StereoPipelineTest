@@ -22,7 +22,7 @@ bundle_adjust -t spot5                 \
   -o run/ba/run
 
 # Jitter solve with 1 iteration. Uses BA matches and adjusted cameras.
-# With 24042-line images, 2000 lines per knot gives ~12 knots.
+# With 24042-line images, 2000 lines per pose sample gives ~12 samples.
 jitter_solve                                 \
   --image-list run/ba/run-image_list.txt     \
   --camera-list run/ba/run-camera_list.txt   \
