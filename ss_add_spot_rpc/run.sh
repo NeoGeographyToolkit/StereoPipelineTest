@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Test add_spot_rpc: generate RPC from exact SPOT5 model, then compare
-# the RPC against the exact model with cam_test.
+# Test add_spot_rpc: generate RPC from SPOT5 CSM model, then compare
+# the exact CSM model against the RPC with cam_test.
 
 set -x verbose
 rm -rfv run
@@ -12,7 +12,7 @@ mkdir run
 cp ../data/spot5_front_crop.dim run/spot5_front_crop_rpc.dim
 add_spot_rpc run/spot5_front_crop_rpc.dim
 
-# Compare exact (spot5) vs RPC. Height 0 since this is Antarctica.
+# Compare exact CSM (spot5) vs RPC. Height 0 since this is Antarctica.
 cam_test --session1 spot5 --session2 rpc \
   --image ../data/spot5_front_crop.bil \
   --cam1 ../data/spot5_front_crop.dim \
