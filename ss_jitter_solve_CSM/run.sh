@@ -19,5 +19,6 @@ jitter_solve --threads 1                       \
   --match-files-prefix run/run                 \
   --num-iterations 10                          \
   --update-isis-cubes-with-csm-state           \
+  --save-cnet-as-gcp                           \
   -o run/jitter
 
