@@ -5,7 +5,7 @@ source ../bin/setup_env.sh
              run/run-right_bathy.adjusted_state.json; do \
                 
     gold=gold/$(basename $file)
-
+    echo Comparing $file $gold
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."
         exit 1;
