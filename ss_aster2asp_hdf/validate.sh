@@ -6,7 +6,7 @@ for gold in gold/run-Band3N.xml gold/run-Band3B.xml; do
   file=${gold/gold/run}
 
   if [ ! -e "$file" ]; then
-      echo "ERROR: File $f does not exist."
+      echo "ERROR: File $file does not exist."
       exit 1
   fi
 
