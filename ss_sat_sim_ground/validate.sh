@@ -19,6 +19,9 @@ for file in run/run-10000.tif \
         exit 1;
     fi
    
+    # Remove cached stats to ensure consistent gdalinfo output ordering
+    rm -f "$file.aux.xml" "$gold.aux.xml"
+
     echo Comparing $file and $gold
     gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right | grep -v Min= > run/run.txt
     gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v size | grep -v Left | grep -v Right | grep -v Min= > gold/run.txt
