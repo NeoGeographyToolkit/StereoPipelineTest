@@ -2,6 +2,8 @@
 
 set -x verbose
 rm -rfv run
+mkdir -p run
+ls ../data/dem2gcp/input.gcp > run/input_gcp_list.txt
 
 dem2gcp                                                      \
   --warped-dem ../data/dem2gcp/run-DEM_crop_tr20.tif         \
@@ -15,5 +17,5 @@ dem2gcp                                                      \
   --search-len 5                                             \
   --gcp-sigma 1                                              \
   --max-num-gcp 1000                                         \
+  --input-gcp-list run/input_gcp_list.txt                    \
   --output-gcp run/run.gcp
-
