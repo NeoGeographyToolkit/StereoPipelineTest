@@ -14,7 +14,7 @@ mkdir run
 # surface as the text plane up to numerical noise. The pixel-diff metric
 # printed by cam_test is the equivalence oracle.
 
-echo "=== analytical text plane vs stereographic raster ===" > run/run.txt
+echo "analytical text plane vs stereographic raster" > run/run.txt
 cam_test --image ../data/left_bathy_b3_corr.tif                 \
   --cam1 ../data/left_bathy.xml                                 \
   --cam2 ../data/left_bathy.xml                                 \
@@ -24,8 +24,8 @@ cam_test --image ../data/left_bathy_b3_corr.tif                 \
   --height-above-datum -50                                      \
   | grep -i -v elapsed >> run/run.txt
 
-echo ""                                                  >> run/run.txt
-echo "=== analytical text plane vs lon-lat raster ===" >> run/run.txt
+echo ""                                              >> run/run.txt
+echo "analytical text plane vs lon-lat raster" >> run/run.txt
 cam_test --image ../data/left_bathy_b3_corr.tif                 \
   --cam1 ../data/left_bathy.xml                                 \
   --cam2 ../data/left_bathy.xml                                 \

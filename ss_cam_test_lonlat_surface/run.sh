@@ -11,7 +11,7 @@ mkdir run
 #   1) the same raster reprojected to local stereographic (gdalwarp)
 #   2) a global best-fit plane in text format
 
-echo "=== vendor lonlat raster vs vendor stereographic raster ===" > run/run.txt
+echo "vendor lonlat raster vs vendor stereographic raster" > run/run.txt
 cam_test --image ../data/left_bathy_b3_corr.tif                  \
   --cam1 ../data/left_bathy.xml                                  \
   --cam2 ../data/left_bathy.xml                                  \
@@ -21,8 +21,8 @@ cam_test --image ../data/left_bathy_b3_corr.tif                  \
   --height-above-datum -50 2>/dev/null                           \
   | grep -i -v elapsed >> run/run.txt
 
-echo ""                                                       >> run/run.txt
-echo "=== vendor lonlat raster vs best-fit plane (text) ===" >> run/run.txt
+echo ""                                                  >> run/run.txt
+echo "vendor lonlat raster vs best-fit plane (text)" >> run/run.txt
 cam_test --image ../data/left_bathy_b3_corr.tif                  \
   --cam1 ../data/left_bathy.xml                                  \
   --cam2 ../data/left_bathy.xml                                  \
