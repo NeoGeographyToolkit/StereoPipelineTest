@@ -6,8 +6,8 @@ rm -rfv run
 parallel_stereo \
   ../data/M181058717LE.ce_cam2map.cub    \
   ../data/M181073012LE.ce_cam2map.cub    \
-  ../data/M181058717LE.ce.cub            \
-  ../data/M181073012LE.ce.cub            \
+  ../data/M181058717LE.ce.crop.cub            \
+  ../data/M181073012LE.ce.crop.cub            \
   run/run                                \
   --dem ../data/lro_nac_clip.tif         \
   --stereo-algorithm asp_mgm            \
