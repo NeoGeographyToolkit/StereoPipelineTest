@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# HRSC testcase.
+# https://stereopipeline.readthedocs.io/en/latest/examples/hrsc.html
+
 set -x verbose
 rm -rfv run
 
