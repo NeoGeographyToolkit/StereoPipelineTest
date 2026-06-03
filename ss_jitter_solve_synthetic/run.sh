@@ -23,7 +23,7 @@ jitter_solve                           \
   --heights-from-dem-uncertainty 10    \
   --num-anchor-points-per-tile 50      \
   --num-anchor-points-extra-lines 1000 \
-  --anchor-weight 0.1                  \
+  --anchor-dem-uncertainty 10.0        \
   --anchor-dem $dem                    \
   ../data/linescan-nadir-c1.tif        \
   ../data/linescan-fwd-c1.tif          \
