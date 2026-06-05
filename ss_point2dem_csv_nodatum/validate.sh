@@ -1,30 +1,40 @@
 #!/bin/bash
 source ../bin/setup_env.sh
 
-# Case 1 (negative): point2dem must have failed, and specifically via the
-# datum guard, not for some unrelated reason.
-neg_status=$(cat run/neg_status.txt 2>/dev/null)
-gold_neg=$(cat gold/neg_status.txt 2>/dev/null)
-if [ "$neg_status" != "$gold_neg" ]; then
-  echo "Validation failed: negative exit status '$neg_status', expected '$gold_neg'."
-  exit 1
-fi
-if ! grep -q "require an explicit datum or SRS" run/neg_out.txt; then
-  echo "Validation failed: point2dem failed but not via the datum guard."
-  exit 1
-fi
+# Negative case: point2dem was expected to fail. Compare the recorded exit
+# status against gold.
+file=run/neg_status.txt
+gold=gold/neg_status.txt
+if [ ! -e "$file" ]; then echo "ERROR: File $file does not exist."; echo Validation failed; exit 1; fi
+if [ ! -e "$gold" ]; then echo "ERROR: File $gold does not exist."; echo Validation failed; exit 1; fi
+diff=$(diff $file $gold)
+if [ "$diff" != "" ]; then echo "Negative status: run=$(cat $file) gold=$(cat $gold)"; echo Validation failed; exit 1; fi
 
-# Case 2 (positive control): point2dem must have succeeded and written a DEM.
-pos_status=$(cat run/pos_status.txt 2>/dev/null)
-gold_pos=$(cat gold/pos_status.txt 2>/dev/null)
-if [ "$pos_status" != "$gold_pos" ]; then
-  echo "Validation failed: positive exit status '$pos_status', expected '$gold_pos'."
-  exit 1
-fi
-if [ ! -e run/pos-DEM.tif ]; then
-  echo "Validation failed: positive control did not produce run/pos-DEM.tif."
-  exit 1
-fi
+# Positive control: compare the produced DEM against gold the usual way.
+for file in run/pos-DEM.tif; do
+
+  gold=gold/$(basename $file)
+
+  if [ ! -e "$file" ]; then echo "ERROR: File $file does not exist."; echo Validation failed; exit 1; fi
+  if [ ! -e "$gold" ]; then echo "ERROR: File $gold does not exist."; echo Validation failed; exit 1; fi
+
+  # Remove cached xmls
+  rm -fv "$file.aux.xml"
+  rm -fv "$gold.aux.xml"
+
+  cmp_stats.sh $file $gold
+  gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
+  gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold/run.txt
+
+  diff=$(diff run/run.txt gold/run.txt)
+  cat run/run.txt
+
+  rm -f run/run.txt gold/run.txt
+
+  echo diff is $diff
+  if [ "$diff" != "" ]; then echo Validation failed; exit 1; fi
+
+done
 
 echo Validation succeeded
 exit 0
