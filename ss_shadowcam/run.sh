@@ -38,6 +38,7 @@ bundle_adjust                                   \
   --num-iterations 50                           \
   --camera-weight 0 --tri-weight 0.1            \
   --remove-outliers-params "75 3 200 200"       \
+  --threads 1 --flann-method kmeans             \
   -o run/ba/run
 
 # Stereo on the overlap window of the same cropped cubes, using the
@@ -50,6 +51,7 @@ parallel_stereo                                 \
   --alignment-method local_epipolar             \
   --stereo-algorithm asp_mgm                    \
   --subpixel-mode 9                             \
+  --threads 1 --processes 1                     \
   ../data/M074289249SE_crop.cub                 \
   ../data/M074296291SE_crop.cub                 \
   run/ba/run-M074289249SE_crop.adjusted_state.json \

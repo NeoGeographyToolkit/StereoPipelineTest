@@ -1,6 +1,24 @@
 #!/bin/bash
 source ../bin/setup_env.sh
 
+# Stage 1: isd_generate must have produced a CSM ISD for each cropped cube.
+for f in run/M074289249SE_crop.json run/M074296291SE_crop.json; do
+    if [ ! -s "$f" ]; then
+        echo "ERROR: ISD $f missing or empty (isd_generate stage failed)."
+        exit 1
+    fi
+done
+
+# Stage 2: bundle_adjust must have produced an adjusted CSM state per camera.
+for f in run/ba/run-M074289249SE_crop.adjusted_state.json \
+         run/ba/run-M074296291SE_crop.adjusted_state.json; do
+    if [ ! -s "$f" ]; then
+        echo "ERROR: bundle_adjust output $f missing (bundle_adjust stage failed)."
+        exit 1
+    fi
+done
+
+# Stage 3: the stereo DEM must match the gold.
 file=run/stereo/run-DEM.tif
 gold=gold/$(basename $file)
 
