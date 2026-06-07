@@ -46,9 +46,14 @@ if [ ! -e "$gold" ]; then
     exit 1;
 fi
 
-diff=$(diff $file $gold | head -n 50)
-echo "diff is $diff"
-if [ "$diff" != "" ]; then
+# Compare with a tight relative tolerance. On this platform the run and gold are
+# produced identically, so this only absorbs last-digit float noise from
+# evaluation-order changes. The Mac/ARM cloud copy of this test uses a looser
+# tolerance, since there the gold comes from a different platform.
+../bin/max_err.pl $file $gold
+tol=1e-10
+ans=$(../bin/max_err.pl $file $gold $tol)
+if [ "$ans" != "1" ]; then
     echo Validation failed
     exit 1
 fi
