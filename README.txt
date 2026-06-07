@@ -111,3 +111,37 @@ saved, together with the build, as an artifact. The artifact can be fetched, and
 the reference test results updated (or new tests added) with the script:
 
   StereoPipeline/.github/workflows/update_mac_tests.sh
+
+Only a small subset of this full suite runs in the cloud (on Mac ARM64 and
+Linux ARM). That subset is packaged into the release asset:
+
+  https://github.com/NeoGeographyToolkit/StereoPipelineTest/releases/tag/0.0.1
+  (asset: StereoPipelineTest.tar)
+
+which build_test.sh downloads, extracts, and runs.
+
+Each test that belongs to this cloud subset carries a comment near the top of
+its run.sh that begins with the marker "CLOUD-MAC TEST". This is a breadcrumb:
+if the small release tarball is ever lost, the cloud subset can be rebuilt from
+this full suite by collecting every test whose run.sh contains that marker:
+
+  grep -rl 'CLOUD-MAC TEST' ss*/run.sh
+
+As of this writing the cloud Mac/ARM subset is:
+
+  ssCSM_Linescan
+  ssCSM_alignLocalEpi_libelas
+  ssCSM_alignLocalEpi_opencv_sgbm
+  ss_bundle_adjust_CSM_Linescan
+  ss_camera_solve_mt_sidley
+  ss_mapproject_embed_rpc
+  ss_pc_align_mars_pc_xyz
+  ss_pc_align_utm
+
+Note on tolerances: the cloud subset runs on both Mac ARM64 and Linux ARM, where
+the reference 'gold' was produced on a different platform than the run. Their
+validate.sh scripts therefore use generous, relative tolerances (via
+bin/max_err.pl) and, for alignment-sensitive DEM tests, strip the geo-extent
+lines (origin, corners, center) before comparing. The same logic can be carried
+into the full Linux suite here, but with tighter tolerances, since on a single
+platform the run and gold are produced identically.
