@@ -5,6 +5,23 @@
 
 set -x verbose
 rm -rfv run
+mkdir -p run
+
+# Sanity-check: verify the pre-made CSM JSONs (generated from full uncropped
+# cubes) agree with the ISIS camera on the cropped cubes. The ISDs were made
+# offline because isd_generate on cropped HRSC cubes produces broken timing
+# tables (ALE bug). This cam_test catches any future drift between ISIS and CSM.
+cam_test --image ../data/HD755_0000_S12_crop.cub  \
+  --cam1 ../data/HD755_0000_S12_crop.cub          \
+  --cam2 ../data/HD755_0000_S12.json              \
+  --session1 isis --session2 csm                  \
+  --sample-rate 100 > run/cam_test_s12.txt 2>&1
+
+cam_test --image ../data/HD755_0000_S22_crop.cub  \
+  --cam1 ../data/HD755_0000_S22_crop.cub          \
+  --cam2 ../data/HD755_0000_S22.json              \
+  --session1 isis --session2 csm                  \
+  --sample-rate 100 > run/cam_test_s22.txt 2>&1
 
 # The clips are grown and interest point matching is relaxed (more points
 # per tile, higher uniqueness threshold) so enough matches are found for
