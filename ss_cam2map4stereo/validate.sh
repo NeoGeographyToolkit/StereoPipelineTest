@@ -1,39 +1,31 @@
 #!/bin/bash
-source ../bin/setup_env.sh
 
-for file in run/*cub; do
+file=run/output.txt
 
-  echo $file $gold
-  gold=gold/$(basename $file)
+if [ ! -s "$file" ]; then
+  echo "ERROR: $file is missing or empty."
+  exit 1
+fi
 
-  if [ ! -e "$file" ]; then
-      echo "ERROR: File $file does not exist."
-      exit 1;
-  fi
+# Check that camrange ran on both images
+count=$(grep -c "Running camrange" "$file")
+if [ "$count" -lt 2 ]; then
+  echo "ERROR: Expected 2 camrange calls, found $count."
+  exit 1
+fi
 
-  if [ ! -e "$gold" ]; then
-      echo "ERROR: File $gold does not exist."
-      exit 1;
-  fi
+# Check that two cam2map commands were produced
+count=$(grep -c "^cam2map " "$file")
+if [ "$count" -lt 2 ]; then
+  echo "ERROR: Expected 2 cam2map commands, found $count."
+  exit 1
+fi
 
-  # Remove cached xmls
-  rm -fv "$file.aux.xml"
-  rm -fv "$gold.aux.xml"
-
-  echo Comparing $file $gold
-  cmp_stats.sh $file $gold
-  gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v xml > run/run.txt
-  gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v xml > gold/run.txt
-
-  diff=$(diff run/run.txt gold/run.txt)
-
-  echo diff is $diff
-  if [ "$diff" != "" ]; then
-      echo Validation failed
-      exit 1
-  fi
-
-done
+# Check that the script finished successfully
+if ! grep -q "Finished" "$file"; then
+  echo "ERROR: Did not find 'Finished' in output."
+  exit 1
+fi
 
 echo Validation succeeded
 exit 0

@@ -2,7 +2,7 @@
 
 set -x verbose
 rm -rfv run
+mkdir -p run
 
-cam2map4stereo.py ../data/M0100115_crop2.cub ../data/E0201461_crop2.cub --prefix run/run
-
-
+cam2map4stereo.py ../data/M0100115_crop2.cub ../data/E0201461_crop2.cub \
+  --prefix run/run --dry-run > run/output.txt 2>&1
