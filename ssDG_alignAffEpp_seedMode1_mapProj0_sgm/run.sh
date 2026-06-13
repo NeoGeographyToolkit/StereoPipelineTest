@@ -25,7 +25,7 @@ parallel_stereo                           \
   --xcorr-threshold 2.5                   \
   --corr-max-levels 4                     \
   --cost-mode 4                           \
-  --min-num-ip 5                          \
+  --min-matches 5                         \
   --save-left-right-disparity-difference  \
   --job-size-h 2048                       \
   --job-size-w 2048                       \

@@ -33,7 +33,7 @@ parallel_stereo                            \
   --left-image-crop-win 200 1000 850 950   \
   --right-image-crop-win 290 1230 800 870  \
   --stereo-algorithm asp_mgm               \
-  --min-num-ip 5                           \
+  --min-matches 5                          \
   --ip-per-tile 2000                       \
   --ip-uniqueness-threshold 0.9            \
   ../data/HD755_0000_S12_crop.cub          \
