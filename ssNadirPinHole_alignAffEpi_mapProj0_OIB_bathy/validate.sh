@@ -33,5 +33,29 @@ if [ "$diff" != "" ]; then
     exit 1
 fi
 
+# Also validate the interest point matches extracted from the disparity with
+# --num-matches-from-disparity. These exercise the crop-window code path (the
+# matches are shifted from the cropped domain to full-image coordinates). The
+# match file is deterministic, so compare it directly.
+mfile=run/run-disp-img_icebridge2__img_icebridge3.txt
+mgold=gold/$(basename $mfile)
+
+if [ ! -e "$mfile" ]; then
+    echo "ERROR: File $mfile does not exist."
+    exit 1;
+fi
+
+if [ ! -e "$mgold" ]; then
+    echo "ERROR: File $mgold does not exist."
+    exit 1;
+fi
+
+mdiff=$(diff $mfile $mgold)
+echo match diff is $mdiff
+if [ "$mdiff" != "" ]; then
+    echo Validation failed
+    exit 1
+fi
+
 echo Validation succeeded
 exit 0

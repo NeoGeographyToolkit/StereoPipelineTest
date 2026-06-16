@@ -20,6 +20,8 @@ parallel_stereo --alignment-method affineepipolar           \
     --left-image-crop-win 4089 486 550 500                  \
     --right-image-crop-win 3170 589 650 450                 \
     --corr-seed-mode 1 --threads 8                          \
+    --num-matches-from-disparity 4000                       \
+    --matches-as-txt                                        \
     ../data/img_icebridge2.tif ../data/img_icebridge3.tif   \
     ../data/img_icebridge2.tsai ../data/img_icebridge3.tsai \
     run/run
