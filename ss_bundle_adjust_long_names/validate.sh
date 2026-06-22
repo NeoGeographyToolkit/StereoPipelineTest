@@ -1,17 +1,16 @@
 #!/bin/bash
 source ../bin/setup_env.sh
 
-# The image names are long, so the match file names use the full, untruncated
-# image names. If the name shortening logic regresses (for example, truncating
-# names to a fixed length), these full-name files will not be produced and the
-# test will fail. See the ASP doc section on match file naming.
+# The input image names are very long and share a long common prefix (see run.sh),
+# so the match file names are shortened: each image name is reduced to a leading
+# part plus a hash of its full name. If this shortening logic regresses (for
+# example, truncating names to a fixed length), the file names below will not be
+# produced and the test will fail. The two hashes (af2535afe5c73746 and
+# 92184d781eae8e2e) keep the pair distinct. See the ASP doc on match file naming.
 
-L=cas_cal_sc_20210725T202821-20210725T202825-16378-10-PAN-838849161-8-0__4_0
-R=cas_cal_sc_20210725T202911-20210725T202915-16378-10-PAN-838849162-2-0__4_0
-
-for file in                      \
-    run/run-${L}__${R}.match     \
-    run/run-${L}__${R}-clean.match
+for file in            \
+    run/run-cas_cal_sc_20210725_16378_PAN_synthetic_test_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad__af2535afe5c73746__cas_cal_sc_20210725_16378_PAN_synthetic_test_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad__92184d781eae8e2e.match            \
+    run/run-cas_cal_sc_20210725_16378_PAN_synthetic_test_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad__af2535afe5c73746__cas_cal_sc_20210725_16378_PAN_synthetic_test_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad_pad__92184d781eae8e2e-clean.match
   do
 
     gold=$(echo $file | perl -p -e "s#run/#gold/#g")
