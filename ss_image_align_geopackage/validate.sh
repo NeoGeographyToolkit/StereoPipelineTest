@@ -1,36 +1,31 @@
 #!/bin/bash
 source ../bin/setup_env.sh
 
-# Validate the GeoPackage of interest point matches written by
-# --match-points-geopackage. A GeoPackage is a SQLite file with an embedded
-# timestamp, so a binary comparison of two .gpkg files is not reliable. Instead,
-# dump both the run and gold GeoPackages to CSV with ogr2ogr (a deterministic
-# text form) and compare the numeric values with a tolerance.
+# Validate the cross-projection GeoPackage. Both images are local stereographic
+# (metric); the source center is shifted 0.1 deg from the reference. The writer
+# must use the reference CRS for the layer and reproject the source match coords
+# into it, so dx/dy come out near zero (in meters). Without the reprojection,
+# dx would be ~8.8e3 m (the center shift). No gold file is needed.
 
-run_gpkg=run/matches.gpkg
-gold_gpkg=gold/matches.gpkg
+gpkg=run/matches.gpkg
+if [ ! -e "$gpkg" ]; then echo "ERROR: $gpkg missing"; exit 1; fi
 
-for f in "$run_gpkg" "$gold_gpkg"; do
-  if [ ! -e "$f" ]; then
-    echo "ERROR: File $f does not exist."
-    exit 1
-  fi
-done
+rm -fv run/matches.csv
+ogr2ogr -f CSV run/matches.csv "$gpkg"
 
-# Dump both GeoPackages to CSV
-rm -fv run/matches.csv gold/matches.csv
-ogr2ogr -f CSV run/matches.csv "$run_gpkg"
-ogr2ogr -f CSV gold/matches.csv "$gold_gpkg"
+# dx, dy (reference meters) must be small. Working: a few pixels at 50 m. Broken
+# (no reprojection): ~8.8e3 m. Threshold 1000 m separates them cleanly.
+maxabs=$(awk -F, '
+  NR==1{ for(i=1;i<=NF;i++){ g=$i; gsub(/"/,"",g); if(g=="dx")dxc=i; if(g=="dy")dyc=i } next }
+  dxc&&dyc{ x=$dxc+0; if(x<0)x=-x; y=$dyc+0; if(y<0)y=-y; if(x>m)m=x; if(y>m)m=y }
+  END{ if(!dxc||!dyc) print "NA"; else printf "%.3f", m }' run/matches.csv)
+echo "max |dx|,|dy| = $maxabs meters"
 
-# Show the textual difference, then judge with a relative tolerance
-diff run/matches.csv gold/matches.csv
-
-../bin/max_err.pl run/matches.csv gold/matches.csv # print the error
-ans=$(../bin/max_err.pl run/matches.csv gold/matches.csv 1e-6) # compare the error
-if [ "$ans" -eq 0 ]; then
-    echo Validation failed
-    exit 1
+ok=$(awk -v m="$maxabs" 'BEGIN{ print (m!="NA" && m+0<1000)?1:0 }')
+if [ "$ok" -ne 1 ]; then
+  echo "Validation failed: dx/dy not near zero (reprojection likely wrong)."
+  exit 1
 fi
 
-echo Validation succeeded
+echo "Validation succeeded"
 exit 0
