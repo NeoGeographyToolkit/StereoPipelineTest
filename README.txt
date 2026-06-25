@@ -130,6 +130,7 @@ this full suite by collecting every test whose run.sh contains that marker:
 As of this writing the cloud Mac/ARM subset is:
 
   ssCSM_Linescan
+  ssCSM_seedMode3
   ssCSM_alignLocalEpi_libelas
   ssCSM_alignLocalEpi_opencv_sgbm
   ss_bundle_adjust_CSM_Linescan
@@ -137,6 +138,9 @@ As of this writing the cloud Mac/ARM subset is:
   ss_mapproject_embed_rpc
   ss_pc_align_mars_pc_xyz
   ss_pc_align_utm
+
+ssCSM_seedMode3 runs corr-seed-mode 3, which drives sparse_disp, so it also
+verifies that the bundled numpy, scipy, and gdal Python modules ship and work.
 
 Note on tolerances: the cloud subset runs on both Mac ARM64 and Linux ARM, where
 the reference 'gold' was produced on a different platform than the run. Their
