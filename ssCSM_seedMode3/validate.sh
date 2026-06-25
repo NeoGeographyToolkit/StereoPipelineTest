@@ -24,9 +24,10 @@ gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v minimum > ru
 gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v minimum > gold/run.txt
 cat run/run.txt
 
-# Tolerant comparison. The sparse_disp seed drifts a little across platforms, so
-# allow a loose relative error rather than an exact match.
-ans=$(../bin/max_err.pl run/run.txt gold/run.txt 1e-2)
+# Tolerant comparison. The sparse_disp seed drifts across platforms: the DEM
+# mean matches closely but the tails (stddev, min, max) can differ by ~10%
+# (e.g. arm-Linux vs arm-Mac), so allow a loose relative error.
+ans=$(../bin/max_err.pl run/run.txt gold/run.txt 2e-1)
 rm -f run/run.txt gold/run.txt
 
 if [ "$ans" != "1" ]; then
