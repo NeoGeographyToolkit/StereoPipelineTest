@@ -1,7 +1,7 @@
 #!/bin/bash
 source ../bin/setup_env.sh
 
-for file in run/run.json run/run.txt; do
+for file in run/run.json run/run.txt run/pose.json run/pose.txt; do
 
   gold=gold/$(basename $file)
 
