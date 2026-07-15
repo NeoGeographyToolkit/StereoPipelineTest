@@ -1,4 +1,5 @@
 #!/bin/bash
+# CLOUD-MAC TEST
 
 set -x verbose
 rm -rfv run

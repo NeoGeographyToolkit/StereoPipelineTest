@@ -138,9 +138,16 @@ As of this writing the cloud Mac/ARM subset is:
   ss_mapproject_embed_rpc
   ss_pc_align_mars_pc_xyz
   ss_pc_align_utm
+  ss_cam_test_cassis
 
 ssCSM_seedMode3 runs corr-seed-mode 3, which drives sparse_disp, so it also
 verifies that the bundled numpy, scipy, and gdal Python modules ship and work.
+
+ss_cam_test_cassis loads a vendor CaSSIS CSM camera (rational distortion, CSM
+type 9) and compares it to a transverse refit. It verifies that the bundled
+ale/usgscsm are CaSSIS-capable (loading type 9 needs ale::DistortionType::CASSIS).
+Its validate.sh uses a tolerant compare, so small cross-platform last-digit
+differences pass, while a CaSSIS load failure (missing or huge values) fails.
 
 Note on tolerances: the cloud subset runs on both Mac ARM64 and Linux ARM, where
 the reference 'gold' was produced on a different platform than the run. Their
