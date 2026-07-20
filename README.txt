@@ -132,6 +132,7 @@ As of this writing the cloud Mac/ARM subset is:
   ssCSM_Linescan
   ssCSM_seedMode3
   ssCSM_alignLocalEpi_libelas
+  ssCSM_alignLocalEpi_mgm_multi
   ssCSM_alignLocalEpi_opencv_sgbm
   ss_bundle_adjust_CSM_Linescan
   ss_camera_solve_mt_sidley
