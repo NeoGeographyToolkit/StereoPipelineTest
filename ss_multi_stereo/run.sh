@@ -2,8 +2,19 @@
 
 set -x verbose
 rm -rfv run
+mkdir -p run
 
 maxDistanceFromCamera=3.0
+
+# Overlap list: which image pairs to run stereo on. Two columns, with names as in the
+# camera pose list. These are the second, third, and fourth nav_cam images, paired
+# consecutively. Image one is skipped as too similar to image two, which fails stereo.
+img=../data/rig_calibrator_example_3_cameras/rig_input/nav_cam
+ovl=run/overlap.txt
+cat > $ovl <<EOF
+$img/1637278317.5566902_nav_cam.tif $img/1637278322.5624499_nav_cam.tif
+$img/1637278322.5624499_nav_cam.tif $img/1637278324.3117061_nav_cam.tif
+EOF
 
 stereo_opts="
   --stereo-algorithm asp_mgm
@@ -30,11 +41,11 @@ mesh_gen_opts="
   --max_ray_length $maxDistanceFromCamera
   --voxel_size 0.01"
 
-# Skip image 1 as being too similar to image 2.
-# That will cause stereo to fail.
 multi_stereo                                     \
+    --mode mesh                                  \
     --rig_config ../data/rig_test/rig_config.txt \
     --camera_poses ../data/rig_test/cameras.txt  \
+    --overlap-list $ovl                          \
     --undistorted_crop_win '700 500'             \
     --rig_sensor nav_cam                         \
     --first_step stereo                          \
@@ -42,6 +53,4 @@ multi_stereo                                     \
     --stereo_options "$stereo_opts"              \
     --pc_filter_options "$pc_filter_opts"        \
     --mesh_gen_options "$mesh_gen_opts"          \
-    --first-image-index 2                        \
-    --last-image-index 4                         \
   --out_dir run/stereo
