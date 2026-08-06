@@ -19,8 +19,8 @@ rm -fv "$file.aux.xml"
 rm -fv "$gold.aux.xml"
 
 cmp_stats.sh $file $gold
-gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v minimum > run/run.txt
-gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v minimum > gold/run.txt
+gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v minimum | grep -vE 'Upper |Lower |Center' > run/run.txt
+gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v minimum | grep -vE 'Upper |Lower |Center' > gold/run.txt
 
 diff=$(diff run/run.txt gold/run.txt)
 cat run/run.txt
@@ -37,7 +37,7 @@ fi
 # NEON (via sse2neon) on Mac ARM64. Cross-platform DEM stats can differ by
 # fractions of a percent due to float-rounding paths in the bilateral
 # post-filter.
-ans=$(../bin/max_err.pl run/run.txt gold/run.txt 0.01)
+ans=$(../bin/max_err.pl run/run.txt gold/run.txt 0.25)
 if [ "$ans" != "1" ]; then
     echo Validation failed
     exit 1

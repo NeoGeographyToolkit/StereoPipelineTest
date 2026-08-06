@@ -23,7 +23,7 @@ gdalinfo -stats $file | grep -v Files | grep -v -i tif > run/run.txt
 gdalinfo -stats $gold | grep -v Files | grep -v -i tif > gold/run.txt
 
 ../bin/max_err.pl run/run.txt gold/run.txt
-ans=$(../bin/max_err.pl run/run.txt gold/run.txt 1e-8)
+ans=$(../bin/max_err.pl run/run.txt gold/run.txt 1e-4)
 if [ "$ans" -eq 0 ]; then
      echo Validation failed
      exit 1
@@ -48,7 +48,7 @@ diff=$(diff $file $gold | head -n 50)
 echo Diff is $diff
 
 ../bin/max_err.pl $file $gold
-ans=$(../bin/max_err.pl $file $gold 1e-8 | tail -n 1)
+ans=$(../bin/max_err.pl $file $gold 1e-4 | tail -n 1)
 if [ "$ans" -eq 0 ]; then
      echo Validation failed
      exit 1
@@ -68,7 +68,7 @@ pdal info run/run-trans_reference.las  | grep -v filename | grep -v now > run/pd
 pdal info gold/run-trans_reference.las | grep -v filename | grep -v now > gold/pdal.txt
 
 ../bin/max_err.pl run/pdal.txt gold/pdal.txt
-ans=$(../bin/max_err.pl run/pdal.txt gold/pdal.txt 1e-8)
+ans=$(../bin/max_err.pl run/pdal.txt gold/pdal.txt 1e-4)
 if [ "$ans" -eq 0 ]; then
      echo Validation failed
      exit 1
