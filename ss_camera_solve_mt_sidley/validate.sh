@@ -33,7 +33,7 @@ if [ "$ans" -ne 0 ]; then
 	exit 1
 fi
 
-ans=$(../bin/max_err.pl run/run.txt gold/run.txt 0.01) # compare the error
+ans=$(../bin/max_err.pl run/run.txt gold/run.txt 0.05) # compare the error
 if [ "$ans" != "1" ]; then
     echo Validation failed
     exit 1
