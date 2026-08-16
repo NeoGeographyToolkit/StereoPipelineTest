@@ -18,5 +18,7 @@ bundle_adjust                           \
   --refraction-index 1.333              \
   --bathy-plane ../data/bathy-plane.txt \
   --threads 1                           \
+  --num-iterations 1                    \
+  --max-pairwise-matches 200            \
   -o run/run
 

@@ -12,7 +12,7 @@ for method in log obalog sift orb akaze kaze; do
         desc="sgrad"
     fi
 
-    ipfind --ip-per-tile 2000 --interest-operator $method --descriptor-generator $desc --threads 1 ../data/left_sub16.tif ../data/right_sub16.tif --output-folder run/${method}
+    ipfind --ip-per-tile 500 --interest-operator $method --descriptor-generator $desc --threads 1 ../data/left_sub16.tif ../data/right_sub16.tif --output-folder run/${method}
 
     # Binary descriptors (orb, akaze, brisk) match with Hamming distance; the
     # float descriptors (sift, kaze) with L2.
@@ -34,4 +34,4 @@ done
 
 # BRISK detects a large number of keypoints at its threshold, which makes ipmatch
 # slow, so run a detect-only check that it produces interest points.
-ipfind --ip-per-tile 2000 --interest-operator brisk --descriptor-generator brisk --threads 1 ../data/left_sub16.tif --output-folder run/brisk
+ipfind --ip-per-tile 500 --interest-operator brisk --descriptor-generator brisk --threads 1 ../data/left_sub16.tif --output-folder run/brisk

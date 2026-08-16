@@ -19,7 +19,7 @@ EOF
 stereo_opts="
   --stereo-algorithm asp_mgm
   --alignment-method affineepipolar
-  --ip-per-image 10000
+  --ip-per-image 3000
   --min-triangulation-angle 0.5
   --global-alignment-threshold 5
   --session nadirpinhole
@@ -46,7 +46,7 @@ multi_stereo                                     \
     --rig_config ../data/rig_test/rig_config.txt \
     --camera_poses ../data/rig_test/cameras.txt  \
     --overlap-list $ovl                          \
-    --undistorted_crop_win '700 500'             \
+    --undistorted_crop_win '400 300'             \
     --rig_sensor nav_cam                         \
     --first_step stereo                          \
     --last_step  mesh_gen                        \
