@@ -25,8 +25,11 @@ bundle_adjust                                              \
     --bathy-plane-list run/bathy_plane_list.txt            \
     --refraction-index $waterRefractionIndex               \
     --threads 1                                            \
-    --num-iterations 10                                    \
+    --num-iterations 1                                     \
+    --max-pairwise-matches 200                             \
     -o run/ba/run
+# Stereo on the top crop window only. The 1500 line crop keeps both water and
+# land, so the two bathy planes are still exercised, but stereo runs faster.
 stereo                                                     \
     run/left_bathy_b3_corr.tif run/right_bathy_b3_corr.tif \
     ../data/left_bathy.xml ../data/right_bathy.xml         \
@@ -35,6 +38,8 @@ stereo                                                     \
     --bathy-plane-list run/bathy_plane_list.txt            \
     --refraction-index $waterRefractionIndex               \
     --bundle-adjust-prefix run/ba/run                      \
+    --left-image-crop-win 0 0 1500 1500                    \
+    --right-image-crop-win 0 0 1500 1500                   \
     run/run
 
 point2dem run/run-PC.tif

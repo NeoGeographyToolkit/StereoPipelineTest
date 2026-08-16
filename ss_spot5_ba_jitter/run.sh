@@ -13,10 +13,15 @@ left_cam=../data/spot5_front_crop.dim
 right_cam=../data/spot5_back_crop.dim
 
 # Bundle adjust with 1 iteration. Produces .adjust and .adjusted_state.json.
+# The images are large (12000 x 24042). The default OBALoG detector spends
+# several minutes on interest points, so use the fast ORB detector with a
+# capped count. This test only exercises the code path, not convergence.
 bundle_adjust -t spot5                 \
   --num-iterations 1                   \
   --camera-weight 0                    \
   --tri-weight 0.1                     \
+  --ip-detect-method 2                 \
+  --ip-per-image 5000                  \
   --threads 1                          \
   $left $right $left_cam $right_cam    \
   -o run/ba/run

@@ -12,10 +12,19 @@ rm -rfv run
 mkdir -p run/maps
 
 data=../data/cassis_jezero
-blurCtx=$data/ref/ctx_blur_18m.tif
-sharpCtx=$data/ref/ctx_18m.tif
 mapRes=4.59
 demRes=18
+
+# Crop the seed and reference CTX to a small central window that all four
+# framelets overlap. This shrinks the mapprojected images and the stereo
+# extent so the test runs faster while still going through all the motions.
+# The window is in projected coordinates (meters), ulx uly lrx lry.
+blurCtx=run/ctx_blur_crop.tif
+sharpCtx=run/ctx_sharp_crop.tif
+gdal_translate -projwin -4300 8000 -1500 7000 \
+  $data/ref/ctx_blur_18m.tif $blurCtx
+gdal_translate -projwin -4300 8000 -1500 7000 \
+  $data/ref/ctx_18m.tif $sharpCtx
 
 # The two left and two right framelet stems
 L1=cas_cal_sc_20210725T202821-20210725T202825-16378-10-PAN-838849161-7-0__4_0

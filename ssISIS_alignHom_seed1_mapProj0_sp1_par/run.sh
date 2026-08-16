@@ -11,6 +11,8 @@ parallel_stereo --enable-fill-holes --processes 2   \
   --threads-multiprocess 8                          \
   --job-size-w 512 --job-size-h 512                 \
   --nodes-list run/machines.txt                     \
+  --left-image-crop-win 40 900 380 500              \
+  --right-image-crop-win 136 310 646 777            \
   ../data/M0100115_small.cub                        \
   ../data/E0201461_small.cub                        \
   run/run                                           \

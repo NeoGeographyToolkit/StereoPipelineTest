@@ -33,9 +33,9 @@ bundle_adjust                                   \
   ../data/M074296291SE_crop.cub                 \
   run/M074289249SE_crop.json                    \
   run/M074296291SE_crop.json                    \
-  --ip-per-image 30000                          \
-  --max-pairwise-matches 5000                   \
-  --num-iterations 50                           \
+  --ip-per-image 3000                           \
+  --max-pairwise-matches 500                    \
+  --num-iterations 10                           \
   --camera-weight 0 --tri-weight 0.1            \
   --remove-outliers-params "75 3 200 200"       \
   --threads 1 --flann-method kmeans             \
@@ -46,8 +46,8 @@ bundle_adjust                                   \
 proj="+proj=stere +lat_0=-90 +lon_0=0 +k=1 +x_0=0 +y_0=0 +R=1737400 +units=m +no_defs"
 
 parallel_stereo                                 \
-  --left-image-crop-win  2133 629 600 600       \
-  --right-image-crop-win 1511 4341 600 600      \
+  --left-image-crop-win  2133 629 350 350       \
+  --right-image-crop-win 1511 4341 350 350      \
   --alignment-method local_epipolar             \
   --stereo-algorithm asp_mgm                    \
   --subpixel-mode 9                             \
