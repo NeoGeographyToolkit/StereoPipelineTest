@@ -11,11 +11,17 @@ waterRefractionIndex=1.333
 wv_correct --band 3 ../data/left_bathy_b3.tif ../data/left_bathy.xml run/left_bathy_b3_corr.tif
 wv_correct --band 3 ../data/right_bathy_b3.tif ../data/right_bathy.xml run/right_bathy_b3_corr.tif
 
-# Find the bathy plane using a DEM and a shapefile. The outlier threshold is a
-# distance in meters and should be comparable to the DEM ground sample distance
-# (here about 2 m), not far below it.
+# Find the bathy plane using a DEM and a shapefile. --outlier-threshold is a
+# distance in meters: a shoreline vertex counts as an inlier if its DEM height
+# is within this of the fitted plane. The vertices scatter vertically by up to
+# ~1.8 m about the water surface (DEM noise plus horizontal shoreline-tracing
+# error over the sloped near-shore terrain), so the threshold must exceed that
+# for all genuine waterline points to be kept. At 6 m all 9 vertices are inliers
+# and the plane is fit to the full shoreline, coming out nearly horizontal
+# (~0.1 deg tilt) as a water surface should be. The old 0.2 m was far below the
+# scatter, so only 4 vertices survived and the plane was spuriously tilted.
 bathy_plane_calc --shapefile ../data/bathy_shoreline.shp    \
-    --dem ../data/dem_nobathy.tif --outlier-threshold 1.0   \
+    --dem ../data/dem_nobathy.tif --outlier-threshold 6.0   \
     --bathy-plane run/bathy-plane.txt                       \
 	--output-inlier-shapefile run/inliers.shp
 
