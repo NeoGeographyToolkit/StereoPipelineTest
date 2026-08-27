@@ -75,3 +75,32 @@ parallel_stereo                                             \
     run/run
 
 point2dem run/run-PC.tif
+
+# Repeat the bathy run using a single georeferenced ortho land/water mask
+# (--ortho-bathy-mask) instead of the separate left and right masks. This
+# exercises the ortho-mask triangulation branch and should give nearly the
+# same DEM as the run above.
+#
+# The two per-image masks carry a per-pair rule: a point gets the bathymetry
+# correction only where BOTH the left and right masks call it water. A single
+# ortho mask cannot express that, so combine the two mapprojected masks (same
+# grid) into one that is water only where both are water: land = 1 where either
+# mask is land (max > 0), water = 0 where both are water.
+image_calc -c "gt(max(var_0, var_1), 0, 1, 0)" -d float32   \
+    run/left_bathy_b3_corr.map.mask.tif                     \
+    run/right_bathy_b3_corr.map.mask.tif                    \
+    -o run/and_bathy_mask.tif
+
+# Output under run/ so the gold captures it (gold is a copy of run/).
+parallel_stereo                                             \
+    ../data/left_bathy_b3_corr.map.tif                      \
+    ../data/right_bathy_b3_corr.map.tif                     \
+    ../data/left_bathy.xml ../data/right_bathy.xml          \
+    --ortho-bathy-mask run/and_bathy_mask.tif               \
+    --dem ../data/dem_nobathy.tif                           \
+    --refraction-index 1.333                                \
+    --bathy-plane run/bathy-plane.txt                       \
+    --prev-run-prefix run/run                               \
+    run/run_ortho/run
+
+point2dem run/run_ortho/run-PC.tif

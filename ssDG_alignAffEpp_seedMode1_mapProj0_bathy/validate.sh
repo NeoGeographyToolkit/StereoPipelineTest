@@ -2,9 +2,9 @@
 
 source ../bin/setup_env.sh
 
-for file in run/run-DEM.tif; do
+for file in run/run-DEM.tif run/run_ortho/run-DEM.tif; do
 
-    gold=gold/$(basename $file)
+    gold=gold/${file#run/}
     
     if [ ! -e "$file" ]; then
         echo "ERROR: File $file does not exist."
