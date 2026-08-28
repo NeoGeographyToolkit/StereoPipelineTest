@@ -22,8 +22,13 @@ parallel_stereo --alignment-method affineepipolar           \
     --corr-seed-mode 1 --threads 8                          \
     --num-matches-from-disparity 4000                       \
     --matches-as-txt                                        \
+    --propagate-errors --horizontal-stddev 1.0 1.0          \
     ../data/img_icebridge2.tif ../data/img_icebridge3.tif   \
     ../data/img_icebridge2.tsai ../data/img_icebridge3.tsai \
     run/run
 
-point2dem  --t_srs '+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs' --tr 0.4 run/run-PC.tif
+# --propagate-errors bends the rays for bathymetry in the covariance finite
+# differences, so the vertical stddev grows under water. Grid the stddev bands.
+point2dem --propagate-errors                                \
+    --t_srs '+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs' \
+    --tr 0.4 run/run-PC.tif
