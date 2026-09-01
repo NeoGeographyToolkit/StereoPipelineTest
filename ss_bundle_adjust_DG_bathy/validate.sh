@@ -32,5 +32,16 @@ source ../bin/setup_env.sh
 
 done
 
+# The bathy run must classify the triangulated points in the final pointmap.csv
+# as land or water. Fail if either tag is missing.
+pointmap=run/run-final_residuals_pointmap.csv
+for tag in "# water" "# land"; do
+    if ! grep -q "$tag" $pointmap; then
+        echo "ERROR: Did not find '$tag' in $pointmap."
+        echo Validation failed
+        exit 1
+    fi
+done
+
 echo Validation succeeded
 exit 0
