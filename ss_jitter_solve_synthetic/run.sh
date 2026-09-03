@@ -31,16 +31,25 @@ jitter_solve                           \
   ../data/linescan-fwd-c1.json         \
   -o run/run
 
-# plot
-pref1=../data/linescan
-pref2=run/run-linescan
-suff=nadir-c1,fwd-c1
-~/miniconda3/envs/orbit_plot/bin/python \
-  $(which orbit_plot.py)                \
-  --dataset $pref1,$pref2               \
-  --use-ref-cams                        \
-  --subtract-line-fit                   \
-  --orbit-id $suff                      \
-  --output-file run/run.png             \
-  --dataset-label before,after
+# plot (optional; only if the orbit_plot conda env is present, its base varies
+# by machine and both may exist)
+op_py=""
+for base in "$HOME/miniconda3" "$HOME/anaconda3"; do
+    if [ -x "$base/envs/orbit_plot/bin/python" ]; then
+        op_py="$base/envs/orbit_plot/bin/python"
+        break
+    fi
+done
+if [ -n "$op_py" ]; then
+  pref1=../data/linescan
+  pref2=run/run-linescan
+  suff=nadir-c1,fwd-c1
+  $op_py $(which orbit_plot.py)   \
+    --dataset $pref1,$pref2       \
+    --use-ref-cams                \
+    --subtract-line-fit           \
+    --orbit-id $suff              \
+    --output-file run/run.png     \
+    --dataset-label before,after
+fi
 
