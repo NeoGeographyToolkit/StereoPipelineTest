@@ -53,4 +53,4 @@ multi_stereo                                     \
     --stereo-options "$stereo_opts"              \
     --pc-filter-options "$pc_filter_opts"        \
     --mesh-gen-options "$mesh_gen_opts"          \
-  --out-prefix run/stereo/run
+  --output-prefix run/stereo/run

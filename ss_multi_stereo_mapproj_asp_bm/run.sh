@@ -29,11 +29,8 @@ proj="+proj=stere +lat_0=18.4 +lon_0=77.5 +k=1 +x_0=0 +y_0=0 +R=3396190 +units=m
 # extent so the test runs faster while still going through all the motions.
 # The window is in projected coordinates (meters), ulx uly lrx lry.
 blurCtx=run/ctx_blur_crop.tif
-sharpCtx=run/ctx_sharp_crop.tif
 gdal_translate -projwin -4300 8000 -1500 7000 \
   $data/ref/ctx_blur_18m.tif $blurCtx
-gdal_translate -projwin -4300 8000 -1500 7000 \
-  $data/ref/ctx_18m.tif $sharpCtx
 
 # The two left and two right framelet stems
 L1=cas_cal_sc_20210725T202821-20210725T202825-16378-10-PAN-838849161-7-0__4_0
@@ -81,19 +78,34 @@ for L in $L1 $L2; do
   done
 done
 
-# Run stereo on each pair, make a per-pair DEM, and mosaic them. The seed DEM is the
-# blurred CTX the images were mapprojected onto. The sharp CTX is the blunder-filter
-# reference. --processes runs two pairs at a time, each parallel_stereo with two
-# threads.
-multi_stereo                                                                  \
-  --mode dem_mosaic                                                           \
-  --conv-angle-prefix $baPrefix                                               \
-  --conv-angle-range 15,45                                                    \
-  --dem $blurCtx                                                              \
-  --ref-dem $sharpCtx                                                         \
-  --blunder-tol 100                                                           \
-  --processes 2                                                               \
-  --threads 2                                                                 \
-  --stereo-options "--alignment-method none --stereo-algorithm asp_bm --subpixel-mode 2 --corr-seed-mode 1 --min-matches 5 --ip-per-tile 2000 --mapproj-geolocation-uncertainty 0 --ip-match-radius 20" \
-  --point2dem-options "--tr $demRes --t_srs '$proj' --errorimage --max-valid-triangulation-error 8" \
-  --out-prefix run/stereo/run
+# The image and camera lists that bundle_adjust would write under the prefix.
+imgList=$baPrefix-image_list.txt
+camList=$baPrefix-camera_list.txt
+: > $imgList; : > $camList
+for s in $L1 $L2 $R1 $R2; do
+  echo "run/maps/$s.tif"   >> $imgList
+  echo "$baPrefix-$s.json" >> $camList
+done
+
+# Run stereo on each pair, make a per-pair DEM, and mosaic them. The blurred CTX
+# (--dem) is both the mapprojection DEM and the blunder-filter reference. The output
+# projection is pinned with --t_srs. --processes runs two pairs at a time, each
+# parallel_stereo with two threads.
+stereoOpts="--alignment-method none --stereo-algorithm asp_bm --subpixel-mode 2
+  --corr-seed-mode 1 --min-matches 5 --ip-per-tile 2000
+  --mapproj-geolocation-uncertainty 0 --ip-match-radius 20"
+demOpts="--tr $demRes --t_srs '$proj' --errorimage --max-valid-triangulation-error 8"
+
+multi_stereo                     \
+  --mode dem_mosaic              \
+  --image-list $imgList          \
+  --camera-list $camList         \
+  --conv-angle-prefix $baPrefix  \
+  --conv-angle-range 15,45       \
+  --dem $blurCtx                 \
+  --blunder-tol 100              \
+  --processes 2                  \
+  --threads 2                    \
+  --stereo-options "$stereoOpts" \
+  --point2dem-options "$demOpts" \
+  --output-prefix run/stereo/run
