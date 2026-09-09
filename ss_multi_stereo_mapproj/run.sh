@@ -39,15 +39,17 @@ R1=cas_cal_sc_20210725T202910-20210725T202914-16378-10-PAN-838849162-1-0__4_0
 R2=cas_cal_sc_20210725T202911-20210725T202915-16378-10-PAN-838849162-2-0__4_0
 
 # Mapproject each framelet at native resolution onto the blurred CTX. All share the same
-# resolution, as stereo requires for mapprojected input.
+# resolution, as stereo requires for mapprojected input. The four are run in parallel to
+# save wall-clock time; the output rasters are independent of each other.
 for s in $L1 $L2 $R1 $R2; do
   mapproject                        \
     --tr $mapRes                    \
     $blurCtx                        \
     $data/cub/$s.cub                \
     $data/cam/$s.json               \
-    run/maps/$s.tif
+    run/maps/$s.tif &
 done
+wait
 
 # Image and camera lists in matching order, and a 2-column overlap list pairing each
 # left framelet with each right framelet (cross look).
@@ -68,7 +70,7 @@ done
 
 # Run stereo on each pair, make a per-pair DEM, and mosaic them. The blurred CTX
 # (--dem) is both the mapprojection DEM and the blunder-filter reference. The output
-# projection is pinned with --t_srs. --processes runs two pairs at a time, each
+# projection is pinned with --t_srs. --processes 4 runs all four pairs at once, each
 # parallel_stereo with two threads.
 stereoOpts="--alignment-method none --stereo-algorithm asp_mgm --subpixel-mode 9
   --corr-seed-mode 1 --min-matches 5 --ip-per-tile 2000
@@ -82,7 +84,7 @@ multi_stereo                     \
   --overlap-list $ovl            \
   --dem $blurCtx                 \
   --blunder-tol 100              \
-  --processes 2                  \
+  --processes 4                  \
   --threads 2                    \
   --nodes-list run/nodes.txt     \
   --stereo-options "$stereoOpts" \

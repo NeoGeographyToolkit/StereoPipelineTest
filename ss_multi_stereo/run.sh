@@ -43,6 +43,8 @@ mesh_gen_opts="
 
 multi_stereo                                     \
     --mode mesh                                  \
+    --processes 2                                \
+    --threads 4                                  \
     --rig-config ../data/rig_test/rig_config.txt \
     --camera-poses ../data/rig_test/cameras.txt  \
     --overlap-list $ovl                          \
