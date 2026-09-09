@@ -73,11 +73,11 @@ voxblox_mesh --index run/voxblox/haz_cam/index.txt \
 
 # Create textured meshes for given sensors
 for cam in nav_cam sci_cam; do 
-  texrecon --rig_config run/rig_config.txt \
-    --camera_poses run/cameras.txt         \
+  texrecon --rig-config run/rig_config.txt \
+    --camera-poses run/cameras.txt         \
     --mesh run/fused_mesh.ply              \
-    --rig_sensor ${cam}                    \
-    --undistorted_crop_win '1000 800'      \
-    --out_dir run/texrecon_out
+    --rig-sensor ${cam}                    \
+    --undistorted-crop-win '1000 800'      \
+    --out-dir run/texrecon_out
 done
 

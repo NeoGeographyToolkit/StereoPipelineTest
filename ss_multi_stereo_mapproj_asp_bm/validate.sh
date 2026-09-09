@@ -2,14 +2,14 @@
 source ../bin/setup_env.sh
 
 # The maximum triangulation error mosaic must exist.
-err=run/stereo/dem_mosaic-IntersectionErr.tif
+err=run/stereo/run-IntersectionErr.tif
 if [ ! -e "$err" ]; then
     echo "ERROR: File $err does not exist."
     exit 1;
 fi
 
 # Compare the DEM mosaic to the gold, tolerant to small floating point differences.
-file=run/stereo/dem_mosaic-DEM.tif
+file=run/stereo/run-DEM.tif
 gold=gold/$(basename $file)
 
 if [ ! -e "$file" ]; then

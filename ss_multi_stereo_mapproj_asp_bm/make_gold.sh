@@ -50,11 +50,11 @@ done < run/overlap.txt
 # Mosaic the per-pair DEMs (same order as run.sh), and set the gold.
 dem_mosaic $dems -o gold_work/plain >> make_gold_run.log 2>&1
 mkdir -p gold
-cp gold_work/plain-tile-0.tif gold/dem_mosaic-DEM.tif
-rm -f gold/dem_mosaic-DEM.tif.aux.xml
+cp gold_work/plain-tile-0.tif gold/run-DEM.tif
+rm -f gold/run-DEM.tif.aux.xml
 
-echo "Gold set from the plain pairwise path: gold/dem_mosaic-DEM.tif"
+echo "Gold set from the plain pairwise path: gold/run-DEM.tif"
 echo "Comparing multi_stereo (run.sh) against the gold:"
-cmp run/stereo/dem_mosaic-DEM.tif gold/dem_mosaic-DEM.tif \
+cmp run/stereo/run-DEM.tif gold/run-DEM.tif \
   && echo "IDENTICAL bytes: multi_stereo == plain pairwise." \
   || echo "Bytes differ. Inspect with geodiff/gdalinfo."

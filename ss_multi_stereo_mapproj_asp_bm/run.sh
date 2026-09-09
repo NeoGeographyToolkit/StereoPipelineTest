@@ -94,6 +94,6 @@ multi_stereo                                                                  \
   --blunder-tol 100                                                           \
   --processes 2                                                               \
   --threads 2                                                                 \
-  --stereo_options "--alignment-method none --stereo-algorithm asp_bm --subpixel-mode 2 --corr-seed-mode 1 --min-matches 5 --ip-per-tile 2000 --mapproj-geolocation-uncertainty 0 --ip-match-radius 20" \
+  --stereo-options "--alignment-method none --stereo-algorithm asp_bm --subpixel-mode 2 --corr-seed-mode 1 --min-matches 5 --ip-per-tile 2000 --mapproj-geolocation-uncertainty 0 --ip-match-radius 20" \
   --point2dem-options "--tr $demRes --t_srs '$proj' --errorimage --max-valid-triangulation-error 8" \
-  --out_dir run/stereo
+  --out-prefix run/stereo/run

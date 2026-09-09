@@ -43,14 +43,14 @@ mesh_gen_opts="
 
 multi_stereo                                     \
     --mode mesh                                  \
-    --rig_config ../data/rig_test/rig_config.txt \
-    --camera_poses ../data/rig_test/cameras.txt  \
+    --rig-config ../data/rig_test/rig_config.txt \
+    --camera-poses ../data/rig_test/cameras.txt  \
     --overlap-list $ovl                          \
-    --undistorted_crop_win '400 300'             \
-    --rig_sensor nav_cam                         \
-    --first_step stereo                          \
-    --last_step  mesh_gen                        \
-    --stereo_options "$stereo_opts"              \
-    --pc_filter_options "$pc_filter_opts"        \
-    --mesh_gen_options "$mesh_gen_opts"          \
-  --out_dir run/stereo
+    --undistorted-crop-win '400 300'             \
+    --rig-sensor nav_cam                         \
+    --first-step stereo                          \
+    --last-step  mesh_gen                        \
+    --stereo-options "$stereo_opts"              \
+    --pc-filter-options "$pc_filter_opts"        \
+    --mesh-gen-options "$mesh_gen_opts"          \
+  --out-prefix run/stereo/run
