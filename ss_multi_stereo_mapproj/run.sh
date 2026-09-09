@@ -11,6 +11,10 @@ set -x verbose
 rm -rfv run
 mkdir -p run/maps
 
+# Exercise multi_stereo's --nodes-list. localhost runs the pooled tiles locally, so
+# the result is unchanged.
+echo localhost > run/nodes.txt
+
 data=../data/cassis_jezero
 mapRes=4.59
 demRes=18
@@ -80,6 +84,7 @@ multi_stereo                     \
   --blunder-tol 100              \
   --processes 2                  \
   --threads 2                    \
+  --nodes-list run/nodes.txt     \
   --stereo-options "$stereoOpts" \
   --point2dem-options "$demOpts" \
   --output-prefix run/stereo/run
