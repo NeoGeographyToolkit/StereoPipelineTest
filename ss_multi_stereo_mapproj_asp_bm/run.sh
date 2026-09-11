@@ -61,7 +61,7 @@ for L in $L1 $L2; do
   done
 done
 
-# This test drives multi_stereo with --conv-angle-prefix (the asp_mgm test uses
+# This test drives multi_stereo with --conv-angle-list (the asp_mgm test uses
 # --overlap-list). bundle_adjust normally writes the convergence angle report and the
 # adjusted cameras under an output prefix. Here we stage the equivalent inputs under
 # the prefix run/ba: the four cameras (named run/ba-<image>.json), and a report
@@ -102,7 +102,7 @@ multi_stereo                     \
   --mode dem_mosaic              \
   --image-list $imgList          \
   --camera-list $camList         \
-  --conv-angle-prefix $baPrefix  \
+  --conv-angle-list $conv        \
   --conv-angle-range 15,45       \
   --dem $blurCtx                 \
   --blunder-tol 100              \
