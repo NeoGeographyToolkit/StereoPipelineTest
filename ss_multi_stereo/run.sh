@@ -6,14 +6,19 @@ mkdir -p run
 
 maxDistanceFromCamera=3.0
 
-# Overlap list: which image pairs to run stereo on. Two columns, with names as in the
-# camera pose list. These are the second, third, and fourth nav_cam images, paired
-# consecutively. Image one is skipped as too similar to image two, which fails stereo.
+# Convergence angle report, as written by bundle_adjust: which image pairs to run
+# stereo on, selected by median convergence angle (--conv-angle-range). Columns:
+# left right 25% 50% 75% num_matches, with names as in the camera pose list. These
+# are the second, third, and fourth nav_cam images, paired consecutively. Image one
+# is skipped as too similar to image two, which fails stereo. This exercises the
+# --conv-angle-list path (mode 'mesh'); --overlap-list is covered by the dem_mosaic
+# tests.
 img=../data/rig_calibrator_example_3_cameras/rig_input/nav_cam
-ovl=run/overlap.txt
-cat > $ovl <<EOF
-$img/1637278317.5566902_nav_cam.tif $img/1637278322.5624499_nav_cam.tif
-$img/1637278322.5624499_nav_cam.tif $img/1637278324.3117061_nav_cam.tif
+conv=run/convergence_angles.txt
+cat > $conv <<EOF
+# left_image right_image 25% 50% 75% num_matches
+$img/1637278317.5566902_nav_cam.tif $img/1637278322.5624499_nav_cam.tif 6 7 8 500
+$img/1637278322.5624499_nav_cam.tif $img/1637278324.3117061_nav_cam.tif 6 7 8 500
 EOF
 
 stereo_opts="
@@ -47,7 +52,8 @@ multi_stereo                                     \
     --threads 4                                  \
     --rig-config ../data/rig_test/rig_config.txt \
     --camera-poses ../data/rig_test/cameras.txt  \
-    --overlap-list $ovl                          \
+    --conv-angle-list $conv                      \
+    --conv-angle-range 3,15                      \
     --undistorted-crop-win '400 300'             \
     --rig-sensor nav_cam                         \
     --first-step stereo                          \
