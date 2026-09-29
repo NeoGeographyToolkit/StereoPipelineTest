@@ -66,8 +66,10 @@ done
 # adjusted cameras under an output prefix. Here we stage the equivalent inputs under
 # the prefix run/ba: the four cameras (named run/ba-<image>.json), and a report
 # listing all four cross-look pairs with a median convergence angle of 30 degrees, so
-# --conv-angle-range 15,45 selects them all. multi_stereo then builds the same overlap
-# list as above, so the DEM must match the gold made from that overlap list.
+# --conv-angle-range 15,45 selects them all. The report names the raw framelet cubs
+# (before mapprojection), as a real bundle_adjust report does. multi_stereo ties each
+# raw name to the mapprojected image in --image-list via the INPUT_IMAGE_FILE metadata
+# that mapproject wrote, so the same pairs run and the DEM matches the gold.
 baPrefix=run/ba
 for s in $L1 $L2 $R1 $R2; do
   cp $data/cam/$s.json $baPrefix-$s.json
@@ -76,7 +78,7 @@ conv=$baPrefix-convergence_angles.txt
 echo "# left_image right_image 25% 50% 75% num_matches" > $conv
 for L in $L1 $L2; do
   for R in $R1 $R2; do
-    echo "run/maps/$L.tif run/maps/$R.tif 28 30 32 100" >> $conv
+    echo "$data/cub/$L.cub $data/cub/$R.cub 28 30 32 100" >> $conv
   done
 done
 
