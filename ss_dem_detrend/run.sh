@@ -60,9 +60,19 @@ with open("run/points.csv", "w") as f:
 print("generated run/dem.tif and run/points.csv")
 PY
 
+# Locate the dem_detrend tool. A bare $(which ...) that finds nothing expands
+# to empty and silently turns the command into "python --dem ...", which then
+# fails with a baffling "Unknown option". Guard against that and fail loudly,
+# which is also the honest signal that the tool is missing from the build.
+dem_detrend_bin=$(which dem_detrend)
+if [ -z "$dem_detrend_bin" ]; then
+    echo "ERROR: dem_detrend not found on PATH." 1>&2
+    exit 1
+fi
+
 # Detrend the DEM against the control points.
-$bathy_py $(which dem_detrend)                                   \
-    --dem run/dem.tif --csv run/points.csv                       \
+$bathy_py "$dem_detrend_bin"                                      \
+    --dem run/dem.tif --csv run/points.csv                        \
     --output-dem run/dem_detrend.tif --output-trend run/trend.tif \
     --seed 0 > run/run-log.txt 2>&1
 
