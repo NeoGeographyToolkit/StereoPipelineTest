@@ -59,15 +59,14 @@ while read L R; do
 done < run/overlap.txt
 
 # Mosaic the per-pair products (same order and combine mode as run.sh), set the gold.
-# The DEM is blended, the two uncertainty mosaics take the worst case with --max.
+# The DEM and the two uncertainty mosaics are all blended (plain dem_mosaic).
 mkdir -p gold
 dem_mosaic $dems -o gold_work/plain >> make_gold_run.log 2>&1
 cp gold_work/plain-tile-0.tif gold/run-DEM.tif
-# dem_mosaic --max appends a -max suffix to the output tile name.
-dem_mosaic --max $hstd -o gold_work/hstd >> make_gold_run.log 2>&1
-cp gold_work/hstd-tile-0-max.tif gold/run-HorizontalStdDev.tif
-dem_mosaic --max $vstd -o gold_work/vstd >> make_gold_run.log 2>&1
-cp gold_work/vstd-tile-0-max.tif gold/run-VerticalStdDev.tif
+dem_mosaic $hstd -o gold_work/hstd >> make_gold_run.log 2>&1
+cp gold_work/hstd-tile-0.tif gold/run-HorizontalStdDev.tif
+dem_mosaic $vstd -o gold_work/vstd >> make_gold_run.log 2>&1
+cp gold_work/vstd-tile-0.tif gold/run-VerticalStdDev.tif
 rm -f gold/run-DEM.tif.aux.xml gold/run-HorizontalStdDev.tif.aux.xml \
       gold/run-VerticalStdDev.tif.aux.xml
 

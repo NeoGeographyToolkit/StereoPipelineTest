@@ -72,11 +72,15 @@ done
 # (--dem) is both the mapprojection DEM and the blunder-filter reference. The output
 # projection is pinned with --t_srs. --processes 4 runs all four pairs at once, each
 # parallel_stereo with two threads.
+#
+# --propagate-errors is set only in the stereo options. multi_stereo autocompletes it
+# into the point2dem options, so the horizontal and vertical uncertainty get gridded
+# and mosaicked as well.
 stereoOpts="--alignment-method none --stereo-algorithm asp_mgm --subpixel-mode 9
   --corr-seed-mode 1 --min-matches 5 --ip-per-tile 2000
   --mapproj-geolocation-uncertainty 0 --ip-match-radius 20
   --propagate-errors --horizontal-stddev 1.0 1.0"
-demOpts="--tr $demRes --t_srs '$proj' --errorimage --propagate-errors
+demOpts="--tr $demRes --t_srs '$proj' --errorimage
   --max-valid-triangulation-error 8"
 
 multi_stereo                     \
