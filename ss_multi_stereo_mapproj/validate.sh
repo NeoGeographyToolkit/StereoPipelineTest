@@ -8,45 +8,48 @@ if [ ! -e "$err" ]; then
     exit 1;
 fi
 
-# Compare the DEM mosaic to the gold, tolerant to small floating point differences.
-file=run/stereo/run-DEM.tif
-gold=gold/$(basename $file)
+# Compare the DEM mosaic and the two propagated-uncertainty mosaics
+# (--propagate-errors) to the gold, tolerant to small floating point differences.
+for base in run-DEM.tif run-HorizontalStdDev.tif run-VerticalStdDev.tif; do
+    file=run/stereo/$base
+    gold=gold/$base
 
-if [ ! -e "$file" ]; then
-    echo "ERROR: File $file does not exist."
-    exit 1;
-fi
+    if [ ! -e "$file" ]; then
+        echo "ERROR: File $file does not exist."
+        exit 1;
+    fi
 
-if [ ! -e "$gold" ]; then
-    echo "ERROR: File $gold does not exist."
-    exit 1;
-fi
+    if [ ! -e "$gold" ]; then
+        echo "ERROR: File $gold does not exist."
+        exit 1;
+    fi
 
-# Remove cached xmls
-rm -fv "$file.aux.xml"
-rm -fv "$gold.aux.xml"
+    # Remove cached xmls
+    rm -fv "$file.aux.xml"
+    rm -fv "$gold.aux.xml"
 
-cmp_stats.sh $file $gold
-gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v minimum > run/run.txt
-gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v minimum > gold/run.txt
+    cmp_stats.sh $file $gold
+    gdalinfo -stats $file | grep -v Files | grep -v -i tif | grep -i -v minimum > run/run.txt
+    gdalinfo -stats $gold | grep -v Files | grep -v -i tif | grep -i -v minimum > gold/run.txt
 
-cat run/run.txt
+    cat run/run.txt
 
-# Print the error and check the status
-../bin/max_err.pl run/run.txt gold/run.txt
-ans=$?
-if [ "$ans" -ne 0 ]; then
-	echo Validation failed
-	exit 1
-fi
+    # Print the error and check the status
+    ../bin/max_err.pl run/run.txt gold/run.txt
+    ans=$?
+    if [ "$ans" -ne 0 ]; then
+        echo Validation failed for $base
+        exit 1
+    fi
 
-ans=$(../bin/max_err.pl run/run.txt gold/run.txt 1e-5) # compare the error
-if [ "$ans" != "1" ]; then
-    echo Validation failed
-    exit 1
-fi
+    ans=$(../bin/max_err.pl run/run.txt gold/run.txt 1e-5) # compare the error
+    if [ "$ans" != "1" ]; then
+        echo Validation failed for $base
+        exit 1
+    fi
 
-rm -f run/run.txt gold/run.txt
+    rm -f run/run.txt gold/run.txt
+done
 
 echo Validation succeeded
 exit 0

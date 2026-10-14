@@ -74,8 +74,10 @@ done
 # parallel_stereo with two threads.
 stereoOpts="--alignment-method none --stereo-algorithm asp_mgm --subpixel-mode 9
   --corr-seed-mode 1 --min-matches 5 --ip-per-tile 2000
-  --mapproj-geolocation-uncertainty 0 --ip-match-radius 20"
-demOpts="--tr $demRes --t_srs '$proj' --errorimage --max-valid-triangulation-error 8"
+  --mapproj-geolocation-uncertainty 0 --ip-match-radius 20
+  --propagate-errors --horizontal-stddev 1.0 1.0"
+demOpts="--tr $demRes --t_srs '$proj' --errorimage --propagate-errors
+  --max-valid-triangulation-error 8"
 
 multi_stereo                     \
   --mode dem_mosaic              \
