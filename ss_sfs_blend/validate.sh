@@ -1,7 +1,8 @@
 #!/bin/bash
 source ../bin/setup_env.sh
 
-for file in run/sfs_blend_clip.tif run/sfs_weight_clip.tif; do 
+for file in run/sfs_blend_lola.tif   run/sfs_weight_lola.tif \
+            run/sfs_blend_curved.tif run/sfs_weight_curved.tif; do
 
   gold=gold/$(basename $file)
 
