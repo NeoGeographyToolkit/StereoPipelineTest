@@ -18,7 +18,7 @@ get_max_pixel_diff() {
   grep -A3 "cam1 to cam2 pixel diff" | grep Max | awk '{print $2}'
 }
 
-for model in equisolid stereographic; do
+for model in equisolid stereographic orthographic; do
   cam=../data/fisheye_${model}_nadir.tsai
   maxdiff=$(cam_test --image $img --cam1 $cam --cam2 $cam --session1 pinhole --session2 pinhole --datum WGS84 --height-above-datum 0 --sample-rate 100 2>/dev/null | get_max_pixel_diff)
   ok=$(echo "$maxdiff $tol" | awk '{print ($1 < $2) ? "PASS" : "FAIL"}')
