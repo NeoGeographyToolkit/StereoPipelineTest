@@ -4,7 +4,8 @@ set -x verbose
 rm -rfv run
 
 # SfS without approximating the camera model or input adjustments. Test the options
-# --allow-borderline-data and --curvature-in-shadow.
+# --allow-borderline-data, --curvature-in-shadow, and --min-blend-size. The latter
+# sizes a shadow by pixel area, so small shadows keep the SfS result.
 sfs                                \
   -i ../data/sfs-input-DEM.tif     \
   ../data/sfs-cam.cub              \
@@ -13,6 +14,7 @@ sfs                                \
   --threads 1                      \
   --allow-borderline-data          \
   --blending-dist 5                \
+  --min-blend-size 10              \
   --shadow-threshold 0.026         \
   --curvature-in-shadow 0.15       \
   --curvature-in-shadow-weight 0.1 \
