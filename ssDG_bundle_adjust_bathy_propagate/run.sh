@@ -43,13 +43,14 @@ stereo -t dg                                          \
 
 # bundle_adjust with the dense matches, bathymetry, and error propagation.
 printf "run/left_mask.tif\nrun/right_mask.tif\n" > run/masks.txt
-bundle_adjust -t dg                                   \
-    ../data/left_bathy_b3.tif ../data/right_bathy_b3.tif \
-    ../data/left_bathy.xml ../data/right_bathy.xml     \
+bundle_adjust -t dg                                       \
+    ../data/left_bathy_b3.tif ../data/right_bathy_b3.tif  \
+    ../data/left_bathy.xml ../data/right_bathy.xml        \
     --match-files-prefix run/stereo-disp --matches-as-txt \
-    --num-passes 2 --max-iterations 100               \
-    --propagate-errors                                \
-    --bathy-mask-list run/masks.txt                   \
-    --bathy-plane run/bathy-plane.txt                 \
-    --refraction-index 1.34                           \
+    --num-passes 2 --max-iterations 100                   \
+    --propagate-errors                                    \
+    --bathy-mask-list run/masks.txt                       \
+    --bathy-plane run/bathy-plane.txt                     \
+    --refraction-index 1.34                               \
+    --threads 1                                           \
     -o run/ba
