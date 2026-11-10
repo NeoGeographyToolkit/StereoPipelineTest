@@ -12,6 +12,10 @@ mkdir -p run
 # velocity-mode path that the legacy ss_bundle_adjust_optical_bar test does not.
 # Left = aft (A021), right = fore (F021). Corner GCPs plus heights-from-dem give
 # the ground constraint. The sub16 Iceland frames keep it fast (a few seconds).
+# One pass only. The per-camera velocity is weakly constrained on this small
+# pair, so a second pass with outlier removal would cull the high-residual
+# points and leave too few. One pass is deterministic and still floats the
+# motion model from the cam_gen zero seed.
 bundle_adjust                                        \
   ../data/D3C1216-200533A021_crop_sub16.tif          \
   ../data/D3C1216-200533F021_crop_sub16.tif          \
@@ -26,9 +30,8 @@ bundle_adjust                                        \
   --heights-from-dem ../data/IL_reference_dem_large.tif \
   --heights-from-dem-uncertainty 200                 \
   --num-iterations 100                               \
-  --num-passes 2                                     \
+  --num-passes 1                                     \
   --max-pairwise-matches 2000                        \
-  --remove-outliers-params "75 3 200 200"            \
   --max-gcp-reproj-err 15                            \
   --threads 1                                        \
   --ip-per-image 2000                                \
