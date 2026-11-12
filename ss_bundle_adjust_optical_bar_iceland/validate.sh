@@ -28,5 +28,13 @@ for file in run/run-D3C1216-200533A021_crop_sub16.tsai \
 
 done
 
+# The velocity is shared, so both solved cameras must carry the same vector.
+velA=$(grep '^velocity' run/run-D3C1216-200533A021_crop_sub16.tsai)
+velF=$(grep '^velocity' run/run-D3C1216-200533F021_crop_sub16.tsai)
+if [ "$velA" != "$velF" ]; then
+    echo "Shared velocity failed: $velA vs $velF"
+    exit 1
+fi
+
 echo Validation succeeded
 exit 0
