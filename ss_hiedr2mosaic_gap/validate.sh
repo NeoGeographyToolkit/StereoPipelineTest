@@ -1,30 +1,30 @@
 #!/bin/bash
+source ../bin/setup_env.sh
 
+# Gold-diff the hiedr2mosaic log. It records the ISIS step sequence (hi2isis,
+# hical, histitch, spiceinit, spicefit, noproj, hijitreg, handmos, cubenorm,
+# Finished) with relative paths only, so it is deterministic. A match to gold
+# confirms the gap-handling path ran all steps with no KeyError on a missing CCD.
 file=run/output.txt
+gold=gold/output.txt
 
 if [ ! -s "$file" ]; then
-  echo "ERROR: $file is missing or empty."
-  exit 1
-fi
-
-# A KeyError from a missing CCD must not appear.
-if grep -q "KeyError" "$file"; then
-  echo "ERROR: hiedr2mosaic crashed with a KeyError on a missing CCD."
-  exit 1
-fi
-
-# Check that the pipeline steps still appear despite the gap.
-for step in hi2isis hical histitch spiceinit spicefit noproj hijitreg handmos cubenorm; do
-  if ! grep -q "$step" "$file"; then
-    echo "ERROR: Expected step '$step' not found in output."
+    echo "ERROR: $file is missing or empty."
     exit 1
-  fi
-done
+fi
 
-# Check that the script finished successfully.
-if ! grep -q "Finished" "$file"; then
-  echo "ERROR: Did not find 'Finished' in output."
-  exit 1
+if [ ! -e "$gold" ]; then
+    echo "ERROR: File $gold does not exist."
+    exit 1
+fi
+
+echo diff $file $gold
+diff=$(diff $file $gold | head -n 50)
+
+echo diff is $diff
+if [ "$diff" != "" ]; then
+    echo Validation failed
+    exit 1
 fi
 
 echo Validation succeeded

@@ -13,3 +13,8 @@ parallel_stereo --correlator-mode          \
   ../data/image_crop.tif                   \
   run/image_crop_diff_gsd.tif              \
   run/run > run/output.txt 2>&1
+
+# parallel_stereo is expected to exit nonzero here, refusing the GSD mismatch.
+# Extract the deterministic error line (it names the two fixed GSD values) for
+# the gold diff. The grep runs regardless of the exit status above.
+grep "different ground sample distances" run/output.txt > run/gsd_error.txt
