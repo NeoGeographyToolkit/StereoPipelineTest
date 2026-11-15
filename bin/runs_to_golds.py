@@ -32,7 +32,7 @@ def runToGold(f):
     if os.path.isdir(goldFolder):
         shutil.rmtree(goldFolder)
     shutil.copytree(runFolder, goldFolder)
-    print 'Updated gold from run: ' + f
+    print('Updated gold from run: ' + f)
 
 
 # Get the list of folders to update
